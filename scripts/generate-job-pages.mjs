@@ -1,4 +1,4 @@
-// なんでも屋さん(旧jobchain/WorkChain)の求人データから、Googleしごと検索(Google for Jobs)と
+// ヒトテマ(旧なんでも屋さん / jobchain)の求人データから、Googleしごと検索(Google for Jobs)と
 // 求人アグリゲーター(Indeed・求人ボックスなど)向けの、クロール可能な
 // 静的ページ/サイトマップ/フィードを自動生成するスクリプト。
 //
@@ -7,7 +7,7 @@
 // Firestoreのjobs/accountsコレクションを直接読み取り、
 // リポジトリ内に静的ファイルを書き出す。
 //
-// 注意: このスクリプトはなんでも屋さん本体(index.html)のアプリ内ロジックには
+// 注意: このスクリプトはヒトテマ本体(index.html)のアプリ内ロジックには
 // 一切手を加えない。あくまで検索エンジン向けの「もう1枚の入り口」を
 // 追加で生成するだけで、実際の応募・チャットなどの操作は
 // 必ずindex.html(本体アプリ)側で行われる。
@@ -22,8 +22,8 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 
 // ↓サイトのURLを変更した場合(ユーザー名変更やカスタムドメイン化など)は、
 // 必ずここも書き換えること。
-const SITE_BASE_URL = "https://ut181749ut.github.io/jobchain";
-const SITE_NAME = "なんでも屋さん";
+const SITE_BASE_URL = "https://ut181749ut.github.io/hitotema";
+const SITE_NAME = "ヒトテマ";
 
 // この文字数未満しか説明文が書かれていない求人は、内容が薄すぎるため
 // 検索エンジン向けページを作らない(質の低いページを量産するとサイト
@@ -67,20 +67,9 @@ export function textToHtmlParagraphs(text) {
     .join("");
 }
 
-// なんでも屋さん本体(index.html)の PAY_METHODS と同じ表示ロジック。
-// 本体側の表記を変えた場合は、ここも合わせて更新すること。
-const PAY_METHODS = {
-  eth: { label: "ETH", fmt: (n) => Number(n).toFixed(4) + " ETH" },
-  xmr: { label: "Monero (XMR)", fmt: (n) => Number(n).toFixed(4) + " XMR" },
-  btc: { label: "Bitcoin (BTC)", fmt: (n) => Number(n).toFixed(6) + " BTC" },
-  usdc: { label: "USDC", fmt: (n) => Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USDC" },
-  usdt: { label: "USDT", fmt: (n) => Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USDT" },
-  sol: { label: "Solana (SOL)", fmt: (n) => Number(n).toFixed(4) + " SOL" },
-  card: { label: "カード / Apple Pay", fmt: (n) => "¥" + Number(n).toLocaleString("ja-JP") },
-  cash: { label: "手渡し(現金)", fmt: (n) => "¥" + Number(n).toLocaleString("ja-JP") },
-  other: { label: "その他", fmt: (n) => "¥" + Number(n).toLocaleString("ja-JP") },
-};
-export function payInfo(method) { return PAY_METHODS[method] || PAY_METHODS.eth; }
+// 報酬は日本円のみ。このサイトは掲載だけを行い、支払いには関与しないため、
+// 支払い方法という概念そのものを持たない。
+export function fmtReward(n) { return "¥" + Number(n || 0).toLocaleString("ja-JP"); }
 
 function initFirebaseAdmin() {
   const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT;
@@ -100,8 +89,7 @@ function initFirebaseAdmin() {
 }
 
 export function buildJobPageHtml(job, employerName, now) {
-  const payLabel = payInfo(job.pay_method).label;
-  const rewardText = payInfo(job.pay_method).fmt(job.reward);
+  const rewardText = fmtReward(job.reward);
   const location = (job.location || "").trim();
   const isRemote = !location || /オンライン|リモート|remote|在宅/i.test(location);
   const pageUrl = `${SITE_BASE_URL}/jobs/${job.id}.html`;
@@ -109,9 +97,9 @@ export function buildJobPageHtml(job, employerName, now) {
   const locationLabel = location || "オンライン/リモート";
 
   // ロングテールSEOを意識し、タイトル・meta descriptionに
-  // 「職種名 × 勤務地 × 支払い方法」の組み合わせを自然に含める。
-  const pageTitle = `${job.title}｜${locationLabel}の求人(${payLabel}払い) - ${SITE_NAME}`;
-  const metaDescription = `${job.title}。勤務地: ${locationLabel}。報酬: ${rewardText}(${payLabel})。${SITE_NAME}に掲載中の求人です。`;
+  // 「職種名 × 勤務地 × 報酬」の組み合わせを自然に含める。
+  const pageTitle = `${job.title}｜${locationLabel}の求人(報酬${rewardText}) - ${SITE_NAME}`;
+  const metaDescription = `${job.title}。勤務地: ${locationLabel}。報酬: ${rewardText}。${SITE_NAME}に掲載中の求人です。登録不要・匿名で応募できます。`;
 
   const validThrough = new Date(now.getTime() + VALID_THROUGH_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
@@ -140,7 +128,7 @@ export function buildJobPageHtml(job, employerName, now) {
     directApply: false,
     ...jobLocationFields,
   };
-  // 備考: 報酬(reward)はなんでも屋さんでは「単発の仕事1件あたりの固定報酬」であり、
+  // 備考: 報酬(reward)はこのサイトでは「単発の仕事1件あたりの固定報酬」であり、
   // schema.orgのbaseSalary(時給・日給・月給・年俸などの単位が前提)には
   // 正確に対応しないため、誤解を招く構造化データにしないよう、あえて
   // baseSalaryは出力していない。報酬額はページ本文とmeta descriptionに
@@ -170,7 +158,6 @@ export function buildJobPageHtml(job, employerName, now) {
   <h1>${escapeHtml(job.title)}</h1>
   <div class="meta">
     <span>勤務地: ${escapeHtml(locationLabel)}</span>
-    <span>支払い方法: ${escapeHtml(payLabel)}</span>
     <span>投稿者: ${escapeHtml(employerName)}</span>
   </div>
   <div class="reward">報酬: ${escapeHtml(rewardText)}</div>
@@ -210,14 +197,23 @@ async function main() {
   fs.rmSync(jobsDir, { recursive: true, force: true }); // 前回生成分をクリア(締め切られた求人のページを残さないため)
   fs.mkdirSync(jobsDir, { recursive: true });
 
-  const sitemapEntries = [`${SITE_BASE_URL}/`, `${SITE_BASE_URL}/jobs/`];
+  // lastmodは「このページを最後に実質的に変更した日時」を表すもの。
+  // トップページ・求人一覧インデックスは求人の増減で中身が変わり続けるため
+  // 実行時刻(now)を、個別求人ページは投稿後に内容が変わらない前提のため
+  // 投稿日時(created_at)を使う(= 実行のたびに全ページの日時を「今」に
+  // 更新してしまうと、Googleに「鮮度の水増し」とみなされクロール優先度が
+  // かえって下がりかねないため)。
+  const sitemapEntries = [
+    { loc: `${SITE_BASE_URL}/`, lastmod: now.toISOString() },
+    { loc: `${SITE_BASE_URL}/jobs/`, lastmod: now.toISOString() },
+  ];
   const indexEntries = [];
 
   for (const job of openJobs) {
     const employerAccount = accountsById.get(job.employer_id);
     // Googleの公式ガイドラインでは、匿名での採用の場合は
     // hiringOrganization.name に "confidential" を使うことが
-    // 明示的に認められている。なんでも屋さんは匿名投稿が前提のため、
+    // 明示的に認められている。ヒトテマは匿名投稿が前提のため、
     // アカウントが削除済み/取得できない場合はこれに倣う。
     const employerName = (employerAccount && !employerAccount.is_deleted && employerAccount.name)
       ? employerAccount.name
@@ -226,12 +222,20 @@ async function main() {
     const html = buildJobPageHtml(job, employerName, now);
     fs.writeFileSync(path.join(jobsDir, `${job.id}.html`), html, "utf-8");
 
-    sitemapEntries.push(`${SITE_BASE_URL}/jobs/${job.id}.html`);
+    let jobLastmod = now.toISOString();
+    if (job.created_at) {
+      const createdDate = new Date(job.created_at);
+      if (!isNaN(createdDate.getTime())) jobLastmod = createdDate.toISOString();
+    }
+    sitemapEntries.push({
+      loc: `${SITE_BASE_URL}/jobs/${job.id}.html`,
+      lastmod: jobLastmod,
+    });
     indexEntries.push({
       id: job.id,
       title: job.title,
       location: (job.location || "").trim() || "オンライン/リモート",
-      rewardText: payInfo(job.pay_method).fmt(job.reward),
+      rewardText: fmtReward(job.reward),
       pageUrl: `${SITE_BASE_URL}/jobs/${job.id}.html`,
     });
   }
@@ -268,7 +272,7 @@ async function main() {
   // sitemap.xml
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapEntries.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}
+${sitemapEntries.map((e) => `  <url><loc>${e.loc}</loc><lastmod>${e.lastmod}</lastmod></url>`).join("\n")}
 </urlset>
 `;
   fs.writeFileSync(path.join(REPO_ROOT, "sitemap.xml"), sitemapXml, "utf-8");
