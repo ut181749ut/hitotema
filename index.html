@@ -6,31 +6,31 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>なんでも屋さん | 匿名で使える求人マッチング・単発バイト掲示板</title>
-<meta name="description" content="なんでも屋さんは、登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワークまで、現金・カード・Moneroなど好きな支払い方法で求人を投稿・応募できます。">
-<link rel="canonical" href="https://ut181749ut.github.io/jobchain/">
+<title>ヒトテマ | 匿名で使える求人マッチング・単発バイト掲示板</title>
+<meta name="description" content="ヒトテマは、登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワーク・ちょっとした困りごとまで、誰でもすぐに求人を投稿・応募できます。">
+<link rel="canonical" href="https://ut181749ut.github.io/hitotema/">
 <!-- X(Twitter)・LINE・Facebookなどにこのページのリンクを貼った時に、
      画像・タイトル・説明文つきのカードとして表示されるようにするための設定。
      og-image.pngはリポジトリ直下(index.htmlと同じ階層)に置く必要がある。 -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="なんでも屋さん">
-<meta property="og:title" content="なんでも屋さん | 匿名で使える求人マッチング・単発バイト掲示板">
-<meta property="og:description" content="登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワークまで、現金・カード・Moneroなど好きな支払い方法で求人を投稿・応募できます。">
-<meta property="og:url" content="https://ut181749ut.github.io/jobchain/">
-<meta property="og:image" content="https://ut181749ut.github.io/jobchain/og-image.png">
+<meta property="og:site_name" content="ヒトテマ">
+<meta property="og:title" content="ヒトテマ | 匿名で使える求人マッチング・単発バイト掲示板">
+<meta property="og:description" content="登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワーク・ちょっとした困りごとまで、誰でもすぐに求人を投稿・応募できます。">
+<meta property="og:url" content="https://ut181749ut.github.io/hitotema/">
+<meta property="og:image" content="https://ut181749ut.github.io/hitotema/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="なんでも屋さん | 匿名で使える求人マッチング・単発バイト掲示板">
-<meta name="twitter:description" content="登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワークまで、現金・カード・Moneroなど好きな支払い方法で求人を投稿・応募できます。">
-<meta name="twitter:image" content="https://ut181749ut.github.io/jobchain/og-image.png">
+<meta name="twitter:title" content="ヒトテマ | 匿名で使える求人マッチング・単発バイト掲示板">
+<meta name="twitter:description" content="登録不要・匿名で使える求人マッチング掲示板です。単発のお手伝いから在宅ワーク・ちょっとした困りごとまで、誰でもすぐに求人を投稿・応募できます。">
+<meta name="twitter:image" content="https://ut181749ut.github.io/hitotema/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "WebSite",
-  "name": "なんでも屋さん",
-  "url": "https://ut181749ut.github.io/jobchain/"
+  "name": "ヒトテマ",
+  "url": "https://ut181749ut.github.io/hitotema/"
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -210,7 +210,6 @@
   }
   .account-btn .who { text-align: left; line-height: 1.25; }
   .account-btn .who .name { font-size: 12.5px; font-weight: 600; }
-  .account-btn .who .bal { font-size: 11px; color: var(--text-dim); }
   .account-btn.is-guest {
     background: var(--accent);
     border-color: var(--accent);
@@ -257,17 +256,6 @@
   .account-row .who { flex: 1; }
   .account-row .name { font-size: 13px; font-weight: 600; }
   .account-row .addr { font-size: 11px; color: var(--text-dim); }
-  .account-row .bal { font-size: 12px; }
-
-  .demo-banner {
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 12.5px;
-    padding: 8px 20px;
-    text-align: center;
-  }
-  .demo-banner strong { color: var(--text); }
 
   main {
     max-width: 880px;
@@ -501,9 +489,58 @@
   }
 
   /* ---------- 求人一覧ページの表示切り替え ---------- */
-  .list-filter { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-  .list-filter label { margin: 0; font-size: 13px; color: var(--text-dim); white-space: nowrap; }
-  .list-filter select { width: auto; min-width: 160px; }
+  /* ---------- 求人一覧の絞り込みパネル ---------- */
+  .filter-panel { margin-bottom: 18px; }
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 11px 14px;
+    text-align: left;
+  }
+  .filter-toggle:hover:not(:disabled) { border-color: var(--text-dim); }
+  .filter-toggle svg { width: 17px; height: 17px; flex-shrink: 0; }
+  .filter-toggle .chev { margin-left: auto; transition: transform 0.15s ease; }
+  .filter-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .filter-toggle .count {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 999px;
+    padding: 2px 8px;
+    line-height: 1.5;
+  }
+  .filter-body {
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    background: var(--surface);
+    padding: 16px 14px 14px;
+    margin-top: -1px;
+  }
+  .filter-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .filter-grid .field { flex: 1 1 180px; min-width: 150px; margin-bottom: 0; }
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .filter-result { font-size: 12.5px; color: var(--text-dim); margin-right: auto; }
+  @media (max-width: 480px) {
+    .filter-grid .field { flex: 1 1 100%; }
+  }
 
   .fab-post {
     position: fixed;
@@ -577,19 +614,7 @@
   .pill.open { background: color-mix(in srgb, var(--teal) 18%, transparent); color: var(--teal); }
   .pill.hired { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent-strong); }
   .pill.anon { background: var(--privacy-bg); color: var(--privacy); }
-  .pill.settled { background: color-mix(in srgb, var(--teal) 18%, transparent); color: var(--teal); }
-  .pill.unsettled { background: var(--danger-bg); color: var(--danger); }
 
-  .xmr-address {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11.5px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 10px;
-    word-break: break-all;
-    line-height: 1.5;
-  }
   .payment-note {
     font-size: 12.5px;
     color: var(--text-dim);
@@ -601,84 +626,6 @@
   }
   .payment-note strong { color: var(--privacy); }
 
-  /* ---------- 支払い方法のクイック選択(手渡しを一番目立たせ、他は折りたたむ) ---------- */
-  .method-quickpick-cash {
-    display: block;
-    width: 100%;
-    text-align: left;
-    background: var(--accent);
-    color: var(--accent-ink);
-    border: 2px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 8px;
-  }
-  .method-quickpick-cash:hover:not(:disabled) { background: var(--accent-strong); }
-  .method-quickpick-cash .mq-title { font-size: 15px; font-weight: 700; }
-  .method-quickpick-cash .mq-sub { font-size: 12px; font-weight: 500; opacity: 0.85; margin-top: 3px; line-height: 1.5; }
-  .method-quickpick-cash.is-inactive {
-    background: var(--surface);
-    color: var(--text);
-    border-color: var(--border);
-  }
-  .method-quickpick-cash.is-inactive .mq-sub { color: var(--text-dim); opacity: 1; }
-  .method-other-toggle {
-    display: block;
-    width: 100%;
-    background: transparent;
-    border: 1px dashed var(--border);
-    color: var(--text-dim);
-    font-size: 12.5px;
-    font-weight: 500;
-    padding: 9px 12px;
-  }
-  .method-other-toggle:hover:not(:disabled) { color: var(--text); border-color: var(--text-dim); }
-  #method-select-wrap { margin-top: 10px; }
-  .wallet-note {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--privacy);
-    background: var(--privacy-bg);
-    border: 1px solid color-mix(in srgb, var(--privacy) 40%, transparent);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    line-height: 1.7;
-    margin-top: 10px;
-  }
-
-  /* ---------- 本物の暗号資産ウォレット・オンチェーン決済 ---------- */
-  .network-badge {
-    display: inline-flex;
-    align-items: center;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    padding: 3px 9px;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-  .network-badge.net-test { background: color-mix(in srgb, var(--teal) 18%, transparent); color: var(--teal); }
-  .network-badge.net-main { background: var(--danger-bg); color: var(--danger); }
-  .network-badge.net-unknown { background: var(--surface-2); color: var(--text-dim); }
-  .wallet-status-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .wallet-section { padding: 2px 2px 4px; }
-  .onchain-tx-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    padding: 6px 0;
-  }
-  .risk-banner {
-    font-size: 12.5px;
-    line-height: 1.7;
-    background: var(--danger-bg);
-    color: var(--danger);
-    border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-  }
-  .risk-banner strong { color: var(--danger); }
   .site-footer {
     max-width: 880px;
     margin: 0 auto;
@@ -841,7 +788,7 @@
 <body>
 
 <div class="masthead">
-  <a class="wordmark" href="#list" id="masthead-wordmark">なんでも屋さん</a>
+  <a class="wordmark" href="#list" id="masthead-wordmark">ヒトテマ</a>
   <nav class="tabs" id="nav-tabs">
     <a href="#search" data-tab="search">検索</a>
     <a href="#list" data-tab="list">求人一覧</a>
@@ -860,7 +807,7 @@
 <main id="view-root"></main>
 
 <div class="site-footer">
-  運営者はお金のやり取りを仲介・保証する登録業者ではありません。採用後の報酬の受け渡し(Monero・カード/Apple Pay・手渡し)は、投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。送金前には宛先・金額を必ず確認してください。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。
+  このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。
   <br><a href="jobs/">求人一覧(検索エンジン向けページ)</a>
 </div>
 
@@ -890,27 +837,11 @@
   })();
 
   const STRINGS_EN = {
-  "なんでも屋さん": "Nandemoya-san",
-  "(対応ウォレットアプリが必要です)": "(requires a supported wallet app)",
+  "ヒトテマ": "Hitotema",
   "(応募者)": "(applicant)",
   "(投稿者)": "(poster)",
   "(詳細説明なし)": "(no description provided)",
-  "4で始まる95文字のMoneroアドレス": "A 95-character Monero address starting with 4",
-  "<strong>Monero (XMR)</strong> は送信者・受信者・金額を秘匿する匿名性の高い暗号資産です(次世代のプライバシー技術「FCMP++」により匿名集合が大幅に拡大される予定)。このアプリ自体は送金を行いません(Moneroの秘密鍵を扱わない設計です)が、支払いのタイミングで宛先・金額を埋め込んだ「支払いリンク(monero:リンク)」を自動生成するので、それをお互いのMoneroウォレットで開いて送金してください。": "<strong>Monero (XMR)</strong> is a highly private cryptocurrency that hides the sender, receiver, and amount (its anonymity set is set to expand greatly with the next-generation privacy technology \"FCMP++\"). This app itself never handles transfers (it's designed to never touch Monero private keys) — instead, at payment time it automatically generates a \"payment link\" (a monero: link) with the destination and amount embedded, which you then open in your own Monero wallets to send the payment.",
-  "<strong>手渡し(現金)</strong>はアプリを一切介さない、最も匿名性の高い支払い方法です。採用後にチャットで日時・場所を相談し、対面で直接お支払いください。": "<strong>Cash (in-person)</strong> is the most private payment method, since it never goes through the app at all. After hiring, discuss the date/time and place via chat and pay directly in person.",
-  "一番かんたん。ネット決済なしで、会った時にその場で現金を渡すだけ。": "The easiest option. No online payment at all — just hand over cash in person when you meet.",
-  "ほかの支払い方法(Monero・カード)から選ぶ": "Choose a different payment method (Monero or card)",
-  "ほかの支払い方法を閉じる": "Close other payment methods",
-  "Monero / XMR(匿名決済)": "Monero / XMR (anonymous payment)",
-  "Moneroアドレス": "Monero address",
-  "Moneroアドレスを保存しました。": "Monero address saved.",
-  "Monero決済(匿名):": "Monero payment (anonymous):",
-  "カード / Apple Pay": "Card / Apple Pay",
-  "カード決済:": "Card payment:",
-  "<strong>デビット/クレジットカード・Apple Pay</strong>は、アプリ内のカード入力画面でそのまま支払う方法です。報酬額は日本円(JPY)で指定します。カード情報はStripeへ直接送信され、このアプリには保存されません。採用された人は一度だけStripeで本人確認(氏名・住所・生年月日・振込先口座)を済ませる必要があり、支払いが完了すると報酬はStripeを経由して採用された人自身の銀行口座に入金されます。なんでも屋さんは手数料として報酬額の10%を受け取ります。": "<strong>Debit/credit card & Apple Pay</strong> is paid right inside the app on a card entry screen. The reward amount is set in Japanese yen (JPY). Card details go straight to Stripe and are never stored by this app. The hired applicant completes a one-time identity check with Stripe (name, address, date of birth, bank account); once the payment goes through, Stripe deposits the reward into the hired applicant's own bank account. Nandemoya-san takes 10% of the reward as its fee.",
   "← 求人一覧に戻る": "← Back to job list",
-  "「ウォレットで開く」はMonero対応ウォレット(Cake Walletなど)がお使いの端末にインストールされていないと反応しません。基本的には「リンクをコピー」してウォレットアプリ側に貼り付けてください。": "\"Open in wallet\" only works if a Monero-compatible wallet (such as Cake Wallet) is installed on your device. In most cases, use \"Copy link\" and paste it into your wallet app instead.",
-  "あなたのMoneroアドレス": "Your Monero address",
   "このアカウントを削除します。自分が投稿した求人はすべて削除され、この操作は取り消せません。応募した(まだ採用されていない)求人からは応募が取り下げられます。": "This will delete this account. All jobs you posted will be deleted, and this action cannot be undone. Applications you submitted to jobs where you haven't been hired will be withdrawn.",
   "このアカウントを削除する": "Delete this account",
   "この求人に応募する": "Apply to this job",
@@ -922,7 +853,6 @@
   "すでに締め切られています。": "This listing is already closed.",
   "すべて": "All",
   "すべて表示": "Show all",
-  "ほかのアカウントに切り替える(任意)": "Switch to another account (optional)",
   "まだメッセージはありません。最初のメッセージを送ってみましょう。": "No messages yet. Try sending the first one.",
   "まだ応募していません。": "You haven't applied to anything yet.",
   "まだ応募はありません。": "No applications yet.",
@@ -933,13 +863,10 @@
   "アカウントの削除": "Delete account",
   "アカウントの削除に失敗しました。": "Failed to delete account.",
   "アカウントを削除しました。": "Account deleted.",
-  "ウォレットで開く": "Open in wallet",
-  "ウォレットアドレス": "Wallet address",
+  "アカウントID": "Account ID",
   "キャンセル": "Cancel",
   "キーワードなしですべての求人を見る →": "See all jobs without keywords →",
-  "コピーしました。": "Copied.",
-  "コピーに失敗しました。テキストを手動で選択してください。": "Failed to copy. Please select the text manually.",
-  "なんでも屋さん | 匿名で使える求人マッチング・単発バイト掲示板": "Nandemoya-san | Anonymous Job Matching & Gig Board",
+  "ヒトテマ | 匿名で使える求人マッチング・単発バイト掲示板": "Hitotema | Anonymous Job Matching & Gig Board",
   "スキル / タグ (カンマ区切り)": "Skills / tags (comma-separated)",
   "スキル未登録": "No skills registered",
   "チャット": "Chat",
@@ -947,15 +874,10 @@
   "プレビュー": "Preview",
   "プロフィール": "Profile",
   "マイページ": "Dashboard",
-  "マイページでアドレスを登録しておくと、次回から自動入力されます。": "If you register an address on your dashboard, it will be filled in automatically next time.",
-  "マイページに保存したアドレスを自動入力しました。": "Auto-filled with the address saved on your dashboard.",
   "メッセージを入力…": "Type a message…",
-  "リンクをコピー": "Copy link",
   "ログアウト(匿名ゲストに戻る)": "Log out (return to Anonymous Guest)",
   "ログアウトしました。": "Logged out.",
   "ログイン": "Log in",
-  "ログイン不要 — 匿名ゲストのまま投稿・応募できます。ここではウォレット接続の代わりにアカウントを選べます。": "No login required — you can post and apply as Anonymous Guest. Here you can choose an account instead of connecting a wallet.",
-  "ログイン不要・匿名のまま投稿できます。支払い方法はMonero・カード/Apple Pay・手渡しから選べます。": "No login required — you can post anonymously. Choose from Monero, card/Apple Pay, or cash.",
   "不採用": "Not selected",
   "今回は他の応募者が採用されました。またの機会にご応募ください。": "Another applicant was hired this time. Please apply again in the future.",
   "今日": "Today",
@@ -979,14 +901,10 @@
   "勤務日時": "Work date/time",
   "勤務日時(任意・単発の仕事などで指定)": "Work date/time (optional, for one-off jobs, etc.)",
   "匿名ゲスト": "Anonymous Guest",
-  "匿名決済 ・ ": "Anonymous payment ・ ",
-  "受け取りアドレスは採用後にチャットで共有されます。": "The receiving address will be shared via chat after hiring.",
-  "受け取り用Moneroアドレス(任意・後からチャットで伝えることも可能)": "Monero address to receive payment (optional — you can also share it via chat later)",
   "名前 / 屋号など": "Name / business name, etc.",
-  "名前やスキルはウォレットアドレスに紐づけて保存されます(オンチェーンには保存されません)。": "Your name and skills are saved tied to your wallet address (not stored on-chain).",
+  "名前やスキル、投稿した求人は、このアカウントIDに紐づいて保存されます。": "Your name, skills, and the jobs you post are saved against this account ID.",
   "報酬": "Reward",
   "報酬の目安": "Reward range",
-  "場所": "Location",
   "場所を選択・入力": "Select or enter a location",
   "実行する": "Confirm",
   "応募しました。": "Application submitted.",
@@ -994,13 +912,9 @@
   "応募に失敗しました。": "Failed to submit application.",
   "応募の取り下げに失敗しました。": "Failed to withdraw your applications.",
   "応募は無料です。まずは匿名のまま応募できます。": "Applying is free. You can apply anonymously to start.",
-  "応募を締め切る(未採用の場合、報酬は返金されます)": "Close applications (if no one is hired, the reward will be refunded)",
   "応募日時": "Applied on",
   "応募済み": "Applied",
   "応募者(求職者)": "Applicant (job seeker)",
-  "手渡し / 現金(匿名・対面)": "Cash (anonymous, in person)",
-  "手渡し(現金)": "Cash (in-person)",
-  "手渡し決済(匿名):": "Cash payment (anonymous):",
   "投稿した求人の削除に失敗しました。": "Failed to delete your posted jobs.",
   "投稿した求人・応募した求人を確認できます。": "See the jobs you've posted and the jobs you've applied to.",
   "投稿元": "Posted by",
@@ -1015,45 +929,23 @@
   "採用処理に失敗しました。": "Failed to process the hire.",
   "採用済み": "Hired",
   "採用者": "Hired applicant",
-  "採用者が確定していません。": "No applicant has been hired yet.",
-  "採用者への支払いは完了しましたか?この操作は自己申告であり、実際の送金・手渡しはアプリの外で行われます。": "Has payment to the hired applicant been completed? This is a self-reported action — the actual transfer or handoff happens outside the app.",
-  "支払い待ち": "Payment pending",
-  "支払い待ちの求人": "Jobs awaiting your payment",
-  "支払う": "Pay",
-  "確認する": "View",
-  "入金待ちの仕事": "Jobs awaiting payment to you",
-  "採用が決まっていて、まだ支払いが済んでいない求人です。タップすると支払い画面が開きます。": "Jobs where someone has been hired but payment hasn't been made yet. Tap one to open its payment screen.",
-  "あなたが採用され、まだ投稿者からの支払いが済んでいない仕事です。": "Jobs you were hired for where the poster hasn't paid yet.",
-  "送金・手渡しが終わったら押してください(自己申告)。お互いを評価できるようになります。": "Tap this once you've sent or handed over the payment (self-reported). You'll then be able to review each other.",
   "チャットを開く": "Open chat",
-  "報酬の支払い": "Reward payment",
-  "支払い方法": "Payment method",
-  "支払い済み": "Paid",
-  "支払い済み(自己申告)": "Paid (self-reported)",
-  "支払い済みにしました。": "Marked as paid.",
-  "支払い済みにする": "Mark as paid",
-  "支払い状況を変更できるのは求人を投稿した投稿者のみです。": "Only the job poster can change the payment status.",
   "新規ユーザー": "New User",
   "新規登録": "Sign up",
   "普通": "Normal",
   "更新に失敗しました。": "Update failed.",
   "本当にこのアカウントを削除しますか?投稿した求人もすべて削除され、元に戻せません。": "Are you sure you want to delete this account? All jobs you posted will also be deleted, and this cannot be undone.",
   "広告": "Ad",
-  "支払い済みになった求人についてのみ評価できます。": "You can only leave a review for a job that has been marked as paid.",
   "この求人の当事者同士でのみ評価できます。": "Only the two people involved in this job can review each other.",
   "評価は星1〜5個の範囲で指定してください。": "Please choose a rating between 1 and 5 stars.",
   "この求人についてはすでに評価済みです。": "You've already reviewed this job.",
   "評価の送信に失敗しました。": "Failed to submit the review.",
-  "支払い済みにすると、お互いを評価できるようになります。": "Once the job is marked as paid, you'll both be able to review each other.",
   "あなたの評価": "Your review",
   "コメント(任意)": "Comment (optional)",
   "評価を送信する": "Submit review",
   "評価を送信しました。": "Review submitted.",
   "まだ評価がありません": "No reviews yet",
   "検索": "Search",
-  "検索キーワード": "Keyword",
-  "検索条件に一致する求人の一覧です。": "Here are the jobs matching your search.",
-  "検索条件を変更": "Change search filters",
   "業務内容、必要スキル、稼働形態など": "Job duties, required skills, working style, etc.",
   "次の月": "Next month",
   "求人が見つかりませんでした。": "The job could not be found.",
@@ -1065,9 +957,7 @@
   "求人タイトル": "Job title",
   "求人タイトルを入力してください。": "Please enter a job title.",
   "求人一覧": "Job listings",
-  "求人一覧です。": "Here are the job listings.",
   "求人詳細": "Job description",
-  "決済方法": "Payment method",
   "特に設定しない": "No preference",
   "現場の写真やイメージ画像などを1枚添付できます(自動的に縮小・圧縮されます)。": "You can attach one photo or image, such as a site photo (it will be resized and compressed automatically).",
   "画像(任意)": "Image (optional)",
@@ -1075,81 +965,42 @@
   "画像の読み込みに失敗しました。対応していない形式の可能性があります。": "Failed to load the image. It may be in an unsupported format.",
   "画像を削除": "Remove image",
   "画像ファイルを選択してください。": "Please select an image file.",
-  "登録しておくと、Monero決済で求人を投稿するときに自動で入力されます(採用後にチャットで相手に共有する用途にも使えます)。": "If you register one, it will be filled in automatically when posting a Monero-paying job (you can also use it to share with the other person via chat after hiring).",
   "登録してログイン": "Sign up and log in",
   "登録に失敗しました。": "Failed to register.",
-  "秘密鍵もメールアドレスも不要です。表示名(任意)を入れるだけでその場に新しいアカウントが作られ、自動的にログインします。求人を投稿することも、応募することも、どちらも同じアカウントでできます。": "No private key or email address needed. Just enter a display name (optional) and a new account will be created on the spot and you'll be logged in automatically. You can post jobs and apply to jobs from the same account either way.",
   "空欄なら「新規ユーザー」": "Leave blank for \"New User\"",
   "締め切れるのは求人を投稿した投稿者のみです。": "Only the job poster can close this listing.",
   "職種・スキルなど": "Job title, skills, etc.",
   "自分が投稿した求人には応募できません。": "You cannot apply to your own job posting.",
   "自分のアカウントだけ削除できます。": "You can only delete your own account.",
-  "自動コピーできなかったため、テキストを選択しました。手動でコピーしてください。": "Automatic copying failed, so the text has been selected instead. Please copy it manually.",
   "自己紹介 / 会社紹介": "Bio / company description",
-  "表示": "Show",
   "表示ラベル(任意)": "Display label (optional)",
   "表示名(任意)": "Display name (optional)",
-  "該当する求人が見つかりません。": "No jobs match your search.",
   "読み込み中…": "Loading…",
   "送信": "Send",
   "送信に失敗しました。": "Failed to send.",
-  "運営者はお金のやり取りを仲介・保証する登録業者ではありません。採用後の報酬の受け渡し(Monero・カード/Apple Pay・手渡し)は、投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。送金前には宛先・金額を必ず確認してください。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。": "The operator of this site is not a registered business that intermediates or guarantees the exchange of money. After hiring, the reward payment (via Monero, card/Apple Pay, or cash) takes place directly between the job poster and the applicant. Use it at your own risk. Before sending payment, always double-check the recipient and the amount. If you post or apply to jobs involving real money, please confirm for yourself that doing so complies with the rules and laws of your area.",
+  "このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。": "This site is a place to list jobs and get in touch. Its operator is not a registered business that intermediates or guarantees the exchange of money, and is not involved in the reward payment in any way. After hiring, payment takes place directly between the job poster and the applicant. Use it at your own risk. If you post or apply to jobs involving real money, please confirm for yourself that doing so complies with the rules and laws of your area.",
   "選考結果をお待ちください。下のチャットから投稿者に連絡できます。": "Please wait for the outcome of your application. You can contact the job poster via the chat below.",
   "投稿者がこの求人の募集を締め切りました。今回は不採用となります。": "The job poster has closed applications for this job. You were not hired this time.",
   "高収入": "High pay",
-  "＋ 新規登録(新しいアカウントを作る)": "+ Sign up (create a new account)",
-  "お金のやり取りが発生するため、端末を変えてもアカウントに戻れる状態にしておく必要があります。登録しても、今のアカウント・投稿・チャットはそのまま引き継がれます。": "Because real money is involved, you need to be able to get back into your account even if you change devices. Registering keeps your current account, posts, and chats exactly as they are.",
-  "このページ上でカード・Apple Payで支払えます。支払いが完了すると、報酬は自動的に採用者へ送られます。": "You can pay by card or Apple Pay right on this page. Once the payment goes through, the reward is sent to the hired applicant automatically.",
-  "このメールアドレスは既に使われています。「別の端末から引き継ぐ」からログインしてください。": "That email address is already in use. Use \"Restore from another device\" to log in instead.",
-  "この端末のデータを消しても、同じメールアドレスでログインすれば戻れます。": "Even if you clear this device's data, you can get back in by logging in with the same email address.",
-  "ほかの支払い方法(Monero)から選ぶ": "Choose a different payment method (Monero)",
-  "まだ受け取り設定が完了していません。設定が済むまで、投稿者は支払いを行えません。": "Your payout setup isn't finished yet. Until it is, the job poster can't pay you.",
-  "カード決済で報酬を受け取るには、メールアドレスの登録が必要です。入金待ちのお金がある状態で端末を変えたりデータを消したりすると、登録がないとアカウントに戻れなくなるためです。": "To receive rewards by card, you need a registered email address. Without one, changing devices or clearing your data while a payment is pending would lock you out of your account.",
-  "カード決済で報酬を受け取るには、一度だけ本人確認が必要です(氏名・住所・生年月日・振込先口座)。Stripeの画面で入力します。2回目以降の仕事では何もする必要はありません。": "To receive rewards by card, you need to complete an identity check once (name, address, date of birth, and bank account). You'll enter these on Stripe's screen. For later jobs there's nothing more to do.",
-  "カード決済にはメールアドレスの登録が必要です": "Card payments require a registered email address",
-  "カード決済にはメールアドレスの登録が必要です。": "Card payments require a registered email address.",
-  "カード決済の受け取り設定": "Payout setup for card payments",
-  "カード決済は現在準備中です。お手数ですが、チャットで相手と直接やり取りしてください。": "Card payments aren't available yet. Please arrange this directly with the other person via chat.",
-  "カード決済は現在準備中です。公開までは手渡しとMoneroがご利用いただけます。": "Card payments aren't available yet. Until they launch, you can use cash in person or Monero.",
-  "カード決済を使うにはメールアドレスの登録が必要です。登録しても、今のアカウント・投稿・チャットはそのまま引き継がれます。手渡しやMoneroだけを使う場合は登録不要です。": "An email address is required to use card payments. Registering keeps your current account, posts, and chats exactly as they are. If you only use cash or Monero, no registration is needed.",
-  "パスワード(6文字以上)": "Password (6+ characters)",
-  "パスワードは6文字以上にしてください。": "Your password must be at least 6 characters.",
-  "パスワードを忘れた場合": "Forgot your password?",
-  "パスワード再設定用のメールを送りました。": "We've sent a password reset email.",
-  "マイページで設定する": "Set this up on your dashboard",
-  "メールアドレス": "Email address",
-  "メールアドレスかパスワードが違います。": "The email address or password is incorrect.",
-  "メールアドレスの形式が正しくありません。": "That email address isn't formatted correctly.",
-  "メールアドレスを入力してください。": "Please enter an email address.",
-  "メールアドレスを登録": "Register an email address",
-  "メールアドレスを登録(引き継ぎ用)": "Register an email address (for recovery)",
-  "メールアドレスを登録しました。": "Email address registered.",
-  "ログインしました。読み込み直します。": "Logged in. Reloading…",
-  "今はこの端末でしか使えません。データを消すとアカウントに戻れなくなります。": "Right now this account only works on this device. If you clear your data, you won't be able to get back into it.",
-  "以前この端末以外で登録したメールアドレスとパスワードを入力してください。そのアカウントに戻ります。": "Enter the email address and password you registered on another device to get back into that account.",
-  "処理に失敗しました。": "Something went wrong.",
-  "処理中…": "Processing…",
-  "別の端末から引き継ぐ": "Restore from another device",
-  "受け取り可能": "Ready to receive",
-  "受け取り情報を確認・変更する": "View or change payout details",
-  "受け取り設定が完了しました。": "Payout setup is complete.",
-  "受け取り設定の画面を読み込めませんでした。": "Couldn't load the payout setup screen.",
-  "受け取り設定をはじめる": "Start payout setup",
-  "受け取り設定を開けませんでした。": "Couldn't open the payout setup.",
-  "受け取り設定を開始できませんでした。": "Couldn't start the payout setup.",
-  "引き継ぎ用メール": "Recovery email",
-  "支払いが完了しました。": "Payment complete.",
-  "支払いが完了すると、報酬は自動であなたの銀行口座に振り込まれます。": "Once the payment goes through, the reward is paid into your bank account automatically.",
-  "支払いに失敗しました。": "The payment failed.",
-  "支払いを開始できませんでした。": "Couldn't start the payment.",
-  "本人確認がまだ終わっていません。途中まで入力した内容は保存されているので、続きから再開できます。": "Your identity check isn't finished yet. What you've already entered has been saved, so you can pick up where you left off.",
-  "本人確認が完了しています。カード決済の求人に採用されると、報酬は自動であなたの銀行口座に振り込まれます。": "Your identity check is complete. When you're hired for a card-payment job, the reward is paid into your bank account automatically.",
-  "決済機能を読み込めませんでした。": "Couldn't load the payment feature.",
-  "登録する": "Register",
-  "続きから設定する": "Continue setup",
-  "設定が未完了": "Setup incomplete",
-  "試行回数が多すぎます。しばらく待ってからお試しください。": "Too many attempts. Please wait a little and try again.",
-
+  "このサイトは求人の掲載と連絡の場です。報酬のやり取りには一切関与しません。支払いの方法・タイミングは、採用が決まったあとチャットで直接決めてください。": "This site is a place to list jobs and get in touch. It is not involved in the reward payment in any way. Agree on how and when you'll be paid directly over chat once someone is hired.",
+  "アカウントは「匿名ゲスト」ともう1つまでです。": "You can have at most two accounts: the anonymous guest and one more.",
+  "アカウントは「匿名ゲスト」ともう1つまでです。どちらもこの端末にだけ保存されるため、ブラウザのデータを消すと戻れなくなります。": "You can have at most two accounts: the anonymous guest and one more. Both are stored only on this device, so clearing your browser data means losing access to them.",
+  "メールアドレスもパスワードも秘密鍵も不要です。表示名(任意)を入れるだけでアカウントが作られ、自動的にログインします。いつでもログアウトして匿名ゲストに戻れます。作れるのは「匿名ゲスト」のほかに1つまでです。": "No email address, password, or private key needed. Just enter a display name (optional) and the account is created and logged in. You can log out at any time to return to the anonymous guest. You can create one account besides the anonymous guest.",
+  "ログイン不要 — 匿名ゲストのまま投稿・応募できます。名前を付けて使いたいときだけ登録してください。": "No login required — you can post and apply as an anonymous guest. Register only if you want to use a name.",
+  "ログイン不要・匿名のまま投稿できます。報酬の受け渡しは、採用が決まったあと当事者同士で直接行ってください。": "No login required — you can post anonymously. Once someone is hired, the reward is handed over directly between the two of you.",
+  "報酬の受け渡し": "Handing over the reward",
+  "応募を締め切る(誰も採用しない)": "Close applications (hire no one)",
+  "登録したアカウント": "Your registered account",
+  "匿名ゲストの名前は変更できません。名前を付けて使いたい場合は、右上から新規登録してください(自己紹介とスキルは匿名のままでも書けます)。": "The anonymous guest's name can't be changed. To use a display name, sign up from the top right (you can still write a bio and skills while staying anonymous).",
+  "＋ 新規登録(名前を付けて使う)": "+ Sign up (use a display name)",
+  "キーワード": "Keyword",
+  "例: 東京、フルリモート": "e.g. Tokyo, fully remote",
+  "例: 草刈り、翻訳": "e.g. mowing, translation",
+  "募集状況": "Status",
+  "条件をクリア": "Clear filters",
+  "気になる求人を探して、そのまま応募できます。": "Find a job that interests you and apply right away.",
+  "絞り込み": "Filter",
+  "該当する求人が見つかりません。条件を変えてみてください。": "No jobs match these filters. Try changing them."
 };
   function tr(ja) { return LANG === "en" ? (STRINGS_EN[ja] || ja) : ja; }
 
@@ -1174,9 +1025,9 @@
     return "0x" + h;
   }
 
-  // アカウントのID(文字列)から、見た目用の"アドレス"を毎回同じ値になるように
-  // 作る(実際のウォレットアドレスではなく、アバターの色や表示のための見本の値。
-  // 本物のアドレスはこのIDに紐づけて保存していない)。
+  // アカウントのID(文字列)から、表示用の短い識別子を毎回同じ値になるように
+  // 作る。アバターの色と、同じ表示名の人を見分けるためのチップに使うだけで、
+  // 外部のサービスとは一切関係しない。
   function hashSeed(str) {
     let h = 0;
     for (let i = 0; i < str.length; i++) h = (Math.imul(31, h) + str.charCodeAt(i)) | 0;
@@ -1188,8 +1039,8 @@
   /* このアプリの求人・アカウント・メッセージは、誰がアクセスしても同じ  */
   /* データが見えるよう、この下で作るFirebaseプロジェクト(Firestore)に  */
   /* 保存される。ここに置くのは名前・求人内容・メッセージなどのデータ   */
-  /* のみ。Monero・手渡しのやり取りは当事者同士が直接行い、カード決済は  */
-  /* Stripe(Connect)側で処理される。ここで使う設定値(apiKeyなど)は      */
+  /* のみ。報酬の受け渡しは当事者同士が直接行い、このサイトは関与しない。*/
+  /* ここで使う設定値(apiKeyなど)は                                     */
   /* 公開しても安全なもので、データの読み書きの制限はFirestore          */
   /* セキュリティルール(firestore.rules)側で行っている。                */
   /* ---------------------------------------------------------------- */
@@ -1203,30 +1054,12 @@
   };
   const FIREBASE_SDK_VERSION = "12.19.0";
 
-  /* ---------------------------------------------------------------- */
-  /* Stripe Connect(Airbnb と同じ Express + destination charge 方式)  */
-  /*                                                                   */
-  /* STRIPE_CONNECT_ENABLED を false にしている間は、カード決済が選択   */
-  /* 肢から外れる(払う手段が無い求人を作らせないため)。Cloud Functions */
-  /* をデプロイし、Connectを有効にして、下の公開可能キーを入れてから    */
-  /* true にすること。(公開可能キー pk_ は名前のとおり公開して安全)    */
-  /* ---------------------------------------------------------------- */
-  const STRIPE_CONNECT_ENABLED = false;
-  const STRIPE_PUBLISHABLE_KEY = ""; // 例: "pk_live_xxx" / "pk_test_xxx"
-  const FUNCTIONS_REGION = "asia-northeast1";
-
   let fsMod = null;   // firebase/firestore モジュール名前空間(動的importで読み込む)
   let authMod = null; // firebase/auth モジュール名前空間
-  let fnMod = null;   // firebase/functions モジュール名前空間
   let fbApp = null;
   let auth = null;
   let db = null;
-  let functionsInstance = null;
   let MY_AUTH_UID = null;
-  // 匿名アカウントにメールアドレスを紐づけたかどうか。
-  // 紐づいていれば、ブラウザのデータを消しても別の端末からでも同じ
-  // アカウントに戻れる(= お金を受け取る導線を使う前提条件)。
-  let MY_AUTH_EMAIL = null;
 
   // classic <script>(type="module"ではない)の中からでも、dynamic import()なら
   // ES Modulesとして配布されているFirebase JS SDKを問題なく読み込める。
@@ -1236,75 +1069,18 @@
   async function initFirebase() {
     if (db) return; // 二重初期化防止
     const base = `https://www.gstatic.com/firebasejs/${FIREBASE_SDK_VERSION}/`;
-    const [{ initializeApp }, authM, fsM, fnM] = await Promise.all([
+    const [{ initializeApp }, authM, fsM] = await Promise.all([
       import(/* webpackIgnore: true */ base + "firebase-app.js"),
       import(/* webpackIgnore: true */ base + "firebase-auth.js"),
       import(/* webpackIgnore: true */ base + "firebase-firestore.js"),
-      // Cloud Functions(決済処理)。Connectを使わない間は読み込むだけで無害。
-      import(/* webpackIgnore: true */ base + "firebase-functions.js").catch(() => null),
     ]);
     authMod = authM;
     fsMod = fsM;
-    fnMod = fnM;
     fbApp = initializeApp(FIREBASE_CONFIG);
     auth = authMod.getAuth(fbApp);
     db = fsMod.getFirestore(fbApp);
-    if (fnMod) functionsInstance = fnMod.getFunctions(fbApp, FUNCTIONS_REGION);
   }
 
-  /** Cloud Functions の呼び出し。エラーメッセージはサーバー側の文言をそのまま使う。 */
-  async function callFn(name, data) {
-    if (!fnMod || !functionsInstance) throw new Error(tr("決済機能を読み込めませんでした。"));
-    const fn = fnMod.httpsCallable(functionsInstance, name);
-    const res = await fn(data || {});
-    return res.data;
-  }
-
-  // ---------------------------------------------------------------- Stripe.js の読み込み
-  // 決済フォーム(Payment Element)と、受け取り設定の埋め込み(Connect.js)で使う。
-  // 必要になった時点で初めて読み込む(使わない人に余計な通信をさせない)。
-  let stripeJsPromise = null;
-  function loadStripeJs() {
-    if (stripeJsPromise) return stripeJsPromise;
-    stripeJsPromise = new Promise((resolve, reject) => {
-      if (window.Stripe) { resolve(window.Stripe(STRIPE_PUBLISHABLE_KEY)); return; }
-      const s = document.createElement("script");
-      s.src = "https://js.stripe.com/v3/";
-      s.onload = () => resolve(window.Stripe(STRIPE_PUBLISHABLE_KEY));
-      s.onerror = () => reject(new Error(tr("決済機能を読み込めませんでした。")));
-      document.head.appendChild(s);
-    });
-    return stripeJsPromise;
-  }
-
-  let connectJsPromise = null;
-  function loadConnectJs() {
-    if (connectJsPromise) return connectJsPromise;
-    connectJsPromise = new Promise((resolve, reject) => {
-      if (window.StripeConnect) { resolve(window.StripeConnect); return; }
-      const s = document.createElement("script");
-      s.src = "https://connect-js.stripe.com/v1.0/connect.js";
-      s.async = true;
-      s.onload = () => resolve(window.StripeConnect);
-      s.onerror = () => reject(new Error(tr("受け取り設定の画面を読み込めませんでした。")));
-      document.head.appendChild(s);
-    });
-    return connectJsPromise;
-  }
-
-  // Connectの埋め込みコンポーネントは、アプリ内WebViewでは動作しない
-  // (Stripeのドキュメントに明記)。Web版では基本的に埋め込みが使えるが、
-  // 将来WebViewから開かれた場合に備えて判定だけ用意しておく。
-  function isInAppWebView() {
-    try {
-      if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) return true;
-    } catch (e) { /* noop */ }
-    return false;
-  }
-
-  // Firestoreの 'in' 演算子は一度に渡せる値の数に上限があるため、
-  // 多数のID(サブアカウントが多い場合など)をまとめてクエリするときは
-  // 安全のため小分けにする。
   function chunkArray(arr, size) {
     const out = [];
     for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
@@ -1329,14 +1105,6 @@
   // このキャッシュを同期的に読むだけで済むようにし、Firestoreとのやり取り
   // (非同期)は読み込み時とデータ変更時の関数だけに閉じ込めている。
   const ACCOUNTS = [];
-
-  function fakeMoneroAddress(seed) {
-    const chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-    const rnd = mulberry32(seed);
-    let s = "4"; // Moneroのメインアドレスは "4" から始まる
-    for (let i = 0; i < 94; i++) s += chars[Math.floor(rnd() * chars.length)];
-    return s;
-  }
 
   const JOBS = [];
 
@@ -1396,7 +1164,6 @@
   }
 
   function shortAddr(addr) { return addr.slice(0, 6) + "…" + addr.slice(-4); }
-  function shortMonero(addr) { return addr.slice(0, 7) + "…" + addr.slice(-6); }
   function fmtDate(ts) {
     return new Date(ts).toLocaleString(LANG === "en" ? "en-US" : "ja-JP", { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
   }
@@ -1430,112 +1197,38 @@
     ["鹿児島", "鹿児島県"], ["沖縄", "沖縄県"],
   ];
 
-  const PAY_METHODS = {
-    xmr: { label: "Monero (XMR)", unit: "XMR", anon: true, fmt: (n) => Number(n).toFixed(4) + " XMR" },
-    card: { get label() { return tr("カード / Apple Pay"); }, get unit() { return LANG === "en" ? "JPY" : "円"; }, anon: false, fmt: (n) => "¥" + Number(n).toLocaleString("ja-JP") },
-    cash: { get label() { return tr("手渡し(現金)"); }, get unit() { return LANG === "en" ? "JPY" : "円"; }, anon: true, fmt: (n) => "¥" + Number(n).toLocaleString("ja-JP") },
-  };
-  function payInfo(method) { return PAY_METHODS[method] || PAY_METHODS.cash; }
-  function fmtAmount(n, method) { return payInfo(method).fmt(n); }
+  // 報酬は日本円のみ。このサイトは掲載だけを行い、支払いには一切関与しない
+  // (受け渡しの方法・タイミングは当事者同士がチャットで決める)。
+  function fmtAmount(n) { return "¥" + Number(n).toLocaleString("ja-JP"); }
 
   function rewardTierLabels() { return { high: tr("高収入"), normal: tr("普通"), low: tr("低収入") }; }
   // 求人ごとの報酬を「高収入・普通・低収入」に分類する。
-  // 決済方法(Monero/カード/現金)ごとに単位が違うため、同じ決済方法どうしの中で
   // 報酬が高い順に並べ、上位1割を高収入、下位2割を低収入、残りの真ん中7割を普通とする。
-  // 比較できる母数が少ない決済方法(3件未満)は「普通」扱いにする。
+  // 母数が少ないとき(3件未満)はすべて「普通」扱いにする。
   function computeRewardTiers() {
-    const groups = {};
-    JOBS.forEach((j) => { (groups[j.payMethod] || (groups[j.payMethod] = [])).push(j); });
     const tierById = {};
-    Object.values(groups).forEach((list) => {
-      const n = list.length;
-      if (n < 3) {
-        list.forEach((j) => { tierById[j.id] = "normal"; });
-        return;
-      }
-      const sorted = [...list].sort((a, b) => a.reward - b.reward); // 昇順(安い順)
-      const lowCount = Math.max(1, Math.round(n * 0.2));
-      const highCount = Math.max(1, Math.round(n * 0.1));
-      sorted.forEach((j, i) => {
-        if (i < lowCount) tierById[j.id] = "low";
-        else if (i >= n - highCount) tierById[j.id] = "high";
-        else tierById[j.id] = "normal";
-      });
+    const n = JOBS.length;
+    if (n < 3) {
+      JOBS.forEach((j) => { tierById[j.id] = "normal"; });
+      return tierById;
+    }
+    const sorted = [...JOBS].sort((a, b) => a.reward - b.reward); // 昇順(安い順)
+    const lowCount = Math.max(1, Math.round(n * 0.2));
+    const highCount = Math.max(1, Math.round(n * 0.1));
+    sorted.forEach((j, i) => {
+      if (i < lowCount) tierById[j.id] = "low";
+      else if (i >= n - highCount) tierById[j.id] = "high";
+      else tierById[j.id] = "normal";
     });
     return tierById;
-  }
-
-  function payMethodPillHtml(job) {
-    const method = job.payMethod;
-    const info = payInfo(method);
-    const cls = info.anon ? "anon" : "";
-    return `<span class="pill ${cls}">${info.anon ? tr("匿名決済 ・ ") : ""}${info.label}</span>`;
-  }
-
-  // Moneroの "monero:" URI スキーム(BIP21のMonero版)で支払いリンクを生成する。
-  // このアプリ自体は送金機能を持たない(持たせられない)ため、リンクを開くと
-  // 利用者自身のMoneroウォレットにアドレス・金額・メモが自動入力される。
-  function buildMoneroUri({ address, amount, description }) {
-    const params = new URLSearchParams();
-    if (amount) params.set("tx_amount", Number(amount).toFixed(4));
-    if (description) params.set("tx_description", description);
-    const qs = params.toString();
-    return `monero:${address}${qs ? "?" + qs : ""}`;
-  }
-
-  // footerHtml: 「支払い済みにする」ボタンなど、支払い操作のすぐ下に置きたい
-  // 追加の操作を差し込むためのスロット。支払う場所と完了報告の場所を
-  // 1か所にまとめるために使う。
-  function paymentLinkCardHtml({ idPrefix, heading, uri, note, walletNote, headerExtra, footerHtml }) {
-    return `
-      <div class="card" style="margin-top:12px;">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-          <div class="section-title" style="margin-bottom:0;">${heading}</div>
-          ${headerExtra || ""}
-        </div>
-        <div class="xmr-address" id="${idPrefix}-uri">${escapeHtml(uri)}</div>
-        <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center;">
-          <button class="btn-small btn-accent" id="${idPrefix}-copy" type="button">${tr("リンクをコピー")}</button>
-          <a class="btn-small btn-ghost" style="text-decoration:none; display:inline-flex; align-items:center;" href="${escapeHtml(uri)}" id="${idPrefix}-open">${tr("ウォレットで開く")}</a>
-          <span style="font-size:11.5px; color:var(--text-dim);">${tr("(対応ウォレットアプリが必要です)")}</span>
-        </div>
-        <p style="font-size:12px; color:var(--text-dim); margin-top:10px;">${note || ""}</p>
-        <div class="wallet-note">${walletNote || tr("「ウォレットで開く」はMonero対応ウォレット(Cake Walletなど)がお使いの端末にインストールされていないと反応しません。基本的には「リンクをコピー」してウォレットアプリ側に貼り付けてください。")}</div>
-        ${footerHtml || ""}
-      </div>
-    `;
-  }
-
-  function wireCopyButton(btnId, textId) {
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-    btn.addEventListener("click", async () => {
-      const el = document.getElementById(textId);
-      const text = el.textContent;
-      try {
-        await navigator.clipboard.writeText(text);
-        toast(tr("コピーしました。"), "success");
-      } catch {
-        try {
-          const range = document.createRange();
-          range.selectNodeContents(el);
-          const sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(range);
-          toast(tr("自動コピーできなかったため、テキストを選択しました。手動でコピーしてください。"), "error");
-        } catch {
-          toast(tr("コピーに失敗しました。テキストを手動で選択してください。"), "error");
-        }
-      }
-    });
   }
 
   function getAccount(id) { return ACCOUNTS.find((a) => a.id === id); }
   function me() { return getAccount(currentAccountId); }
 
   // FirestoreのDBの行(スネークケース)を、既存の描画コードがそのまま使える
-  // 形(キャメルケース)に変換する。address は実際のウォレットアドレスでは
-  // なく、アバターの色などの表示用にIDから毎回同じ値を作っているだけ。
+  // 形(キャメルケース)に変換する。address はアバターの色や識別チップの
+  // 表示用に、IDから毎回同じ値を作っているだけの文字列。
   function mapAccountRow(row) {
     return {
       id: row.id,
@@ -1546,68 +1239,73 @@
       role: row.role || "",
       bio: row.bio || "",
       skills: row.skills || "",
-      moneroAddress: row.monero_address || "",
-      // Stripe Connect(Express)の受け取り設定。書き込むのはCloud Functions側だけで、
-      // クライアントからは読むだけ(Firestoreルールでも書き込みを禁止している)。
-      stripeAccountId: row.stripe_account_id || "",
-      stripeChargesEnabled: !!row.stripe_charges_enabled,
-      stripePayoutsEnabled: !!row.stripe_payouts_enabled,
       isGuest: false,
       isDeleted: !!row.is_deleted,
       createdAt: row.created_at,
     };
   }
 
-  // 「新規登録」= 実際のウォレット接続の代わりに、このアプリ用の新しいアカウントを
-  // その場で作る操作。秘密鍵などは一切扱わず、名前(任意)を入れるだけで良い。
-  // 投稿者・応募者のどちらとしても最初から使えるため、登録時に役割を選ばせることはしない
-  // (役割はマイページのプロフィールで、あとから表示用のラベルとして任意に設定できる)。
-  // 実際にはFirestoreのaccountsコレクションに1件追加する(auth_uidはこのブラウザの
-  // 匿名セッションのID。同じセッションから何個でもアカウントを作って切り替えられる)。
-  async function insertAccount(name) {
-    const { collection, addDoc } = fsMod;
+  // 1人が持てるアカウントは2つまで ——「匿名ゲスト」と、登録した1つだけ。
+  // ドキュメントIDを匿名認証のUID(とUID_1)に固定することで、
+  // 3つ目を作れないことをFirestoreのセキュリティルール側でも保証している。
+  const GUEST_SLOT = () => MY_AUTH_UID;
+  const NAMED_SLOT = () => MY_AUTH_UID + "_1";
+
+  async function insertAccount(name, docId) {
+    const { doc, setDoc } = fsMod;
     const payload = {
       auth_uid: MY_AUTH_UID,
       name,
       role: "",
       bio: "",
       skills: "",
-      monero_address: "",
       is_deleted: false,
       created_at: new Date().toISOString(),
     };
-    let ref;
     try {
-      ref = await addDoc(collection(db, "accounts"), payload);
+      await setDoc(doc(db, "accounts", docId), payload);
     } catch (e) {
       throw new Error(tr("アカウントの作成に失敗しました。"));
     }
-    const account = mapAccountRow({ id: ref.id, ...payload });
+    const existing = getAccount(docId);
+    if (existing) {
+      Object.assign(existing, mapAccountRow({ id: docId, ...payload }), { mine: true });
+      refreshGuestFlag();
+      return existing;
+    }
+    const account = mapAccountRow({ id: docId, ...payload });
     account.mine = true;
     ACCOUNTS.push(account);
-    return account;
-  }
-
-  async function createAccount({ name }) {
-    const account = await insertAccount(name || tr("新規ユーザー"));
     refreshGuestFlag();
     return account;
   }
 
-  // このセッションにまだ1つもアカウントが無いとき(初回訪問時、または自分の
-  // 最後のアカウントを削除した直後)に、既定の「匿名ゲスト」アカウントを
-  // 自動的に作る。特別に削除できない枠ではなく、ただの普通のアカウント。
-  async function createDefaultGuestAccount() {
-    return insertAccount(tr("匿名ゲスト"));
+  // 「新規登録」= 匿名ゲストとは別に、名前のついたアカウントを1つだけ作る操作。
+  // メールアドレスもパスワードも秘密鍵も要らない。2つ目がすでにある場合は断る。
+  async function createAccount({ name }) {
+    if (myAccounts().length >= 2) throw new Error(tr("アカウントは「匿名ゲスト」ともう1つまでです。"));
+    return insertAccount(name || tr("新規ユーザー"), NAMED_SLOT());
   }
 
-  // このブラウザ(セッション)が持っている、削除されていない自分のアカウントの
-  // 中でいちばん最初に作られたものを「ゲスト」枠として扱う(ログアウトや
-  // アカウント削除の戻り先)。DB上の特別なフラグではなく表示用の目印。
+  // 初回訪問時(または自分のアカウントをすべて削除した直後)に、
+  // 「匿名ゲスト」アカウントを自動的に作る。
+  async function createDefaultGuestAccount() {
+    return insertAccount(tr("匿名ゲスト"), GUEST_SLOT());
+  }
+
+  // このブラウザが持っている、削除されていない自分のアカウント(古い順)。
+  // 仕様上は最大2つ。過去に3つ以上作っていた人は古い2つだけを使う。
+  function myAccounts() {
+    return ACCOUNTS.filter((a) => a.mine && !a.isDeleted)
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      .slice(0, 2);
+  }
+
+  // いちばん古い自分のアカウントを「匿名ゲスト」枠として扱う
+  // (ログアウトやアカウント削除の戻り先)。DB上の特別なフラグではなく表示用の目印。
   function refreshGuestFlag() {
     ACCOUNTS.forEach((a) => { a.isGuest = false; });
-    const mine = ACCOUNTS.filter((a) => a.mine && !a.isDeleted)
-      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    const mine = myAccounts();
     if (mine.length) mine[0].isGuest = true;
   }
 
@@ -1656,7 +1354,7 @@
 
     try {
       await updateDoc(doc(db, "accounts", id), {
-        is_deleted: true, name: tr("削除済みアカウント"), bio: "", skills: "", role: "", monero_address: "",
+        is_deleted: true, name: tr("削除済みアカウント"), bio: "", skills: "", role: "",
       });
     } catch (e) {
       throw new Error(tr("アカウントの削除に失敗しました。"));
@@ -1673,16 +1371,10 @@
     acct.bio = "";
     acct.skills = "";
     acct.role = "";
-    acct.moneroAddress = "";
 
     if (currentAccountId === id) {
-      const remaining = ACCOUNTS.filter((a) => a.mine && !a.isDeleted);
-      if (remaining.length) {
-        currentAccountId = remaining[0].id;
-      } else {
-        const created = await createDefaultGuestAccount();
-        currentAccountId = created.id;
-      }
+      const remaining = myAccounts().filter((a) => a.id !== id);
+      currentAccountId = remaining.length ? remaining[0].id : (await createDefaultGuestAccount()).id;
     }
     refreshGuestFlag();
     persistCurrentAccountId();
@@ -1735,17 +1427,14 @@
     return {
       id: row.id,
       employerId: row.employer_id,
-      payMethod: row.pay_method,
       title: row.title,
       description: row.description || "",
       location: row.location || "",
       reward: Number(row.reward) || 0,
       workDate: row.work_date || "",
-      moneroAddress: row.pay_method === "xmr" ? (row.monero_address || "") : undefined,
       image: row.image_url || "",
       isOpen: !!row.is_open,
       hiredId: row.hired_id,
-      settled: !!row.settled,
       createdAt: row.created_at,
       applicants: [],
     };
@@ -1754,22 +1443,19 @@
     return { accountId: row.applicant_id, appliedAt: row.applied_at };
   }
 
-  async function postJob({ title, description, location, payMethod, reward, moneroAddress, workDate, image }) {
+  async function postJob({ title, description, location, reward, workDate, image }) {
     const acct = me();
     const { collection, addDoc } = fsMod;
     const payload = {
       employer_id: acct.id,
-      pay_method: payMethod,
       title,
       description: description || "",
       location: location || "",
       reward,
       work_date: workDate || "",
-      monero_address: payMethod === "xmr" ? (moneroAddress || "") : "",
       image_url: image || "",
       is_open: true,
       hired_id: null,
-      settled: false,
       created_at: new Date().toISOString(),
     };
     let ref;
@@ -1813,24 +1499,11 @@
     }
     job.isOpen = false;
     job.hiredId = applicantId;
-    // Monero・カード・手渡しは支払いがアプリ外で行われるため、
-    // 実際に支払いが完了したら「支払い済みにする」で自己申告する。
+    // 報酬の受け渡しはこのサイトの外で当事者同士が行う。
+    // このサイトは掲載と連絡の場であり、支払いには一切関与しない。
   }
 
-  async function markSettled(jobId) {
-    const job = getJob(jobId);
-    if (me().id !== job.employerId) throw new Error(tr("支払い状況を変更できるのは求人を投稿した投稿者のみです。"));
-    if (!job.hiredId) throw new Error(tr("採用者が確定していません。"));
-    const { doc, updateDoc } = fsMod;
-    try {
-      await updateDoc(doc(db, "jobs", job.id), { settled: true });
-    } catch (e) {
-      throw new Error(tr("更新に失敗しました。"));
-    }
-    job.settled = true;
-  }
-
-  // 求人ごとの「評価(レビュー)」。支払い済みになった求人についてのみ、
+  // 求人ごとの「評価(レビュー)」。採用が決まった求人について、
   // その求人の投稿者⇔採用者の当事者同士が、お互いを1〜5の星で評価できる。
   // 匿名のままでも、過去の取引実績(星評価)が見えるようにすることで、
   // 使い捨てアカウントによる詐欺的な行為を多少なりとも抑止する狙い。
@@ -1856,7 +1529,6 @@
   async function submitReview(jobId, toId, rating, comment) {
     const job = getJob(jobId);
     const acct = me();
-    if (!job.settled) throw new Error(tr("支払い済みになった求人についてのみ評価できます。"));
     const participantIds = [job.employerId, job.hiredId];
     if (!job.hiredId || !participantIds.includes(acct.id) || !participantIds.includes(toId) || acct.id === toId) {
       throw new Error(tr("この求人の当事者同士でのみ評価できます。"));
@@ -1903,9 +1575,7 @@
     html += `<div class="section-title">${LANG === "en" ? `Review ${escapeHtml(other.name)}` : `${escapeHtml(other.name)}を評価する`}</div>`;
     html += `<div style="font-size:13px; color:var(--text-dim); margin-bottom:12px;">${LANG === "en" ? "Overall rating: " : "総合評価: "}${otherStats ? `★${otherStats.avg.toFixed(1)} (${otherStats.count})` : tr("まだ評価がありません")}</div>`;
 
-    if (!job.settled) {
-      html += `<p style="font-size:13px; color:var(--text-dim);">${tr("支払い済みにすると、お互いを評価できるようになります。")}</p>`;
-    } else if (myExistingReview) {
+    if (myExistingReview) {
       html += `
         <div style="font-size:14px;">
           ${tr("あなたの評価")}: ${"★".repeat(myExistingReview.rating)}${"☆".repeat(5 - myExistingReview.rating)}
@@ -2000,48 +1670,6 @@
       );
     });
     MY_AUTH_UID = user.uid;
-    MY_AUTH_EMAIL = user.email || null;
-  }
-
-  // ---------------------------------------------------------------- メール認証
-  // このアプリは匿名認証で始まるが、匿名のままだとブラウザのデータを消したり
-  // 機種変したりした時点で、そのアカウントに二度と戻れない。普段の投稿・応募は
-  // それでも構わないが、カード決済で報酬をやり取りする場合は「入金待ちのお金に
-  // アクセスできなくなる」事故になるため、メールアドレスの登録を必須にしている。
-  //
-  // 重要: linkWithCredential は匿名アカウントのUIDをそのまま引き継ぐので、
-  // 既存のアカウント・求人・チャットは一切失われない。
-
-  function hasEmailAuth() { return !!MY_AUTH_EMAIL; }
-
-  function friendlyAuthError(err) {
-    const code = (err && err.code) || "";
-    if (code === "auth/email-already-in-use" || code === "auth/credential-already-in-use") {
-      return tr("このメールアドレスは既に使われています。「別の端末から引き継ぐ」からログインしてください。");
-    }
-    if (code === "auth/weak-password") return tr("パスワードは6文字以上にしてください。");
-    if (code === "auth/invalid-email") return tr("メールアドレスの形式が正しくありません。");
-    if (code === "auth/wrong-password" || code === "auth/invalid-credential" || code === "auth/user-not-found") {
-      return tr("メールアドレスかパスワードが違います。");
-    }
-    if (code === "auth/too-many-requests") return tr("試行回数が多すぎます。しばらく待ってからお試しください。");
-    return (err && err.message) || tr("処理に失敗しました。");
-  }
-
-  // 今の匿名アカウントにメールアドレスを紐づける(UIDは変わらない)
-  async function linkEmail(email, password) {
-    const cred = authMod.EmailAuthProvider.credential(email, password);
-    const result = await authMod.linkWithCredential(auth.currentUser, cred);
-    MY_AUTH_EMAIL = result.user.email || email;
-  }
-
-  // 別の端末などから、登録済みのアカウントに入り直す。
-  async function signInWithEmail(email, password) {
-    await authMod.signInWithEmailAndPassword(auth, email, password);
-  }
-
-  async function sendPasswordReset(email) {
-    await authMod.sendPasswordResetEmail(auth, email);
   }
 
   // 起動時に、アカウント・求人・応募・メッセージをすべてFirestoreから読み込み、
@@ -2101,15 +1729,13 @@
       MESSAGES[key].push({ fromId: row.from_id, text: row.text, at: row.created_at });
     });
 
-    // 自分のアカウントが1つも無ければ(初回訪問、または以前すべて削除した場合)、
-    // 既定の「匿名ゲスト」アカウントを自動的に作る。
-    let mine = ACCOUNTS.filter((a) => a.mine && !a.isDeleted);
-    if (!mine.length) {
-      const created = await createDefaultGuestAccount();
-      mine = [created];
-    }
+    // まだ1つも無ければ(初回訪問、または以前すべて削除した場合)
+    // 「匿名ゲスト」を自動的に作る。
+    let mine = myAccounts();
+    if (!mine.length) { await createDefaultGuestAccount(); mine = myAccounts(); }
     refreshGuestFlag();
 
+    // 前回どちらを使っていたかを覚えておき、ログイン状態を保つ。
     let savedId = null;
     try { savedId = localStorage.getItem(CURRENT_ACCOUNT_KEY); } catch {}
     const savedAccount = savedId && mine.find((a) => a.id === savedId);
@@ -2155,8 +1781,12 @@
 
   function renderAccountPanel() {
     const panel = document.getElementById("account-panel");
-    const guest = ACCOUNTS.find((a) => a.isGuest);
-    const samples = ACCOUNTS.filter((a) => a.mine && !a.isGuest && !a.isDeleted);
+    const mine = myAccounts();
+    // 通常ここが空になることはない(起動時に必ず1つ作る)が、
+    // 万一空でもパネルを開いた瞬間に落ちないようにしておく。
+    if (!mine.length) { panel.innerHTML = `<div class="hint-line">${tr("読み込み中…")}</div>`; return; }
+    const guest = mine[0];
+    const samples = mine.slice(1);
 
     function rowHtml(a) {
       return `
@@ -2172,29 +1802,22 @@
 
     const loggedIn = !me().isGuest;
     panel.innerHTML = `
-      <div class="hint-line">${tr("ログイン不要 — 匿名ゲストのまま投稿・応募できます。ここではウォレット接続の代わりにアカウントを選べます。")}</div>
+      <div class="hint-line">${tr("ログイン不要 — 匿名ゲストのまま投稿・応募できます。名前を付けて使いたいときだけ登録してください。")}</div>
       ${rowHtml(guest)}
       ${samples.length ? `
-        <div class="hint-line" style="border:none; border-top:1px solid var(--border); margin:6px 0 0; padding:10px 8px 6px;">${tr("ほかのアカウントに切り替える(任意)")}</div>
+        <div class="hint-line" style="border:none; border-top:1px solid var(--border); margin:6px 0 0; padding:10px 8px 6px;">${tr("登録したアカウント")}</div>
         ${samples.map(rowHtml).join("")}
       ` : ""}
       ${loggedIn ? `
         <button class="btn-ghost btn-small" id="account-logout" style="width:100%; margin-top:10px;" type="button">${tr("ログアウト(匿名ゲストに戻る)")}</button>
       ` : ""}
+      ${samples.length ? "" : `
+        <div style="border-top:1px solid var(--border); margin-top:10px; padding-top:10px;">
+          <button class="btn-ghost btn-small" id="signup-toggle" style="width:100%;" type="button">${tr("＋ 新規登録(名前を付けて使う)")}</button>
+        </div>
+      `}
       <div style="border-top:1px solid var(--border); margin-top:10px; padding-top:10px;">
-        <button class="btn-ghost btn-small" id="signup-toggle" style="width:100%;" type="button">${tr("＋ 新規登録(新しいアカウントを作る)")}</button>
-      </div>
-      <div style="border-top:1px solid var(--border); margin-top:10px; padding-top:10px;">
-        ${hasEmailAuth() ? `
-          <div style="font-size:11.5px; color:var(--text-dim); padding:0 8px 8px;">
-            ${tr("引き継ぎ用メール")}: <span class="mono">${escapeHtml(MY_AUTH_EMAIL)}</span>
-          </div>
-          <div style="font-size:11px; color:var(--text-dim); padding:0 8px;">${tr("この端末のデータを消しても、同じメールアドレスでログインすれば戻れます。")}</div>
-        ` : `
-          <div style="font-size:11.5px; color:var(--text-dim); padding:0 8px 8px;">${tr("今はこの端末でしか使えません。データを消すとアカウントに戻れなくなります。")}</div>
-          <button class="btn-ghost btn-small" id="email-link-btn" style="width:100%;" type="button">${tr("メールアドレスを登録(引き継ぎ用)")}</button>
-          <button class="btn-ghost btn-small" id="email-signin-btn" style="width:100%; margin-top:6px;" type="button">${tr("別の端末から引き継ぐ")}</button>
-        `}
+        <div style="font-size:11px; color:var(--text-dim); padding:0 8px;">${tr("アカウントは「匿名ゲスト」ともう1つまでです。どちらもこの端末にだけ保存されるため、ブラウザのデータを消すと戻れなくなります。")}</div>
       </div>
     `;
     panel.querySelectorAll("[data-switch]").forEach((btn) => {
@@ -2215,17 +1838,12 @@
         route();
       });
     }
-    document.getElementById("signup-toggle").addEventListener("click", () => {
-      panel.hidden = true;
-      openSignupModal();
-    });
-    const emailLinkBtn = document.getElementById("email-link-btn");
-    if (emailLinkBtn) {
-      emailLinkBtn.addEventListener("click", () => { panel.hidden = true; openEmailModal("link"); });
-    }
-    const emailSignInBtn = document.getElementById("email-signin-btn");
-    if (emailSignInBtn) {
-      emailSignInBtn.addEventListener("click", () => { panel.hidden = true; openEmailModal("signin"); });
+    const signupBtn = document.getElementById("signup-toggle");
+    if (signupBtn) {
+      signupBtn.addEventListener("click", () => {
+        panel.hidden = true;
+        openSignupModal();
+      });
     }
   }
 
@@ -2237,7 +1855,7 @@
       <div class="modal-overlay" id="signup-modal-overlay">
         <div class="modal-box modal-box-lg">
           <h2 style="font-size:20px; margin-bottom:14px;">${tr("新規登録")}</h2>
-          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">${tr("秘密鍵もメールアドレスも不要です。表示名(任意)を入れるだけでその場に新しいアカウントが作られ、自動的にログインします。求人を投稿することも、応募することも、どちらも同じアカウントでできます。")}</p>
+          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">${tr("メールアドレスもパスワードも秘密鍵も不要です。表示名(任意)を入れるだけでアカウントが作られ、自動的にログインします。いつでもログアウトして匿名ゲストに戻れます。作れるのは「匿名ゲスト」のほかに1つまでです。")}</p>
           <form id="signup-form" class="stack">
             <div class="field" style="margin-bottom:0;">
               <label for="signup-name">${tr("表示名(任意)")}</label>
@@ -2276,220 +1894,6 @@
     });
   }
 
-  // メールアドレスの登録(link)と、別端末からの引き継ぎ(signin)の共通モーダル。
-  // onDone を渡すと、成功後にそのまま元の操作(受け取り設定など)へ進める。
-  function openEmailModal(mode, onDone) {
-    const root = document.getElementById("modal-root");
-    const isLink = mode !== "signin";
-    root.innerHTML = `
-      <div class="modal-overlay" id="email-modal-overlay">
-        <div class="modal-box modal-box-lg">
-          <h2 style="font-size:20px; margin-bottom:14px;">${isLink ? tr("メールアドレスを登録") : tr("別の端末から引き継ぐ")}</h2>
-          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:18px;">${isLink
-            ? tr("カード決済を使うにはメールアドレスの登録が必要です。登録しても、今のアカウント・投稿・チャットはそのまま引き継がれます。手渡しやMoneroだけを使う場合は登録不要です。")
-            : tr("以前この端末以外で登録したメールアドレスとパスワードを入力してください。そのアカウントに戻ります。")}</p>
-          <form id="email-form" class="stack">
-            <div class="field" style="margin-bottom:0;">
-              <label for="email-input">${tr("メールアドレス")}</label>
-              <input id="email-input" type="email" required autocomplete="email" placeholder="you@example.com" />
-            </div>
-            <div class="field" style="margin-bottom:0;">
-              <label for="email-password">${tr("パスワード(6文字以上)")}</label>
-              <input id="email-password" type="password" required minlength="6" autocomplete="${isLink ? "new-password" : "current-password"}" />
-            </div>
-            ${isLink ? "" : `<button type="button" class="btn-ghost btn-small" id="email-reset" style="align-self:flex-start;">${tr("パスワードを忘れた場合")}</button>`}
-            <div class="modal-actions" style="margin-top:6px;">
-              <button type="button" class="btn-ghost" id="email-cancel">${tr("キャンセル")}</button>
-              <button type="submit" class="btn-accent">${isLink ? tr("登録する") : tr("ログイン")}</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    `;
-    const close = () => { root.innerHTML = ""; };
-    document.getElementById("email-modal-overlay").addEventListener("click", (e) => {
-      if (e.target.id === "email-modal-overlay") close();
-    });
-    document.getElementById("email-cancel").addEventListener("click", close);
-    document.getElementById("email-input").focus();
-
-    const resetBtn = document.getElementById("email-reset");
-    if (resetBtn) {
-      resetBtn.addEventListener("click", async () => {
-        const email = document.getElementById("email-input").value.trim();
-        if (!email) { toast(tr("メールアドレスを入力してください。"), "error"); return; }
-        try {
-          await sendPasswordReset(email);
-          toast(tr("パスワード再設定用のメールを送りました。"), "success");
-        } catch (err) { toast(friendlyAuthError(err), "error"); }
-      });
-    }
-
-    document.getElementById("email-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email-input").value.trim();
-      const password = document.getElementById("email-password").value;
-      const submitBtn = e.target.querySelector('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
-      try {
-        if (isLink) {
-          await linkEmail(email, password);
-          close();
-          toast(tr("メールアドレスを登録しました。"), "success");
-          renderShell();
-          if (typeof onDone === "function") onDone();
-          else route();
-        } else {
-          await signInWithEmail(email, password);
-          // サインインでFirebaseのユーザーが入れ替わるため、取り違えを防ぐ
-          // 意味でもページごと読み込み直す。
-          close();
-          toast(tr("ログインしました。読み込み直します。"), "success");
-          setTimeout(() => location.reload(), 600);
-        }
-      } catch (err) {
-        if (submitBtn) submitBtn.disabled = false;
-        toast(friendlyAuthError(err), "error");
-      }
-    });
-  }
-
-  /**
-   * 報酬の支払いモーダル(Stripe Payment Element)。
-   * 外部サイトに遷移せず、この画面の中でカード番号やApple Payの操作が完結する。
-   * カード情報はStripeのiframe内で扱われるため、このアプリは一切触れない。
-   */
-  async function openPaymentModal(job, acct) {
-    if (!hasEmailAuth()) { openEmailModal("link"); return; }
-
-    const root = document.getElementById("modal-root");
-    root.innerHTML = `
-      <div class="modal-overlay" id="pay-modal-overlay">
-        <div class="modal-box modal-box-lg">
-          <h2 style="font-size:20px; margin-bottom:6px;">${tr("報酬の支払い")}</h2>
-          <div style="font-size:14px; margin-bottom:16px;"><span class="mono">${fmtAmount(job.reward, job.payMethod)}</span></div>
-          <div id="payment-element"><div class="empty">${tr("読み込み中…")}</div></div>
-          <div id="pay-error" style="color:var(--danger); font-size:13px; margin-top:10px;" hidden></div>
-          <div class="modal-actions" style="margin-top:16px;">
-            <button type="button" class="btn-ghost" id="pay-cancel">${tr("キャンセル")}</button>
-            <button type="button" class="btn-accent" id="pay-submit" disabled>${tr("支払う")}</button>
-          </div>
-        </div>
-      </div>
-    `;
-    const close = () => { root.innerHTML = ""; };
-    document.getElementById("pay-cancel").addEventListener("click", close);
-    const showError = (msg) => {
-      const el = document.getElementById("pay-error");
-      if (!el) return;
-      el.textContent = msg;
-      el.hidden = false;
-    };
-
-    let stripe, elements;
-    try {
-      // 金額はサーバー側(Cloud Functions)がFirestoreの求人から読んで決める。
-      // クライアントは金額を一切渡さない。
-      const [stripeObj, intent] = await Promise.all([
-        loadStripeJs(),
-        callFn("createJobPaymentIntent", { jobId: job.id, accountId: acct.id }),
-      ]);
-      stripe = stripeObj;
-      elements = stripe.elements({
-        clientSecret: intent.clientSecret,
-        appearance: { theme: "stripe" },
-      });
-      const paymentElement = elements.create("payment");
-      const mount = document.getElementById("payment-element");
-      if (!mount) return; // モーダルが閉じられた
-      mount.innerHTML = "";
-      paymentElement.mount(mount);
-      const submitBtn = document.getElementById("pay-submit");
-      if (submitBtn) submitBtn.disabled = false;
-    } catch (err) {
-      showError((err && err.message) || tr("支払いを開始できませんでした。"));
-      return;
-    }
-
-    document.getElementById("pay-submit").addEventListener("click", async () => {
-      const submitBtn = document.getElementById("pay-submit");
-      submitBtn.disabled = true;
-      submitBtn.textContent = tr("処理中…");
-      // 3Dセキュア(本人認証)が必要な場合はStripeが自動で画面を出す。
-      const { error } = await stripe.confirmPayment({
-        elements,
-        redirect: "if_required",
-        confirmParams: { return_url: location.href },
-      });
-      if (error) {
-        showError(error.message || tr("支払いに失敗しました。"));
-        submitBtn.disabled = false;
-        submitBtn.textContent = tr("支払う");
-        return;
-      }
-      close();
-      toast(tr("支払いが完了しました。"), "success");
-      // settled はWebhookが立てる。反映までわずかに時間差があるため少し待つ。
-      setTimeout(() => { reloadAndRender(job.id); }, 1500);
-    });
-  }
-
-  // 支払い後など、サーバー側の変更を取り込んで画面を描き直す
-  async function reloadAndRender(jobId) {
-    try {
-      await fetchAllData();
-      renderShell();
-      viewJob(jobId);
-    } catch (e) {
-      location.reload();
-    }
-  }
-
-  /**
-   * 受け取り設定(Expressのオンボーディング)を開始する。
-   * Web版はページ内に埋め込み、WebViewから開かれた場合は埋め込みが
-   * 使えないためStripeホストのページへ遷移する。
-   */
-  async function startConnectOnboarding(acct) {
-    if (!acct.stripeAccountId) {
-      const created = await callFn("createConnectAccount", { accountId: acct.id });
-      acct.stripeAccountId = created.stripeAccountId;
-    }
-
-    if (isInAppWebView()) {
-      const { url } = await callFn("createAccountLink", { accountId: acct.id });
-      window.location.href = url;
-      return;
-    }
-
-    const container = document.getElementById("connect-embed");
-    if (!container) return;
-    container.innerHTML = `<div class="empty">${tr("読み込み中…")}</div>`;
-
-    const StripeConnect = await loadConnectJs();
-    const instance = StripeConnect.init({
-      publishableKey: STRIPE_PUBLISHABLE_KEY,
-      fetchClientSecret: async () => {
-        const res = await callFn("createAccountSession", { accountId: acct.id });
-        return res.clientSecret;
-      },
-    });
-    const onboarding = instance.create("account-onboarding");
-    onboarding.setOnExit(async () => {
-      try {
-        const res = await callFn("refreshConnectStatus", { accountId: acct.id });
-        acct.stripeChargesEnabled = !!(res && res.ready);
-        if (res && res.ready) toast(tr("受け取り設定が完了しました。"), "success");
-      } catch (e) { /* noop */ }
-      viewDashboard();
-    });
-    container.innerHTML = "";
-    container.appendChild(onboarding);
-  }
-
-  // A-ADS(暗号資産系の広告ネットワーク)のバナー広告。求人一覧の中に
-  // 数件おきに差し込む。広告主・広告内容はA-ADS側の配信ロジックに
-  // 任せており、このアプリ側では表示位置とラベル表示のみを担当する。
   function adBannerHtml() {
     return `
       <div class="ad-slot">
@@ -2513,10 +1917,9 @@
             ${job.isOpen
               ? `<span class="pill open">${tr("募集中")}</span>`
               : job.hiredId ? `<span class="pill hired">${tr("採用済み")}</span>` : `<span class="pill">${tr("募集終了")}</span>`}
-            ${payMethodPillHtml(job)}
             <span class="meta-item"><span class="meta-label">${tr("勤務地")}</span>${escapeHtml(job.location) || "-"}</span>
             ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("勤務日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
-            <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward, job.payMethod)}</span></span>
+            <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward)}</span></span>
             <span class="meta-item"><span class="meta-label">${tr("投稿元")}</span>${escapeHtml(employer.name)}${ratingBadgeHtml(employer.id)}</span>
           </div>
         </div>
@@ -2528,7 +1931,6 @@
     const root = document.getElementById("view-root");
     const initialQ = (query && query.get("q")) || "";
     const initialLoc = (query && query.get("loc")) || "";
-    const initialMethod = (query && query.get("method")) || "";
     const initialDate = (query && query.get("date")) || "";
     const initialRewardTier = (query && query.get("tier")) || "";
     const REMOTE_OPTIONS = [];
@@ -2550,15 +1952,6 @@
             <div class="loc-dropdown" id="loc-dropdown" hidden></div>
           </div>
           <div class="search-filters">
-            <div class="field">
-              <label for="search-method">${tr("決済方法")}</label>
-              <select id="search-method">
-                <option value="">${tr("すべて")}</option>
-                <option value="xmr" ${initialMethod === "xmr" ? "selected" : ""}>Monero (XMR)</option>
-                <option value="card" ${initialMethod === "card" ? "selected" : ""}>${tr("カード / Apple Pay")}</option>
-                <option value="cash" ${initialMethod === "cash" ? "selected" : ""}>${tr("手渡し(現金)")}</option>
-              </select>
-            </div>
             <div class="field date-field">
               <label id="search-date-label" for="search-date-btn">${tr("勤務日(以降)")}</label>
               <button type="button" id="search-date-btn" class="date-btn">
@@ -2586,7 +1979,6 @@
 
     const locInput = document.getElementById("search-loc");
     const dropdown = document.getElementById("loc-dropdown");
-    const methodSelect = document.getElementById("search-method");
 
     /* ---- 独自カレンダー(勤務日) ---- */
     let selectedDate = initialDate || "";
@@ -2755,13 +2147,11 @@
       e.preventDefault();
       const q = document.getElementById("search-q").value.trim();
       const loc = locInput.value.trim();
-      const method = document.getElementById("search-method").value;
       const date = selectedDate;
       const tier = document.getElementById("search-tier").value;
       const params = new URLSearchParams();
       if (q) params.set("q", q);
       if (loc) params.set("loc", loc);
-      if (method) params.set("method", method);
       if (date) params.set("date", date);
       if (tier) params.set("tier", tier);
       const qs = params.toString();
@@ -2771,58 +2161,112 @@
 
   function viewList(query) {
     const root = document.getElementById("view-root");
-    const q = (query && query.get("q")) || "";
-    const loc = (query && query.get("loc")) || "";
-    const method = (query && query.get("method")) || "";
-    const dateFrom = (query && query.get("date")) || "";
-    const tier = (query && query.get("tier")) || "";
-    const hasSearch = !!(q || loc || method || dateFrom || tier);
-    const backParams = new URLSearchParams();
-    if (q) backParams.set("q", q);
-    if (loc) backParams.set("loc", loc);
-    if (method) backParams.set("method", method);
-    if (dateFrom) backParams.set("date", dateFrom);
-    if (tier) backParams.set("tier", tier);
-    const backQs = backParams.toString();
-    const chips = [
-      q ? `${tr("検索キーワード")}: <strong class="mono">${escapeHtml(q)}</strong>` : "",
-      loc ? `${tr("場所")}: <strong class="mono">${escapeHtml(loc)}</strong>` : "",
-      method ? `${tr("決済方法")}: <strong class="mono">${escapeHtml(payInfo(method).label)}</strong>` : "",
-      dateFrom ? `${tr("勤務日(以降)")}: <strong class="mono">${escapeHtml(dateFrom)}</strong>` : "",
-      tier ? `${tr("報酬の目安")}: <strong class="mono">${escapeHtml(rewardTierLabels()[tier] || tier)}</strong>` : "",
-    ].filter(Boolean).join(" ・ ");
+    // 検索ページから渡された条件を初期値として読み込む。
+    // 以降はこのページ内の絞り込みパネルで直接変更できる。
+    const init = {
+      q: (query && query.get("q")) || "",
+      loc: (query && query.get("loc")) || "",
+      date: (query && query.get("date")) || "",
+      tier: (query && query.get("tier")) || "",
+      status: (query && query.get("status")) || "open",
+    };
+    const hasInitialFilter = !!(init.q || init.loc || init.date || init.tier);
+
     root.innerHTML = `
       <div class="page-head">
         <h1>${tr("求人一覧")}</h1>
-        <div class="sub">${hasSearch ? tr("検索条件に一致する求人の一覧です。") : tr("求人一覧です。")}</div>
+        <div class="sub">${tr("気になる求人を探して、そのまま応募できます。")}</div>
       </div>
-      ${hasSearch ? `
-        <div class="card" style="margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-          <div style="font-size:13.5px;">${chips}</div>
-          <a href="#search${backQs ? "?" + backQs : ""}" class="btn-ghost btn-small" style="text-decoration:none;">${tr("検索条件を変更")}</a>
+      <div class="filter-panel">
+        <button type="button" class="filter-toggle" id="filter-toggle" aria-expanded="${hasInitialFilter ? "true" : "false"}" aria-controls="filter-body">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+          <span>${tr("絞り込み")}</span>
+          <span class="count" id="filter-count" hidden>0</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="filter-body" id="filter-body" ${hasInitialFilter ? "" : "hidden"}>
+          <div class="filter-grid">
+            <div class="field">
+              <label for="filter-q">${tr("キーワード")}</label>
+              <input id="filter-q" type="search" value="${escapeHtml(init.q)}" placeholder="${tr("例: 草刈り、翻訳")}" />
+            </div>
+            <div class="field">
+              <label for="filter-loc">${tr("勤務地")}</label>
+              <input id="filter-loc" type="search" value="${escapeHtml(init.loc)}" placeholder="${tr("例: 東京、フルリモート")}" />
+            </div>
+            <div class="field">
+              <label for="filter-date">${tr("勤務日(以降)")}</label>
+              <input id="filter-date" type="date" value="${escapeHtml(init.date)}" />
+            </div>
+            <div class="field">
+              <label for="filter-tier">${tr("報酬の目安")}</label>
+              <select id="filter-tier">
+                <option value="">${tr("すべて")}</option>
+                <option value="high" ${init.tier === "high" ? "selected" : ""}>${tr("高収入")}</option>
+                <option value="normal" ${init.tier === "normal" ? "selected" : ""}>${tr("普通")}</option>
+                <option value="low" ${init.tier === "low" ? "selected" : ""}>${tr("低収入")}</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filter-status">${tr("募集状況")}</label>
+              <select id="filter-status">
+                <option value="open" ${init.status !== "all" ? "selected" : ""}>${tr("募集中のみ")}</option>
+                <option value="all" ${init.status === "all" ? "selected" : ""}>${tr("すべて表示")}</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <span class="filter-result" id="filter-result"></span>
+            <button type="button" class="btn-ghost btn-small" id="filter-clear">${tr("条件をクリア")}</button>
+          </div>
         </div>
-      ` : ""}
-      <div class="list-filter">
-        <label for="filter-select" style="margin:0;">${tr("表示")}</label>
-        <select id="filter-select">
-          <option value="open">${tr("募集中のみ")}</option>
-          <option value="all">${tr("すべて表示")}</option>
-        </select>
       </div>
       <div class="job-list" id="job-list"></div>
     `;
 
+    const toggleBtn = document.getElementById("filter-toggle");
+    const bodyEl = document.getElementById("filter-body");
+    const countEl = document.getElementById("filter-count");
+    const resultEl = document.getElementById("filter-result");
+    const qEl = document.getElementById("filter-q");
+    const locEl = document.getElementById("filter-loc");
+    const dateEl = document.getElementById("filter-date");
+    const tierEl = document.getElementById("filter-tier");
+    const statusEl = document.getElementById("filter-status");
+
+    toggleBtn.addEventListener("click", () => {
+      const open = bodyEl.hidden;
+      bodyEl.hidden = !open;
+      toggleBtn.setAttribute("aria-expanded", String(open));
+    });
+
+    document.getElementById("filter-clear").addEventListener("click", () => {
+      qEl.value = "";
+      locEl.value = "";
+      dateEl.value = "";
+      tierEl.value = "";
+      statusEl.value = "open";
+      renderList();
+    });
+
     function renderList() {
-      const filter = document.getElementById("filter-select").value;
-      const qLower = q.toLowerCase();
-      const locLower = loc.toLowerCase();
+      const q = qEl.value.trim().toLowerCase();
+      const loc = locEl.value.trim().toLowerCase();
+      const dateFrom = dateEl.value;
+      const tier = tierEl.value;
+      const status = statusEl.value;
+
+      // 「募集中のみ」は初期値なので、絞り込みの件数には数えない。
+      const activeCount = [q, loc, dateFrom, tier].filter(Boolean).length + (status === "all" ? 1 : 0);
+      countEl.hidden = activeCount === 0;
+      countEl.textContent = String(activeCount);
+
       const dateFromTime = dateFrom ? new Date(dateFrom).getTime() : null;
       const tierById = tier ? computeRewardTiers() : null;
       const filtered = JOBS.filter((j) => {
-        if (filter === "open" && !j.isOpen) return false;
-        if (qLower && !(j.title + " " + j.description + " " + j.location).toLowerCase().includes(qLower)) return false;
-        if (locLower && !j.location.toLowerCase().includes(locLower)) return false;
-        if (method && j.payMethod !== method) return false;
+        if (status === "open" && !j.isOpen) return false;
+        if (q && !(j.title + " " + j.description + " " + j.location).toLowerCase().includes(q)) return false;
+        if (loc && !j.location.toLowerCase().includes(loc)) return false;
         if (tierById && tierById[j.id] !== tier) return false;
         if (dateFromTime !== null) {
           if (!j.workDate) return false;
@@ -2830,7 +2274,12 @@
           if (isNaN(jobTime) || jobTime < dateFromTime) return false;
         }
         return true;
-      }).sort((a, b) => b.createdAt - a.createdAt);
+      }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      resultEl.textContent = LANG === "en"
+        ? `${filtered.length} of ${JOBS.length} jobs`
+        : `${JOBS.length}件中 ${filtered.length}件を表示`;
+
       const listEl = document.getElementById("job-list");
       // 求人5件おきに広告バナーを1枠差し込む(ただし一覧の最後には付けない)。
       const AD_INTERVAL = 5;
@@ -2840,20 +2289,21 @@
             return jobCardHtml(j) + (showAd ? adBannerHtml() : "");
           }).join("")
         : JOBS.length
-          ? `<div class="empty">${tr("該当する求人が見つかりません。")}</div>`
+          ? `<div class="empty">${tr("該当する求人が見つかりません。条件を変えてみてください。")}</div>`
           : `<div class="empty">${tr("まだ求人がありません。最初の求人を投稿してみましょう。")}</div>`;
     }
 
-    document.getElementById("filter-select").addEventListener("change", renderList);
-    renderList();
-  }
-
-  function payMethodNotes() {
-    return {
-      xmr: tr("<strong>Monero (XMR)</strong> は送信者・受信者・金額を秘匿する匿名性の高い暗号資産です(次世代のプライバシー技術「FCMP++」により匿名集合が大幅に拡大される予定)。このアプリ自体は送金を行いません(Moneroの秘密鍵を扱わない設計です)が、支払いのタイミングで宛先・金額を埋め込んだ「支払いリンク(monero:リンク)」を自動生成するので、それをお互いのMoneroウォレットで開いて送金してください。"),
-      card: tr("<strong>デビット/クレジットカード・Apple Pay</strong>は、アプリ内のカード入力画面でそのまま支払う方法です。報酬額は日本円(JPY)で指定します。カード情報はStripeへ直接送信され、このアプリには保存されません。採用された人は一度だけStripeで本人確認(氏名・住所・生年月日・振込先口座)を済ませる必要があり、支払いが完了すると報酬はStripeを経由して採用された人自身の銀行口座に入金されます。なんでも屋さんは手数料として報酬額の10%を受け取ります。"),
-      cash: tr("<strong>手渡し(現金)</strong>はアプリを一切介さない、最も匿名性の高い支払い方法です。採用後にチャットで日時・場所を相談し、対面で直接お支払いください。"),
+    // 文字入力は打つたびに走らせず、少し待ってからまとめて反映する。
+    let typingTimer = null;
+    const onType = () => {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(renderList, 220);
     };
+    qEl.addEventListener("input", onType);
+    locEl.addEventListener("input", onType);
+    [dateEl, tierEl, statusEl].forEach((el) => el.addEventListener("change", renderList));
+
+    renderList();
   }
 
   function viewPost() {
@@ -2861,7 +2311,7 @@
     root.innerHTML = `
       <div class="page-head">
         <h1>${tr("求人を投稿する")}</h1>
-        <div class="sub">${tr("ログイン不要・匿名のまま投稿できます。支払い方法はMonero・カード/Apple Pay・手渡しから選べます。")}</div>
+        <div class="sub">${tr("ログイン不要・匿名のまま投稿できます。報酬の受け渡しは、採用が決まったあと当事者同士で直接行ってください。")}</div>
       </div>
       <form id="post-form" class="card stack">
         <div class="field">
@@ -2890,110 +2340,17 @@
           <div style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">${tr("現場の写真やイメージ画像などを1枚添付できます(自動的に縮小・圧縮されます)。")}</div>
         </div>
         <div class="field">
-          <label>${tr("支払い方法")}</label>
-          <button type="button" class="method-quickpick-cash" id="method-cash-btn">
-            <div class="mq-title">${tr("手渡し / 現金(匿名・対面)")}</div>
-            <div class="mq-sub">${tr("一番かんたん。ネット決済なしで、会った時にその場で現金を渡すだけ。")}</div>
-          </button>
-          <button type="button" class="method-other-toggle" id="method-other-toggle" aria-expanded="false">${STRIPE_CONNECT_ENABLED ? tr("ほかの支払い方法(Monero・カード)から選ぶ") : tr("ほかの支払い方法(Monero)から選ぶ")}</button>
-          <div id="method-select-wrap" hidden>
-            <select id="f-method">
-              <option value="xmr">${tr("Monero / XMR(匿名決済)")}</option>
-              <!-- カード決済はStripe Connectの準備が整うまで選べないようにする
-                   (支払う手段が無い求人を作らせないため) -->
-              ${STRIPE_CONNECT_ENABLED ? `<option value="card">${tr("カード / Apple Pay")}</option>` : ""}
-              <option value="cash">${tr("手渡し / 現金(匿名・対面)")}</option>
-            </select>
-          </div>
+          <label for="f-reward">${LANG === "en" ? "Reward (JPY)" : "採用報酬 (円)"}</label>
+          <input id="f-reward" type="number" min="0" step="100" value="15000" />
         </div>
-        <div class="payment-note" id="method-note"></div>
-        <div class="card" id="email-gate" hidden style="margin-top:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-          <div class="section-title" style="margin-bottom:6px;">${tr("カード決済にはメールアドレスの登録が必要です")}</div>
-          <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">${tr("お金のやり取りが発生するため、端末を変えてもアカウントに戻れる状態にしておく必要があります。登録しても、今のアカウント・投稿・チャットはそのまま引き継がれます。")}</p>
-          <button type="button" class="btn-accent btn-small" id="email-gate-btn">${tr("メールアドレスを登録")}</button>
-        </div>
-        <div class="field">
-          <!-- 単位は syncMethodUI() が選択中の支払い方法に合わせて書き換える。
-               初期選択は手渡し(現金)なので、初期表示も円にしておく。 -->
-          <label for="f-reward" id="f-reward-label">${LANG === "en" ? "Reward (JPY)" : "採用報酬 (円)"}</label>
-          <input id="f-reward" type="number" min="0" step="0.01" value="1.0" />
-        </div>
-        <div class="field" id="monero-field" hidden>
-          <label for="f-monero">${tr("受け取り用Moneroアドレス(任意・後からチャットで伝えることも可能)")}</label>
-          <input id="f-monero" value="${escapeHtml(me().moneroAddress || "")}" placeholder="${tr("4で始まる95文字のMoneroアドレス")}" />
-          <div style="font-size:12px; color:var(--text-dim); margin-top:6px;">${me().moneroAddress ? tr("マイページに保存したアドレスを自動入力しました。") : tr("マイページでアドレスを登録しておくと、次回から自動入力されます。")}</div>
-        </div>
+        <div class="payment-note">${tr("このサイトは求人の掲載と連絡の場です。報酬のやり取りには一切関与しません。支払いの方法・タイミングは、採用が決まったあとチャットで直接決めてください。")}</div>
         <div>
           <button type="submit" class="btn-accent" id="post-submit-btn">${tr("求人を投稿する")}</button>
         </div>
       </form>
     `;
 
-    const methodSelect = document.getElementById("f-method");
-    const rewardLabel = document.getElementById("f-reward-label");
     const rewardInput = document.getElementById("f-reward");
-    const moneroField = document.getElementById("monero-field");
-    const emailGateEl = document.getElementById("email-gate");
-    const submitBtn = document.getElementById("post-submit-btn");
-    const noteEl = document.getElementById("method-note");
-    const cashQuickpickBtn = document.getElementById("method-cash-btn");
-    const otherToggleBtn = document.getElementById("method-other-toggle");
-    const methodSelectWrap = document.getElementById("method-select-wrap");
-
-    // 投稿フォームを開いた時は「手渡し(現金)」を一番目立つ形で初期選択にしておき、
-    // Monero・カードなど他の支払い方法は、専用のボタンをタッチ(クリック)
-    // して開いた時だけ選べるようにする。内部的には従来通り #f-method の<select>
-    // そのものを使っており、値の持ち方・送信処理は一切変えていない。
-    methodSelect.value = "cash";
-
-    function syncMethodUI() {
-      const method = methodSelect.value;
-      const info = payInfo(method);
-      rewardLabel.textContent = LANG === "en" ? `Reward (${info.unit})` : `採用報酬 (${info.unit})`;
-      moneroField.hidden = method !== "xmr";
-      noteEl.innerHTML = payMethodNotes()[method];
-      submitBtn.textContent = tr("求人を投稿する");
-      cashQuickpickBtn.classList.toggle("is-inactive", method !== "cash");
-      // カード決済はメールアドレスの登録が前提(お金が絡むため、端末を
-      // 変えてもアカウントに戻れる状態にしておく必要がある)。
-      emailGateEl.hidden = !(method === "card" && !hasEmailAuth());
-      if (method === "cash" || method === "card") {
-        // カード決済もcashと同じ日本円表示。JPYは小数点以下(銭単位)を
-        // 扱えず常に整数の円単位になるため、Monero(XMR)のような細かい
-        // 刻みではなくcashと同じ「100円刻み」で扱う。
-        rewardInput.step = "100";
-        rewardInput.value = rewardInput.value <= 10 ? 15000 : rewardInput.value;
-      } else {
-        rewardInput.step = "0.01";
-      }
-    }
-    methodSelect.addEventListener("change", syncMethodUI);
-    syncMethodUI();
-
-    document.getElementById("email-gate-btn").addEventListener("click", () => {
-      // 登録が終わったら投稿フォームに戻って、そのまま続けられるようにする
-      openEmailModal("link", () => { syncMethodUI(); });
-    });
-
-    const otherMethodsLabel = () => STRIPE_CONNECT_ENABLED
-      ? tr("ほかの支払い方法(Monero・カード)から選ぶ")
-      : tr("ほかの支払い方法(Monero)から選ぶ");
-
-    cashQuickpickBtn.addEventListener("click", () => {
-      methodSelect.value = "cash";
-      syncMethodUI();
-      methodSelectWrap.hidden = true;
-      otherToggleBtn.setAttribute("aria-expanded", "false");
-      otherToggleBtn.textContent = otherMethodsLabel();
-    });
-    otherToggleBtn.addEventListener("click", () => {
-      const willOpen = methodSelectWrap.hidden;
-      methodSelectWrap.hidden = !willOpen;
-      otherToggleBtn.setAttribute("aria-expanded", String(willOpen));
-      otherToggleBtn.textContent = willOpen
-        ? tr("ほかの支払い方法を閉じる")
-        : otherMethodsLabel();
-    });
 
     let selectedImageDataUrl = "";
     const imageInput = document.getElementById("f-image");
@@ -3026,12 +2383,6 @@
       e.preventDefault();
       const title = document.getElementById("f-title").value.trim();
       if (!title) { toast(tr("求人タイトルを入力してください。"), "error"); return; }
-      // カード決済の求人は、メールアドレス登録済みの人しか投稿できない
-      if (methodSelect.value === "card" && !hasEmailAuth()) {
-        toast(tr("カード決済にはメールアドレスの登録が必要です。"), "error");
-        openEmailModal("link", () => { syncMethodUI(); });
-        return;
-      }
       const submitBtn = e.target.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
       try {
@@ -3040,9 +2391,7 @@
           description: document.getElementById("f-desc").value.trim(),
           location: document.getElementById("f-loc").value.trim(),
           workDate: document.getElementById("f-workdate").value,
-          payMethod: methodSelect.value,
           reward: Number(rewardInput.value || 0),
-          moneroAddress: document.getElementById("f-monero").value.trim(),
           image: selectedImageDataUrl,
         });
         toast(tr("求人を投稿しました。"), "success");
@@ -3125,30 +2474,16 @@
       <div class="card" style="margin-bottom:18px;">
         <div class="meta-row" style="margin-bottom:10px;">
           ${job.isOpen ? `<span class="pill open">${tr("募集中")}</span>` : job.hiredId ? `<span class="pill hired">${tr("採用済み")}</span>` : `<span class="pill">${tr("募集終了")}</span>`}
-          ${payMethodPillHtml(job)}
-          ${job.hiredId ? (job.settled ? `<span class="pill settled">${tr("支払い済み(自己申告)")}</span>` : `<span class="pill unsettled">${tr("支払い待ち")}</span>`) : ""}
         </div>
         <h1 style="font-size:24px; margin-bottom:10px;">${escapeHtml(job.title)}</h1>
         ${job.image ? `<img class="job-detail-image" src="${job.image}" alt="" />` : ""}
         <div class="meta-row" style="margin-bottom:14px;">
           <span class="meta-item"><span class="meta-label">${tr("勤務地")}</span>${escapeHtml(job.location) || "-"}</span>
           ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("勤務日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
-          <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward, job.payMethod)}</span></span>
+          <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward)}</span></span>
           <span class="meta-item"><span class="meta-label">${tr("投稿日")}</span>${fmtDate(job.createdAt)}</span>
         </div>
         <p style="white-space:pre-wrap; line-height:1.75; font-size:14.5px;">${escapeHtml(job.description) || tr("(詳細説明なし)")}</p>
-        ${job.payMethod === "xmr" ? `
-          <div class="payment-note" style="margin-top:12px;">
-            <strong>${tr("Monero決済(匿名):")}</strong> ${payMethodNotes().xmr}
-            ${job.moneroAddress ? `<div class="xmr-address" style="margin-top:8px;">${escapeHtml(job.moneroAddress)}</div>` : `<div style="margin-top:8px;">${tr("受け取りアドレスは採用後にチャットで共有されます。")}</div>`}
-          </div>
-        ` : job.payMethod === "card" ? `
-          <div class="payment-note" style="margin-top:12px;">
-            <strong>${tr("カード決済:")}</strong> ${payMethodNotes().card}
-          </div>
-        ` : job.payMethod === "cash" ? `
-          <div class="payment-note" style="margin-top:12px;"><strong>${tr("手渡し決済(匿名):")}</strong> ${payMethodNotes().cash}</div>
-        ` : ""}
         <div style="margin-top:12px; font-size:12.5px; color:var(--text-dim);">
           ${tr("投稿者")}: ${escapeHtml(employer.name)} <span class="addr-chip">${shortAddr(employer.address)}</span>${ratingBadgeHtml(employer.id)}
         </div>
@@ -3163,121 +2498,19 @@
     const chatContainer = document.getElementById("chat-container");
 
     if (iAmEmployer) {
-      // 「採用したあとどこで支払うのか分からない」という指摘を受け、
-      // 支払いカードは応募者一覧より“上”に出す。手渡しのように
-      // アプリ内にリンクが無い方法でも、チャットへの導線をカードとして出す。
       actionsEl.innerHTML = `
         ${(() => {
           if (!job.hiredId) return "";
           const hiredAcct = getAccount(job.hiredId);
-          const isXmr = job.payMethod === "xmr";
-          const isCard = job.payMethod === "card";
-          const isDirectChat = job.payMethod === "cash";
-          const statusPill = job.settled
-            ? `<span class="pill settled">${tr("支払い済み(自己申告)")}</span>`
-            : `<span class="pill unsettled">${tr("支払い待ち")}</span>`;
-          // 「払う」操作のすぐ下に「払った」と報告するボタンを置く。
-          const settleFooterHtml = job.settled
-            ? ""
-            : `
-              <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
-                <button class="btn-ghost btn-small settle-btn">${tr("支払い済みにする")}</button>
-                <div style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">${tr("送金・手渡しが終わったら押してください(自己申告)。お互いを評価できるようになります。")}</div>
-              </div>
-            `;
-
-          if (isDirectChat) {
-            const methodLabel = tr("手渡し(現金)");
-            return `
-              <div class="card" style="margin-bottom:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-                  <div class="section-title" style="margin-bottom:0;">${tr("報酬の支払い")}(${methodLabel})</div>
-                  ${statusPill}
-                </div>
-                <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${LANG === "en"
-                  ? `Arrange the payment of ${fmtAmount(job.reward, job.payMethod)} directly with ${escapeHtml(hiredAcct.name)} via chat.`
-                  : `報酬 ${fmtAmount(job.reward, job.payMethod)} の受け渡し方法・タイミングは、${escapeHtml(hiredAcct.name)}さんとチャットで直接相談してください。`}</p>
-                <button class="btn-accent btn-small chat-with" data-id="${job.hiredId}" data-name="${escapeHtml(hiredAcct.name)}">${tr("チャットを開く")}</button>
-                ${settleFooterHtml}
-              </div>
-            `;
-          }
-
-          if (job.settled || (!isXmr && !isCard)) return "";
-
-          // カード決済はStripe Connect(アプリ内で完結)でのみ扱う。
-          // 以前の「採用者がStripeで決済リンクを発行してURLを貼る」方式は廃止した。
-          if (isCard) {
-            if (!STRIPE_CONNECT_ENABLED) {
-              return `
-                <div class="card" style="margin-bottom:12px;">
-                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-                    <div class="section-title" style="margin-bottom:0;">${tr("報酬の支払い")}</div>
-                    ${statusPill}
-                  </div>
-                  <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${tr("カード決済は現在準備中です。お手数ですが、チャットで相手と直接やり取りしてください。")}</p>
-                  <button class="btn-accent btn-small chat-with" data-id="${job.hiredId}" data-name="${escapeHtml(hiredAcct.name)}">${tr("チャットを開く")}</button>
-                  ${settleFooterHtml}
-                </div>
-              `;
-            }
-            if (!hiredAcct.stripeChargesEnabled) {
-              return `
-                <div class="card" style="margin-bottom:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-                    <div class="section-title" style="margin-bottom:0;">${tr("報酬の支払い")}</div>
-                    ${statusPill}
-                  </div>
-                  <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${LANG === "en"
-                    ? `${escapeHtml(hiredAcct.name)} hasn't finished their payout setup yet. Please check with them via chat.`
-                    : `採用者(${escapeHtml(hiredAcct.name)})はまだ受け取り設定を完了していません。チャットで確認してください。`}</p>
-                  <button class="btn-accent btn-small chat-with" data-id="${job.hiredId}" data-name="${escapeHtml(hiredAcct.name)}">${tr("チャットを開く")}</button>
-                </div>
-              `;
-            }
-            return `
-              <div class="card" style="margin-bottom:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-                  <div class="section-title" style="margin-bottom:0;">${tr("報酬の支払い")}(${fmtAmount(job.reward, job.payMethod)})</div>
-                  ${statusPill}
-                </div>
-                <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${tr("このページ上でカード・Apple Payで支払えます。支払いが完了すると、報酬は自動的に採用者へ送られます。")}</p>
-                <button class="btn-accent btn-small" id="pay-now-btn">${tr("支払う")}</button>
-              </div>
-            `;
-          }
-
-          // 以下はMonero決済のみ
-          const theirAddress = hiredAcct.moneroAddress;
-          if (!theirAddress) {
-            return `
-              <div class="card" style="margin-bottom:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
-                  <div class="section-title" style="margin-bottom:0;">${tr("報酬の支払い")}</div>
-                  ${statusPill}
-                </div>
-                <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${LANG === "en"
-                  ? `The hired applicant (${escapeHtml(hiredAcct.name)}) hasn't registered a Monero address yet. Please check with them via chat.`
-                  : `採用者(${escapeHtml(hiredAcct.name)})はまだMoneroアドレスを登録していません。チャットで確認してください。`}</p>
-                <button class="btn-accent btn-small chat-with" data-id="${job.hiredId}" data-name="${escapeHtml(hiredAcct.name)}">${tr("チャットを開く")}</button>
-                ${settleFooterHtml}
-              </div>
-            `;
-          }
-          const uri = buildMoneroUri({
-            address: theirAddress,
-            amount: job.reward,
-            description: LANG === "en" ? `Reward: ${job.title}` : `報酬: ${job.title}`,
-          });
-          return paymentLinkCardHtml({
-            idPrefix: "reward-pay",
-            heading: LANG === "en" ? `Reward payment link (${fmtAmount(job.reward, job.payMethod)})` : `報酬の支払いリンク(${fmtAmount(job.reward, job.payMethod)})`,
-            uri,
-            note: LANG === "en" ? `Sent to the address the hired applicant (${escapeHtml(hiredAcct.name)}) registered on their dashboard.` : `採用者(${escapeHtml(hiredAcct.name)})がマイページに登録したアドレス宛てです。`,
-            walletNote: tr("「ウォレットで開く」はMonero対応ウォレット(Cake Walletなど)がお使いの端末にインストールされていないと反応しません。基本的には「リンクをコピー」してウォレットアプリ側に貼り付けてください。"),
-            headerExtra: statusPill,
-            footerHtml: settleFooterHtml,
-          });
+          return `
+            <div class="card" style="margin-bottom:12px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
+              <div class="section-title">${tr("報酬の受け渡し")}</div>
+              <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">${LANG === "en"
+                ? `Arrange the payment of ${fmtAmount(job.reward)} directly with ${escapeHtml(hiredAcct.name)} via chat. This site only lists jobs and is not involved in the payment itself.`
+                : `報酬 ${fmtAmount(job.reward)} の受け渡し方法・タイミングは、${escapeHtml(hiredAcct.name)}さんとチャットで直接決めてください。このサイトは掲載の場であり、支払いには関与しません。`}</p>
+              <button class="btn-accent btn-small chat-with" data-id="${job.hiredId}" data-name="${escapeHtml(hiredAcct.name)}">${tr("チャットを開く")}</button>
+            </div>
+          `;
         })()}
         <div class="card">
           <div class="section-title">${LANG === "en" ? `Applicants (${job.applicants.length})` : `応募者一覧 (${job.applicants.length}名)`}</div>
@@ -3293,48 +2526,23 @@
                 <div class="actions">
                   <button class="btn-ghost btn-small chat-with" data-id="${a.accountId}" data-name="${escapeHtml(applicant.name)}">${tr("チャット")}</button>
                   ${job.isOpen ? `<button class="btn-accent btn-small hire-btn" data-id="${a.accountId}" data-name="${escapeHtml(applicant.name)}">${tr("採用する")}</button>` : ""}
-                  ${hired ? (job.settled
-                    ? `<span class="pill settled">${tr("支払い済み")}</span>`
-                    : `<span class="pill unsettled">${tr("支払い待ち")}</span>`) : ""}
                 </div>
               </div>
             `;
           }).join("") : `<div class="empty">${tr("まだ応募はありません。")}</div>`}
-          ${job.isOpen ? `<div style="margin-top:16px;"><button class="btn-danger btn-small" id="close-btn">${tr("応募を締め切る(未採用の場合、報酬は返金されます)")}</button></div>` : ""}
+          ${job.isOpen ? `<div style="margin-top:16px;"><button class="btn-danger btn-small" id="close-btn">${tr("応募を締め切る(誰も採用しない)")}</button></div>` : ""}
         </div>
       `;
-      if (document.getElementById("reward-pay-copy")) wireCopyButton("reward-pay-copy", "reward-pay-uri");
-
-      const payNowBtn = document.getElementById("pay-now-btn");
-      if (payNowBtn) {
-        payNowBtn.addEventListener("click", () => openPaymentModal(job, acct));
-      }
-
       actionsEl.querySelectorAll(".hire-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const rewardText = fmtAmount(job.reward, job.payMethod);
+          const rewardText = fmtAmount(job.reward);
           const msg = LANG === "en"
-            ? `Hire ${btn.dataset.name}? Please pay the reward of ${rewardText} directly${job.payMethod === "xmr" ? " via Monero" : job.payMethod === "card" ? " via card/Apple Pay" : job.payMethod === "cash" ? " in cash, in person" : ""}.`
-            : (() => {
-              const directPayLabel = job.payMethod === "xmr" ? "Moneroで" : job.payMethod === "card" ? "カード/Apple Payで" : job.payMethod === "cash" ? "手渡しで" : "";
-              return `${btn.dataset.name} を採用しますか?報酬 ${rewardText} は${directPayLabel}直接お支払いください。`;
-            })();
+            ? `Hire ${btn.dataset.name}? The reward of ${rewardText} is paid directly between the two of you — this site is not involved.`
+            : `${btn.dataset.name} を採用しますか?報酬 ${rewardText} の受け渡しは当事者同士で直接行ってください(このサイトは関与しません)。`;
           askConfirm(msg, async () => {
             try {
               await hireApplicant(job.id, btn.dataset.id);
               toast(tr("採用しました。"), "success");
-              viewJob(jobId);
-            } catch (err) { toast(err.message, "error"); }
-          });
-        });
-      });
-
-      actionsEl.querySelectorAll(".settle-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          askConfirm(tr("採用者への支払いは完了しましたか?この操作は自己申告であり、実際の送金・手渡しはアプリの外で行われます。"), async () => {
-            try {
-              await markSettled(job.id);
-              toast(tr("支払い済みにしました。"), "success");
               viewJob(jobId);
             } catch (err) { toast(err.message, "error"); }
           });
@@ -3366,41 +2574,16 @@
     } else {
       const applied = job.applicants.some((a) => a.accountId === acct.id);
       if (applied && job.hiredId === acct.id) {
-        const isCard = job.payMethod === "card";
-        const rewardText = fmtAmount(job.reward, job.payMethod);
-        const howToGetPaid = LANG === "en"
-          ? (job.payMethod === "xmr"
-              ? `The reward <span class="mono">${rewardText}</span> will be paid by the job poster to the Monero address you registered on your dashboard. If you haven't registered one yet, please do so on <a href="#dashboard">your dashboard</a> first.`
-              : job.payMethod === "card"
-                ? `The reward <span class="mono">${rewardText}</span> will be paid by the job poster by card or Apple Pay. Once the payment goes through, Stripe deposits it into the bank account you registered in your payout setup.`
-                : `The reward <span class="mono">${rewardText}</span> will be paid in cash, in person. Please discuss the date/time and place via chat.`)
-          : (job.payMethod === "xmr"
-              ? `報酬 <span class="mono">${rewardText}</span> は、あなたがマイページに登録したMoneroアドレス宛てに投稿者が支払います。アドレスが未登録の場合は<a href="#dashboard">マイページ</a>で先に登録してください。`
-              : job.payMethod === "card"
-                ? `報酬 <span class="mono">${rewardText}</span> は、投稿者がカード/Apple Payで支払います。支払いが完了すると、Stripeを経由してあなたが受け取り設定で登録した銀行口座に入金されます。`
-                : `報酬 <span class="mono">${rewardText}</span> は手渡しでの支払いです。チャットで日時・場所を相談してください。`);
+        const rewardText = fmtAmount(job.reward);
         actionsEl.innerHTML = `
           <div class="card" style="border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
               <span class="pill hired" style="font-size:14px; padding:6px 14px;">🎉 ${tr("採用されました")}</span>
-              ${job.settled ? `<span class="pill settled">${tr("支払い済み(自己申告)")}</span>` : `<span class="pill unsettled">${tr("支払い待ち")}</span>`}
             </div>
-            <p style="font-size:14px; line-height:1.7;">${howToGetPaid}</p>
+            <p style="font-size:14px; line-height:1.7;">${LANG === "en"
+              ? `The reward <span class="mono">${rewardText}</span> is arranged directly between you and the job poster. Discuss how and when you'll be paid via chat. This site only lists jobs and is not involved in the payment itself.`
+              : `報酬 <span class="mono">${rewardText}</span> の受け渡しは、投稿者と直接のやり取りになります。支払いの方法・タイミングはチャットで相談してください。このサイトは掲載の場であり、支払いには関与しません。`}</p>
           </div>
-          ${isCard ? `
-            <div class="card" style="margin-top:12px;">
-              <div class="section-title">${tr("カード決済の受け取り設定")}</div>
-              ${acct.stripeChargesEnabled ? `
-                <p style="font-size:12.5px; color:var(--text-dim);">
-                  <span class="pill settled">${tr("受け取り可能")}</span>
-                  ${tr("支払いが完了すると、報酬は自動であなたの銀行口座に振り込まれます。")}
-                </p>
-              ` : `
-                <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:10px;">${tr("まだ受け取り設定が完了していません。設定が済むまで、投稿者は支払いを行えません。")}</p>
-                <a href="#dashboard" class="btn-accent btn-small" style="text-decoration:none; display:inline-block;">${tr("マイページで設定する")}</a>
-              `}
-            </div>
-          ` : ""}
         `;
         chatContainer.innerHTML = chatSectionHtml();
         mountChat(job.id, job.employerId, employer.name);
@@ -3450,16 +2633,10 @@
     const root = document.getElementById("view-root");
     const acct = me();
     const posted = JOBS.filter((j) => j.employerId === acct.id);
-    // 投稿者が採用せずに「応募を締め切る(未採用の場合、報酬は返金されます)」で
+    // 投稿者が誰も採用せずに「応募を締め切る」で
     // 締め切った(=キャンセルした)求人は、応募者側のこの一覧からは消す。
     // (誰かが採用されて締め切られた場合は、不採用の記録として引き続き表示する。)
     const applied = JOBS.filter((j) => j.applicants.some((a) => a.accountId === acct.id) && !(!j.isOpen && !j.hiredId));
-    // 「どこで支払うのか分からない」対策として、支払いがまだの案件を
-    // マイページの一番上にまとめて出す。自分が払う側(投稿者)と、
-    // 自分が受け取る側(採用された人)は意味が違うので分けて表示する。
-    const toPay = posted.filter((j) => j.hiredId && !j.settled);
-    const toReceive = applied.filter((j) => j.hiredId === acct.id && !j.settled);
-
     function jobRow(job, extra) {
       return `
         <a class="job-card ${job.isOpen ? "" : "is-closed"}" href="#job-${job.id}" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
@@ -3467,9 +2644,7 @@
             <div class="title" style="font-size:15px;">${escapeHtml(job.title)}</div>
             <div class="meta-row">
               ${job.isOpen ? `<span class="pill open">${tr("募集中")}</span>` : job.hiredId ? `<span class="pill hired">${tr("採用済み")}</span>` : `<span class="pill">${tr("募集終了")}</span>`}
-              ${job.hiredId ? (job.settled ? `<span class="pill settled">${tr("支払い済み")}</span>` : `<span class="pill unsettled">${tr("支払い待ち")}</span>`) : ""}
-              ${payMethodPillHtml(job)}
-              <span class="meta-item"><span class="mono">${fmtAmount(job.reward, job.payMethod)}</span></span>
+              <span class="meta-item"><span class="mono">${fmtAmount(job.reward)}</span></span>
             </div>
           </div>
           <div>${extra || ""}</div>
@@ -3477,50 +2652,11 @@
       `;
     }
 
-    // 支払い待ちカード内の行。求人カードより一段コンパクトにして、
-    // 「この求人の支払い画面へ行く」導線であることをはっきりさせる。
-    function pendingRow(job, actionLabel) {
-      return `
-        <a class="job-card" href="#job-${job.id}" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-          <div>
-            <div class="title" style="font-size:15px;">${escapeHtml(job.title)}</div>
-            <div class="meta-row">
-              ${payMethodPillHtml(job)}
-              <span class="meta-item"><span class="mono">${fmtAmount(job.reward, job.payMethod)}</span></span>
-            </div>
-          </div>
-          <span class="btn-accent btn-small" style="white-space:nowrap; pointer-events:none;">${actionLabel}</span>
-        </a>
-      `;
-    }
-
-    const pendingSectionHtml = (toPay.length || toReceive.length) ? `
-      <div class="card" style="margin-bottom:24px; border-color: color-mix(in srgb, var(--accent) 45%, var(--border));">
-        ${toPay.length ? `
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-            <div class="section-title" style="margin-bottom:0;">${tr("支払い待ちの求人")}</div>
-            <span class="pill unsettled">${toPay.length}</span>
-          </div>
-          <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">${tr("採用が決まっていて、まだ支払いが済んでいない求人です。タップすると支払い画面が開きます。")}</p>
-          <div class="job-list" style="margin-bottom:${toReceive.length ? "18px" : "0"};">${toPay.map((j) => pendingRow(j, tr("支払う"))).join("")}</div>
-        ` : ""}
-        ${toReceive.length ? `
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
-            <div class="section-title" style="margin-bottom:0;">${tr("入金待ちの仕事")}</div>
-            <span class="pill unsettled">${toReceive.length}</span>
-          </div>
-          <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">${tr("あなたが採用され、まだ投稿者からの支払いが済んでいない仕事です。")}</p>
-          <div class="job-list">${toReceive.map((j) => pendingRow(j, tr("確認する"))).join("")}</div>
-        ` : ""}
-      </div>
-    ` : "";
-
     root.innerHTML = `
       <div class="page-head">
         <h1>${tr("マイページ")}</h1>
         <div class="sub">${tr("投稿した求人・応募した求人を確認できます。")}</div>
       </div>
-      ${pendingSectionHtml}
       <div style="margin-bottom:24px;">
         <div class="section-title">${LANG === "en" ? `Jobs you posted (${posted.length})` : `自分が投稿した求人 (${posted.length})`}</div>
         <div class="job-list">${posted.length ? posted.map((j) => jobRow(j)).join("") : `<div class="empty">${tr("まだ求人を投稿していません。")}</div>`}</div>
@@ -3529,108 +2665,7 @@
         <div class="section-title">${LANG === "en" ? `Jobs you applied to (${applied.length})` : `応募者として応募した求人 (${applied.length})`}</div>
         <div class="job-list">${applied.length ? applied.map((j) => jobRow(j, j.hiredId === acct.id ? `<span class="pill hired">${tr("採用されました")}</span>` : "")).join("") : `<div class="empty">${tr("まだ応募していません。")}</div>`}</div>
       </div>
-      <div class="card" style="margin-bottom:24px;">
-        <div class="section-title">${tr("あなたのMoneroアドレス")}</div>
-        <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:14px;">${tr("登録しておくと、Monero決済で求人を投稿するときに自動で入力されます(採用後にチャットで相手に共有する用途にも使えます)。")}</p>
-        <form id="monero-form" class="row" style="align-items:flex-end;">
-          <div class="field" style="margin-bottom:0;">
-            <label for="my-monero">${tr("Moneroアドレス")}</label>
-            <input id="my-monero" value="${escapeHtml(acct.moneroAddress || "")}" placeholder="${tr("4で始まる95文字のMoneroアドレス")}" />
-          </div>
-          <div>
-            <button type="submit" class="btn-accent">${tr("保存する")}</button>
-          </div>
-        </form>
-      </div>
-      <div class="card">
-        <div class="section-title">${tr("カード決済の受け取り設定")}</div>
-        ${!STRIPE_CONNECT_ENABLED ? `
-          <p style="font-size:12.5px; color:var(--text-dim);">${tr("カード決済は現在準備中です。公開までは手渡しとMoneroがご利用いただけます。")}</p>
-        ` : (hasEmailAuth() ? `
-          ${acct.stripeChargesEnabled ? `
-            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">
-              <span class="pill settled">${tr("受け取り可能")}</span>
-              ${tr("本人確認が完了しています。カード決済の求人に採用されると、報酬は自動であなたの銀行口座に振り込まれます。")}
-            </p>
-            <button type="button" class="btn-ghost btn-small" id="connect-manage-btn">${tr("受け取り情報を確認・変更する")}</button>
-          ` : acct.stripeAccountId ? `
-            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">
-              <span class="pill unsettled">${tr("設定が未完了")}</span>
-              ${tr("本人確認がまだ終わっていません。途中まで入力した内容は保存されているので、続きから再開できます。")}
-            </p>
-            <button type="button" class="btn-accent btn-small" id="connect-start-btn">${tr("続きから設定する")}</button>
-          ` : `
-            <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">${tr("カード決済で報酬を受け取るには、一度だけ本人確認が必要です(氏名・住所・生年月日・振込先口座)。Stripeの画面で入力します。2回目以降の仕事では何もする必要はありません。")}</p>
-            <button type="button" class="btn-accent btn-small" id="connect-start-btn">${tr("受け取り設定をはじめる")}</button>
-          `}
-          <div id="connect-embed" style="margin-top:14px;"></div>
-        ` : `
-          <p style="font-size:12.5px; color:var(--text-dim); margin-bottom:12px;">${tr("カード決済で報酬を受け取るには、メールアドレスの登録が必要です。入金待ちのお金がある状態で端末を変えたりデータを消したりすると、登録がないとアカウントに戻れなくなるためです。")}</p>
-          <button type="button" class="btn-accent btn-small" id="stripe-email-gate-btn">${tr("メールアドレスを登録")}</button>
-        `)}
-      </div>
     `;
-
-
-
-
-    document.getElementById("monero-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const v = document.getElementById("my-monero").value.trim();
-      try {
-        const { doc, updateDoc } = fsMod;
-        await updateDoc(doc(db, "accounts", acct.id), { monero_address: v });
-        acct.moneroAddress = v;
-        toast(tr("Moneroアドレスを保存しました。"), "success");
-      } catch (err) {
-        toast((err && err.message) || tr("保存に失敗しました。"), "error");
-      }
-    });
-
-
-    const stripeGateBtn = document.getElementById("stripe-email-gate-btn");
-    if (stripeGateBtn) {
-      stripeGateBtn.addEventListener("click", () => {
-        openEmailModal("link", () => { viewDashboard(); });
-      });
-    }
-
-    // ---- Stripe Connect: 受け取り設定(Expressのオンボーディング) ----
-    const connectStartBtn = document.getElementById("connect-start-btn");
-    if (connectStartBtn) {
-      connectStartBtn.addEventListener("click", async () => {
-        connectStartBtn.disabled = true;
-        try {
-          await startConnectOnboarding(acct);
-        } catch (err) {
-          toast((err && err.message) || tr("受け取り設定を開始できませんでした。"), "error");
-          connectStartBtn.disabled = false;
-        }
-      });
-    }
-    const connectManageBtn = document.getElementById("connect-manage-btn");
-    if (connectManageBtn) {
-      connectManageBtn.addEventListener("click", async () => {
-        connectManageBtn.disabled = true;
-        try {
-          await startConnectOnboarding(acct);
-        } catch (err) {
-          toast((err && err.message) || tr("受け取り設定を開けませんでした。"), "error");
-          connectManageBtn.disabled = false;
-        }
-      });
-    }
-    // 設定途中で戻ってきた場合(return_url / refresh_url)、最新状態を取り直す
-    if (STRIPE_CONNECT_ENABLED && acct.stripeAccountId && !acct.stripeChargesEnabled) {
-      callFn("refreshConnectStatus", { accountId: acct.id })
-        .then((res) => {
-          if (res && res.ready) {
-            acct.stripeChargesEnabled = true;
-            viewDashboard();
-          }
-        })
-        .catch(() => { /* 表示を壊さないため黙って無視 */ });
-    }
   }
 
   function viewProfile() {
@@ -3639,10 +2674,10 @@
     root.innerHTML = `
       <div class="page-head">
         <h1>${tr("プロフィール")}</h1>
-        <div class="sub">${tr("名前やスキルはウォレットアドレスに紐づけて保存されます(オンチェーンには保存されません)。")}</div>
+        <div class="sub">${tr("名前やスキル、投稿した求人は、このアカウントIDに紐づいて保存されます。")}</div>
       </div>
       <div class="card" style="margin-bottom:16px;">
-        <div style="font-size:12.5px; color:var(--text-dim);">${tr("ウォレットアドレス")}</div>
+        <div style="font-size:12.5px; color:var(--text-dim);">${tr("アカウントID")}</div>
         <div class="addr-chip" style="margin-top:6px; display:inline-block;">${acct.address}</div>
         <div style="margin-top:10px; font-size:12.5px; color:var(--text-dim);">${tr("あなたの評価")}: ${(() => {
           const stats = accountRatingStats(acct.id);
@@ -3661,7 +2696,13 @@
         </div>
         <div class="field">
           <label for="p-name">${tr("名前 / 屋号など")}</label>
-          <input id="p-name" value="${escapeHtml(acct.name)}" />
+          <input id="p-name" value="${escapeHtml(acct.name)}" ${acct.isGuest ? "readonly disabled" : ""} />
+          ${acct.isGuest ? `
+            <div style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">
+              ${tr("匿名ゲストの名前は変更できません。名前を付けて使いたい場合は、右上から新規登録してください(自己紹介とスキルは匿名のままでも書けます)。")}
+            </div>
+            <button type="button" class="btn-ghost btn-small" id="p-signup-btn" style="margin-top:8px;">${tr("＋ 新規登録(名前を付けて使う)")}</button>
+          ` : ""}
         </div>
         <div class="field">
           <label for="p-bio">${tr("自己紹介 / 会社紹介")}</label>
@@ -3682,14 +2723,17 @@
     document.getElementById("profile-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const role = document.getElementById("p-role").value;
-      const name = document.getElementById("p-name").value.trim();
       const bio = document.getElementById("p-bio").value.trim();
       const skills = document.getElementById("p-skills").value.trim();
+      // 匿名ゲストの名前は固定。入力欄も無効にしているが、
+      // 念のため保存するデータにも名前を含めない。
+      const name = acct.isGuest ? acct.name : document.getElementById("p-name").value.trim();
+      const patch = acct.isGuest ? { role, bio, skills } : { role, name, bio, skills };
       const submitBtn = e.target.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
       try {
         const { doc, updateDoc } = fsMod;
-        await updateDoc(doc(db, "accounts", acct.id), { role, name, bio, skills });
+        await updateDoc(doc(db, "accounts", acct.id), patch);
         acct.role = role;
         acct.name = name;
         acct.bio = bio;
@@ -3702,6 +2746,11 @@
         if (submitBtn) submitBtn.disabled = false;
       }
     });
+    const signupFromProfile = document.getElementById("p-signup-btn");
+    if (signupFromProfile) {
+      signupFromProfile.addEventListener("click", () => { openSignupModal(); });
+    }
+
     const deleteBtn = document.getElementById("delete-account-btn");
     if (deleteBtn) {
       deleteBtn.addEventListener("click", () => {
@@ -3740,9 +2789,9 @@
   // 上書きする。LANGが"ja"の場合は何もせず、これまでの表示と完全に同じになる。
   function applyStaticTranslations() {
     if (LANG !== "en") return;
-    document.title = tr("なんでも屋さん | 匿名で使える求人マッチング・単発バイト掲示板");
+    document.title = tr("ヒトテマ | 匿名で使える求人マッチング・単発バイト掲示板");
     const wordmark = document.getElementById("masthead-wordmark");
-    if (wordmark) wordmark.textContent = tr("なんでも屋さん");
+    if (wordmark) wordmark.textContent = tr("ヒトテマ");
     const navLabels = {
       search: "検索",
       list: "求人一覧",
@@ -3758,7 +2807,7 @@
     if (loginLabel) loginLabel.textContent = tr("ログイン");
     const footer = document.querySelector(".site-footer");
     if (footer) {
-      footer.textContent = tr("運営者はお金のやり取りを仲介・保証する登録業者ではありません。採用後の報酬の受け渡し(Monero・カード/Apple Pay・手渡し)は、投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。送金前には宛先・金額を必ず確認してください。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。");
+      footer.textContent = tr("このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。");
     }
     const fab = document.getElementById("fab-post");
     if (fab) {
