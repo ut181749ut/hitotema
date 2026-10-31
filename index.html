@@ -827,6 +827,17 @@
     main { padding-inline: 16px; }
     .applicant-row .actions { width: 100%; display: flex; gap: 8px; }
   }
+  /* 新規登録時の「忘れたら戻れない」警告 */
+  .pw-warn {
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: var(--danger);
+    background: var(--danger-bg);
+    border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    border-radius: var(--radius);
+    padding: 11px 13px;
+  }
+  .pw-warn strong { display: block; margin-bottom: 2px; }
 </style>
 </head>
 <body>
@@ -1010,15 +1021,12 @@
   "画像を削除": "Remove image",
   "画像ファイルを選択してください。": "Please select an image file.",
   "登録してログイン": "Sign up and log in",
-  "登録に失敗しました。": "Failed to register.",
-  "空欄なら「新規ユーザー」": "Leave blank for \"New User\"",
   "締め切れるのは求人を投稿した投稿者のみです。": "Only the job poster can close this listing.",
   "職種・スキルなど": "Job title, skills, etc.",
   "自分が投稿した求人には応募できません。": "You cannot apply to your own job posting.",
   "自分のアカウントだけ削除できます。": "You can only delete your own account.",
   "自己紹介 / 会社紹介": "Bio / company description",
   "表示ラベル(任意)": "Display label (optional)",
-  "表示名(任意)": "Display name (optional)",
   "読み込み中…": "Loading…",
   "送信": "Send",
   "送信に失敗しました。": "Failed to send.",
@@ -1028,8 +1036,6 @@
   "高収入": "High pay",
   "このサイトは求人の掲載と連絡の場です。報酬のやり取りには一切関与しません。支払いの方法・タイミングは、採用が決まったあとチャットで直接決めてください。": "This site is a place to list jobs and get in touch. It is not involved in the reward payment in any way. Agree on how and when you'll be paid directly over chat once someone is hired.",
   "アカウントは「匿名ゲスト」ともう1つまでです。": "You can have at most two accounts: the anonymous guest and one more.",
-  "アカウントは「匿名ゲスト」ともう1つまでです。どちらもこの端末にだけ保存されるため、ブラウザのデータを消すと戻れなくなります。": "You can have at most two accounts: the anonymous guest and one more. Both are stored only on this device, so clearing your browser data means losing access to them.",
-  "メールアドレスもパスワードも秘密鍵も不要です。表示名(任意)を入れるだけでアカウントが作られ、自動的にログインします。いつでもログアウトして匿名ゲストに戻れます。作れるのは「匿名ゲスト」のほかに1つまでです。": "No email address, password, or private key needed. Just enter a display name (optional) and the account is created and logged in. You can log out at any time to return to the anonymous guest. You can create one account besides the anonymous guest.",
   "ログイン不要 — 匿名ゲストのまま投稿・応募できます。名前を付けて使いたいときだけ登録してください。": "No login required — you can post and apply as an anonymous guest. Register only if you want to use a name.",
   "ログイン不要・匿名のまま投稿できます。報酬の受け渡しは、採用が決まったあと当事者同士で直接行ってください。": "No login required — you can post anonymously. Once someone is hired, the reward is handed over directly between the two of you.",
   "報酬の受け渡し": "Handing over the reward",
@@ -1044,7 +1050,36 @@
   "条件をクリア": "Clear filters",
   "気になる求人を探して、そのまま応募できます。": "Find a job that interests you and apply right away.",
   "絞り込み": "Filter",
-  "該当する求人が見つかりません。条件を変えてみてください。": "No jobs match these filters. Try changing them."
+  "該当する求人が見つかりません。条件を変えてみてください。": "No jobs match these filters. Try changing them.",
+  "この名前はすでに使われています。別の名前にしてください。": "That name is already taken. Please choose another.",
+  "この名前はログインにも使うため、変更できません。": "This name is also used to sign in, so it can't be changed.",
+  "パスワード": "Password",
+  "パスワード(8文字以上)": "Password (8 characters or more)",
+  "パスワードは8文字以上にしてください。": "Your password must be at least 8 characters.",
+  "メールアドレスは要りません。名前とパスワードだけ決めてください。この2つがあれば、別の端末からも同じアカウントに入れます。": "No email address needed. Just choose a name and a password. With those two, you can sign in to the same account from any device.",
+  "メールアドレスを預からないので、運営者でもパスワードを再発行できません。投稿も評価もすべて失われます。必ず控えを取ってください。": "Because we hold no email address, not even the operator can reset your password. Your posts and ratings would all be lost. Please write it down somewhere safe.",
+  "ログインしました。読み込み直します。": "Signed in. Reloading…",
+  "ログイン機能がまだ有効になっていません。運営者にお知らせください。": "Sign-in isn't switched on yet. Please let the operator know.",
+  "例: たろう": "e.g. taro",
+  "処理に失敗しました。": "Something went wrong.",
+  "別の端末から入る": "Sign in from another device",
+  "匿名ゲストはこの端末にだけ保存されます。ブラウザのデータを消すと戻れなくなります。名前を付けて登録すると、別の端末からも入れるようになります。": "The anonymous guest is stored on this device only; clearing your browser data loses it. Register with a name to be able to sign in from other devices.",
+  "名前": "Name",
+  "名前(ログインにも使います)": "Name (also used to sign in)",
+  "名前かパスワードが違います。": "That name or password is incorrect.",
+  "名前とパスワードで、別の端末からも入れます。匿名ゲストのほうはこの端末にだけ残ります。": "With your name and password you can sign in from another device. The anonymous guest stays on this device only.",
+  "名前を入力してください。": "Please enter a name.",
+  "忘れると二度と入れません。": "If you forget it, you're locked out for good.",
+  "登録したときの名前とパスワードを入れてください。元のアカウントに戻ります。": "Enter the name and password you registered with, and you'll be back in your account.",
+  "試行回数が多すぎます。しばらく待ってからお試しください。": "Too many attempts. Please wait a while and try again.",
+  "通信に失敗しました。電波の良いところでお試しください。": "The connection failed. Please try again with a better signal.",
+  "このブラウザはすでに登録済みです。アカウントを作り直してください。": "This browser is already registered. Please re-create the account instead.",
+  "この求人を削除する": "Delete this job",
+  "アカウントを作り直しました。": "Account re-created.",
+  "アカウントを作り直す": "Re-create the account",
+  "削除できるのは求人を投稿した投稿者のみです。": "Only the job poster can delete it.",
+  "求人の削除に失敗しました。": "Failed to delete the job.",
+  "求人を削除しました。": "Job deleted."
 };
   function tr(ja) { return LANG === "en" ? (STRINGS_EN[ja] || ja) : ja; }
 
@@ -1104,6 +1139,11 @@
   let auth = null;
   let db = null;
   let MY_AUTH_UID = null;
+  // パスワードを設定済みか(= 別の端末から入り直せるか)。
+  // 匿名のままなら false。
+  let MY_HAS_PASSWORD = false;
+  // 登録時の名前。アカウントを消して作り直すときに使う。
+  let MY_AUTH_NAME = "";
 
   // classic <script>(type="module"ではない)の中からでも、dynamic import()なら
   // ES Modulesとして配布されているFirebase JS SDKを問題なく読み込める。
@@ -1374,13 +1414,16 @@
     const myJobIds = JOBS.filter((j) => j.employerId === id).map((j) => j.id);
     if (myJobIds.length) {
       try {
-        await batchDeleteRefs(myJobIds.map((jid) => doc(db, "jobs", jid)));
+        // 順番が大事。応募を消せるのは「その求人の投稿者」だが、
+        // 求人を先に消すとその判定ができなくなり、応募が消せずに残る。
+        // 必ず 応募・チャット → 求人 の順で消すこと。
         for (const chunk of chunkArray(myJobIds, 30)) {
           const appSnap = await getDocs(query(collection(db, "applications"), where("job_id", "in", chunk)));
           await batchDeleteRefs(appSnap.docs.map((d) => d.ref));
           const msgSnap = await getDocs(query(collection(db, "messages"), where("job_id", "in", chunk)));
           await batchDeleteRefs(msgSnap.docs.map((d) => d.ref));
         }
+        await batchDeleteRefs(myJobIds.map((jid) => doc(db, "jobs", jid)));
       } catch (e) {
         throw new Error(tr("投稿した求人の削除に失敗しました。"));
       }
@@ -1656,6 +1699,29 @@
     }
   }
 
+  // 求人を1件だけ消す。投稿者本人だけが実行できる(セキュリティルール側でも制限)。
+  // 応募とチャットも道連れにする。評価だけは後から改ざんできないよう
+  // ルールで削除を禁じているので、相手が受け取った星はそのまま残る。
+  async function deleteJob(jobId) {
+    const job = getJob(jobId);
+    if (!job) throw new Error(tr("求人が見つかりませんでした。"));
+    if (me().id !== job.employerId) throw new Error(tr("削除できるのは求人を投稿した投稿者のみです。"));
+    const { collection, doc, getDocs, query, where } = fsMod;
+    try {
+      // 応募・チャット → 求人 の順。逆にすると応募が消せなくなる。
+      const appSnap = await getDocs(query(collection(db, "applications"), where("job_id", "==", job.id)));
+      await batchDeleteRefs(appSnap.docs.map((d) => d.ref));
+      const msgSnap = await getDocs(query(collection(db, "messages"), where("job_id", "==", job.id)));
+      await batchDeleteRefs(msgSnap.docs.map((d) => d.ref));
+      await batchDeleteRefs([doc(db, "jobs", job.id)]);
+    } catch (e) {
+      throw new Error(tr("求人の削除に失敗しました。"));
+    }
+    const i = JOBS.findIndex((j) => j.id === job.id);
+    if (i >= 0) JOBS.splice(i, 1);
+    Object.keys(MESSAGES).forEach((k) => { if (k.startsWith("job" + job.id + "_")) delete MESSAGES[k]; });
+  }
+
   async function closeJob(jobId) {
     const job = getJob(jobId);
     const acct = me();
@@ -1714,6 +1780,71 @@
       );
     });
     MY_AUTH_UID = user.uid;
+    MY_HAS_PASSWORD = !user.isAnonymous;
+    MY_AUTH_NAME = user.displayName || "";
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* 名前 + パスワードでのログイン                                      */
+  /*                                                                   */
+  /* Firebaseの認証はメールアドレスしか受け付けないため、表示名から      */
+  /* 機械的に内部用のアドレスを作って使う。利用者にメールは一切聞かない。*/
+  /* 副産物として、名前の重複はFirebase側が弾いてくれる(同じ名前からは   */
+  /* 必ず同じアドレスが出るので、2人目の登録が失敗する)。               */
+  /* ---------------------------------------------------------------- */
+  const AUTH_DOMAIN_FOR_NAMES = "hitotema.invalid"; // 実在しない予約済みTLD
+
+  // 表記ゆれで別人扱いにならないよう、全角半角と大文字小文字を揃える。
+  function normalizeName(name) {
+    let n = (name || "").trim();
+    try { n = n.normalize("NFKC"); } catch (e) { /* 古い環境では素通し */ }
+    return n.toLowerCase();
+  }
+
+  async function nameToAuthEmail(name) {
+    const norm = normalizeName(name);
+    const bytes = new TextEncoder().encode(norm);
+    const buf = await crypto.subtle.digest("SHA-256", bytes);
+    const hex = [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    // メールのローカル部は64文字までなので、先頭40文字だけ使う(衝突はまず起きない)
+    return `u${hex.slice(0, 40)}@${AUTH_DOMAIN_FOR_NAMES}`;
+  }
+
+  // 今の匿名アカウントにパスワードを紐づける。
+  // linkWithCredential はUIDを変えないので、投稿も評価もそのまま残る。
+  async function attachPassword(name, password) {
+    const email = await nameToAuthEmail(name);
+    const cred = authMod.EmailAuthProvider.credential(email, password);
+    await authMod.linkWithCredential(auth.currentUser, cred);
+    // 名前はハッシュにしてしまうと元に戻せないので、認証側にも控えておく。
+    try { await authMod.updateProfile(auth.currentUser, { displayName: name }); } catch (e) { /* 失敗しても登録自体は成立する */ }
+    MY_HAS_PASSWORD = true;
+    MY_AUTH_NAME = name;
+  }
+
+  // 別の端末から入り直す。成功するとUIDが登録時のものに入れ替わる。
+  async function signInWithName(name, password) {
+    const email = await nameToAuthEmail(name);
+    await authMod.signInWithEmailAndPassword(auth, email, password);
+  }
+
+  // Firebaseのエラーを、利用者に意味が通る日本語にする。
+  // (メール列挙対策が有効なプロジェクトでは、存在しない名前も
+  //  パスワード違いも同じ invalid-credential で返ってくる)
+  function authErrorMessage(err, mode) {
+    const code = (err && err.code) || "";
+    if (code === "auth/email-already-in-use" || code === "auth/credential-already-in-use") {
+      return tr("この名前はすでに使われています。別の名前にしてください。");
+    }
+    if (code === "auth/provider-already-linked") {
+      return tr("このブラウザはすでに登録済みです。アカウントを作り直してください。");
+    }
+    if (code === "auth/weak-password") return tr("パスワードは8文字以上にしてください。");
+    if (code === "auth/too-many-requests") return tr("試行回数が多すぎます。しばらく待ってからお試しください。");
+    if (code === "auth/network-request-failed") return tr("通信に失敗しました。電波の良いところでお試しください。");
+    if (code === "auth/operation-not-allowed") return tr("ログイン機能がまだ有効になっていません。運営者にお知らせください。");
+    if (mode === "signin") return tr("名前かパスワードが違います。");
+    return (err && err.message) || tr("処理に失敗しました。");
   }
 
   // 起動時に、アカウント・求人・応募・メッセージをすべてFirestoreから読み込み、
@@ -1857,11 +1988,21 @@
       ` : ""}
       ${samples.length ? "" : `
         <div style="border-top:1px solid var(--border); margin-top:10px; padding-top:10px;">
-          <button class="btn-ghost btn-small" id="signup-toggle" style="width:100%;" type="button">${tr("＋ 新規登録(名前を付けて使う)")}</button>
+          ${MY_HAS_PASSWORD ? `
+            <div style="font-size:11.5px; color:var(--text-dim); padding:0 8px 8px;">${LANG === "en"
+              ? `You are registered as "${escapeHtml(MY_AUTH_NAME)}" but that account was deleted.`
+              : `「${escapeHtml(MY_AUTH_NAME)}」で登録済みですが、そのアカウントは削除されています。`}</div>
+            <button class="btn-ghost btn-small" id="recreate-toggle" style="width:100%;" type="button">${tr("アカウントを作り直す")}</button>
+          ` : `
+            <button class="btn-ghost btn-small" id="signup-toggle" style="width:100%;" type="button">${tr("＋ 新規登録(名前を付けて使う)")}</button>
+            <button class="btn-ghost btn-small" id="login-toggle" style="width:100%; margin-top:6px;" type="button">${tr("別の端末から入る")}</button>
+          `}
         </div>
       `}
       <div style="border-top:1px solid var(--border); margin-top:10px; padding-top:10px;">
-        <div style="font-size:11px; color:var(--text-dim); padding:0 8px;">${tr("アカウントは「匿名ゲスト」ともう1つまでです。どちらもこの端末にだけ保存されるため、ブラウザのデータを消すと戻れなくなります。")}</div>
+        <div style="font-size:11px; color:var(--text-dim); padding:0 8px;">${MY_HAS_PASSWORD
+          ? tr("名前とパスワードで、別の端末からも入れます。匿名ゲストのほうはこの端末にだけ残ります。")
+          : tr("匿名ゲストはこの端末にだけ保存されます。ブラウザのデータを消すと戻れなくなります。名前を付けて登録すると、別の端末からも入れるようになります。")}</div>
       </div>
     `;
     panel.querySelectorAll("[data-switch]").forEach((btn) => {
@@ -1889,23 +2030,106 @@
         openSignupModal();
       });
     }
+    const loginBtn = document.getElementById("login-toggle");
+    if (loginBtn) {
+      loginBtn.addEventListener("click", () => {
+        panel.hidden = true;
+        openLoginModal();
+      });
+    }
+    // 登録済みのまま中身だけ消してしまった場合の作り直し。
+    // パスワードはそのままなので、名前も元のものに戻す。
+    const recreateBtn = document.getElementById("recreate-toggle");
+    if (recreateBtn) {
+      recreateBtn.addEventListener("click", async () => {
+        recreateBtn.disabled = true;
+        try {
+          const account = await createAccount({ name: MY_AUTH_NAME });
+          currentAccountId = account.id;
+          persistCurrentAccountId();
+          panel.hidden = true;
+          toast(tr("アカウントを作り直しました。"), "success");
+          route();
+        } catch (err) {
+          recreateBtn.disabled = false;
+          toast((err && err.message) || tr("処理に失敗しました。"), "error");
+        }
+      });
+    }
   }
 
   // 新規登録は、狭いアカウントパネルの中に小さく出すのではなく、
   // 画面中央に大きく表示するモーダルで行う。
+  // 別の端末から、登録済みのアカウントに入り直すためのモーダル。
+  function openLoginModal() {
+    const root = document.getElementById("modal-root");
+    root.innerHTML = `
+      <div class="modal-overlay" id="login-modal-overlay">
+        <div class="modal-box modal-box-lg">
+          <h2 style="font-size:20px; margin-bottom:14px;">${tr("別の端末から入る")}</h2>
+          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:18px;">${tr("登録したときの名前とパスワードを入れてください。元のアカウントに戻ります。")}</p>
+          <form id="login-form" class="stack">
+            <div class="field" style="margin-bottom:0;">
+              <label for="login-name">${tr("名前")}</label>
+              <input id="login-name" required maxlength="30" autocomplete="username" />
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label for="login-pw">${tr("パスワード")}</label>
+              <input id="login-pw" type="password" required autocomplete="current-password" />
+            </div>
+            <div class="modal-actions" style="margin-top:6px;">
+              <button type="button" class="btn-ghost" id="login-cancel">${tr("キャンセル")}</button>
+              <button type="submit" class="btn-accent">${tr("ログイン")}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    `;
+    const close = () => { root.innerHTML = ""; };
+    document.getElementById("login-modal-overlay").addEventListener("click", (e) => {
+      if (e.target.id === "login-modal-overlay") close();
+    });
+    document.getElementById("login-cancel").addEventListener("click", close);
+    document.getElementById("login-name").focus();
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("login-name").value.trim();
+      const pw = document.getElementById("login-pw").value;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        await signInWithName(name, pw);
+        toast(tr("ログインしました。読み込み直します。"), "success");
+        // UIDが入れ替わるので、画面を作り直すより読み込み直すほうが確実。
+        setTimeout(() => location.reload(), 600);
+      } catch (err) {
+        if (submitBtn) submitBtn.disabled = false;
+        toast(authErrorMessage(err, "signin"), "error");
+      }
+    });
+  }
+
   function openSignupModal() {
     const root = document.getElementById("modal-root");
     root.innerHTML = `
       <div class="modal-overlay" id="signup-modal-overlay">
         <div class="modal-box modal-box-lg">
           <h2 style="font-size:20px; margin-bottom:14px;">${tr("新規登録")}</h2>
-          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:20px;">${tr("メールアドレスもパスワードも秘密鍵も不要です。表示名(任意)を入れるだけでアカウントが作られ、自動的にログインします。いつでもログアウトして匿名ゲストに戻れます。作れるのは「匿名ゲスト」のほかに1つまでです。")}</p>
+          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.7; margin-bottom:18px;">${tr("メールアドレスは要りません。名前とパスワードだけ決めてください。この2つがあれば、別の端末からも同じアカウントに入れます。")}</p>
           <form id="signup-form" class="stack">
             <div class="field" style="margin-bottom:0;">
-              <label for="signup-name">${tr("表示名(任意)")}</label>
-              <input id="signup-name" placeholder="${tr("空欄なら「新規ユーザー」")}" />
+              <label for="signup-name">${tr("名前(ログインにも使います)")}</label>
+              <input id="signup-name" required maxlength="30" autocomplete="username" placeholder="${tr("例: たろう")}" />
             </div>
-            <div class="modal-actions" style="margin-top:6px;">
+            <div class="field" style="margin-bottom:0;">
+              <label for="signup-pw">${tr("パスワード(8文字以上)")}</label>
+              <input id="signup-pw" type="password" required minlength="8" autocomplete="new-password" />
+            </div>
+            <div class="pw-warn">
+              <strong>${tr("忘れると二度と入れません。")}</strong>
+              ${tr("メールアドレスを預からないので、運営者でもパスワードを再発行できません。投稿も評価もすべて失われます。必ず控えを取ってください。")}
+            </div>
+            <div class="modal-actions" style="margin-top:2px;">
               <button type="button" class="btn-ghost" id="signup-cancel">${tr("キャンセル")}</button>
               <button type="submit" class="btn-accent">${tr("登録してログイン")}</button>
             </div>
@@ -1922,9 +2146,23 @@
     document.getElementById("signup-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = document.getElementById("signup-name").value.trim();
+      const pw = document.getElementById("signup-pw").value;
       const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (!name) { toast(tr("名前を入力してください。"), "error"); return; }
+      if (pw.length < 8) { toast(tr("パスワードは8文字以上にしてください。"), "error"); return; }
+      // 古い(パスワード無しの)アカウントと名前がぶつかる場合もここで止める。
+      // Firebase側では旧アカウントの名前までは予約されていないため。
+      if (MY_HAS_PASSWORD) {
+        toast(tr("このブラウザはすでに登録済みです。アカウントを作り直してください。"), "error");
+        return;
+      }
+      if (ACCOUNTS.some((a) => !a.isDeleted && normalizeName(a.name) === normalizeName(name))) {
+        toast(tr("この名前はすでに使われています。別の名前にしてください。"), "error");
+        return;
+      }
       if (submitBtn) submitBtn.disabled = true;
       try {
+        await attachPassword(name, pw);
         const account = await createAccount({ name });
         currentAccountId = account.id;
         persistCurrentAccountId();
@@ -1933,7 +2171,7 @@
         route();
       } catch (err) {
         if (submitBtn) submitBtn.disabled = false;
-        toast((err && err.message) || tr("登録に失敗しました。"), "error");
+        toast(authErrorMessage(err, "signup"), "error");
       }
     });
   }
@@ -2574,7 +2812,10 @@
               </div>
             `;
           }).join("") : `<div class="empty">${tr("まだ応募はありません。")}</div>`}
-          ${job.isOpen ? `<div style="margin-top:16px;"><button class="btn-danger btn-small" id="close-btn">${tr("応募を締め切る(誰も採用しない)")}</button></div>` : ""}
+          <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+            ${job.isOpen ? `<button class="btn-danger btn-small" id="close-btn">${tr("応募を締め切る(誰も採用しない)")}</button>` : ""}
+            <button class="btn-ghost btn-small" id="delete-job-btn" style="border-color:var(--danger); color:var(--danger);">${tr("この求人を削除する")}</button>
+          </div>
         </div>
       `;
       actionsEl.querySelectorAll(".hire-btn").forEach((btn) => {
@@ -2599,6 +2840,23 @@
           mountChat(job.id, btn.dataset.id, btn.dataset.name);
         });
       });
+
+      const deleteJobBtn = document.getElementById("delete-job-btn");
+      if (deleteJobBtn) {
+        deleteJobBtn.addEventListener("click", () => {
+          const n = job.applicants.length;
+          const msg = LANG === "en"
+            ? `Delete this job? Its ${n} application(s) and the chats will be deleted too. This cannot be undone.`
+            : `この求人を削除しますか?応募${n}件とチャットも一緒に消えます。元に戻せません。`;
+          askConfirm(msg, async () => {
+            try {
+              await deleteJob(job.id);
+              toast(tr("求人を削除しました。"), "success");
+              location.hash = "#dashboard";
+            } catch (err) { toast(err.message, "error"); }
+          });
+        });
+      }
 
       const closeBtn = document.getElementById("close-btn");
       if (closeBtn) {
@@ -2715,6 +2973,9 @@
   function viewProfile() {
     const root = document.getElementById("view-root");
     const acct = me();
+    // 匿名ゲストの名前は固定。登録済みのアカウントも、名前がログインIDを
+    // 兼ねているので変更できない(変えると入り直せなくなるため)。
+    const nameLocked = acct.isGuest || MY_HAS_PASSWORD;
     root.innerHTML = `
       <div class="page-head">
         <h1>${tr("プロフィール")}</h1>
@@ -2740,12 +3001,16 @@
         </div>
         <div class="field">
           <label for="p-name">${tr("名前 / 屋号など")}</label>
-          <input id="p-name" value="${escapeHtml(acct.name)}" ${acct.isGuest ? "readonly disabled" : ""} />
+          <input id="p-name" value="${escapeHtml(acct.name)}" ${nameLocked ? "readonly disabled" : ""} />
           ${acct.isGuest ? `
             <div style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">
               ${tr("匿名ゲストの名前は変更できません。名前を付けて使いたい場合は、右上から新規登録してください(自己紹介とスキルは匿名のままでも書けます)。")}
             </div>
             <button type="button" class="btn-ghost btn-small" id="p-signup-btn" style="margin-top:8px;">${tr("＋ 新規登録(名前を付けて使う)")}</button>
+          ` : nameLocked ? `
+            <div style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">
+              ${tr("この名前はログインにも使うため、変更できません。")}
+            </div>
           ` : ""}
         </div>
         <div class="field">
@@ -2771,8 +3036,8 @@
       const skills = document.getElementById("p-skills").value.trim();
       // 匿名ゲストの名前は固定。入力欄も無効にしているが、
       // 念のため保存するデータにも名前を含めない。
-      const name = acct.isGuest ? acct.name : document.getElementById("p-name").value.trim();
-      const patch = acct.isGuest ? { role, bio, skills } : { role, name, bio, skills };
+      const name = nameLocked ? acct.name : document.getElementById("p-name").value.trim();
+      const patch = nameLocked ? { role, bio, skills } : { role, name, bio, skills };
       const submitBtn = e.target.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
       try {
