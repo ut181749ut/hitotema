@@ -34,6 +34,9 @@
 }
 </script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<!-- ロゴ専用の書体。text= でロゴに出る文字だけを取り寄せるため、
+     日本語フォントでも数KBしか読み込まない。 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&text=%E3%83%92%E3%83%88%E3%83%86%E3%83%9EHitoema&display=swap">
 <style>
   :root {
     --bg: #f6f3ea;
@@ -177,12 +180,16 @@
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 700;
-    text-transform: lowercase;
-    font-size: 22px;
-    letter-spacing: -0.01em;
+    /* Dela Gothic One は太さが1種類しかないので、font-weight は 400 のまま使う
+       (700 を指定するとブラウザが疑似的に太らせてにじむ)。
+       読み込めなかったときのために、後ろに通常の書体を残してある。 */
+    font-family: "Dela Gothic One", "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    letter-spacing: 0.01em;
     white-space: nowrap;
+    text-decoration: none;
+    font-synthesis: none;
   }
   .wordmark span { color: var(--accent); }
   .wordmark::before {
