@@ -97,9 +97,9 @@ export function buildJobPageHtml(job, employerName, now) {
   const locationLabel = location || "オンライン/リモート";
 
   // ロングテールSEOを意識し、タイトル・meta descriptionに
-  // 「職種名 × 勤務地 × 報酬」の組み合わせを自然に含める。
+  // 「仕事の種類 × 場所 × 報酬」の組み合わせを自然に含める。
   const pageTitle = `${job.title}｜${locationLabel}の求人(報酬${rewardText}) - ${SITE_NAME}`;
-  const metaDescription = `${job.title}。勤務地: ${locationLabel}。報酬: ${rewardText}。${SITE_NAME}に掲載中の求人です。登録不要・匿名で応募できます。`;
+  const metaDescription = `${job.title}。場所: ${locationLabel}。報酬: ${rewardText}。${SITE_NAME}に掲載中の求人です。登録不要・匿名で応募できます。`;
 
   const validThrough = new Date(now.getTime() + VALID_THROUGH_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
@@ -157,7 +157,7 @@ export function buildJobPageHtml(job, employerName, now) {
 <body>
   <h1>${escapeHtml(job.title)}</h1>
   <div class="meta">
-    <span>勤務地: ${escapeHtml(locationLabel)}</span>
+    <span>場所: ${escapeHtml(locationLabel)}</span>
     <span>投稿者: ${escapeHtml(employerName)}</span>
   </div>
   <div class="reward">報酬: ${escapeHtml(rewardText)}</div>
