@@ -425,7 +425,7 @@
     margin-bottom: 0;
   }
 
-  /* datetime-local入力(投稿ページの勤務日時)を大きく、タップしやすく表示する */
+  /* datetime-local入力(投稿ページの日時)を大きく、タップしやすく表示する */
   input[type="datetime-local"] {
     font-size: 16px;
     padding: 13px 14px;
@@ -441,7 +441,7 @@
     font-size: 15.5px;
   }
 
-  /* ---------- 検索ページの独自カレンダー(勤務日) ---------- */
+  /* ---------- 検索ページの独自カレンダー(日付) ---------- */
   .date-field { position: relative; }
   .date-btn {
     width: 100%;
@@ -937,8 +937,8 @@
   "今回は他の応募者が採用されました。またの機会にご応募ください。": "Another applicant was hired this time. Please apply again in the future.",
   "今日": "Today",
   "低収入": "Low pay",
-  "例: Solidity, React, Node.js": "e.g. Solidity, React, Node.js",
-  "例: Solidityスマートコントラクトエンジニア": "e.g. Solidity Smart Contract Engineer",
+  "例: 草刈り, 翻訳, 配送": "e.g. lawn mowing, translation, delivery",
+  "例: 引っ越しの手伝い(2時間)": "e.g. Help with a house move (2 hours)",
   "例: フルリモート / 東京": "e.g. Fully remote / Tokyo",
   "保存しました。": "Saved.",
   "保存する": "Save",
@@ -951,10 +951,10 @@
   "募集中": "Open",
   "募集中のみ": "Open only",
   "募集終了": "Closed",
-  "勤務地": "Location",
-  "勤務日(以降)": "Work date (on or after)",
-  "勤務日時": "Work date/time",
-  "勤務日時(任意・単発の仕事などで指定)": "Work date/time (optional, for one-off jobs, etc.)",
+  "場所": "Location",
+  "日付(以降)": "Date (on or after)",
+  "日時": "Date/time",
+  "日時(任意・単発の仕事などで指定)": "Date/time (optional, for one-off jobs, etc.)",
   "匿名ゲスト": "Anonymous Guest",
   "名前 / 屋号など": "Name / business name, etc.",
   "名前やスキル、投稿した求人は、このアカウントIDに紐づいて保存されます。": "Your name, skills, and the jobs you post are saved against this account ID.",
@@ -1022,7 +1022,7 @@
   "画像ファイルを選択してください。": "Please select an image file.",
   "登録してログイン": "Sign up and log in",
   "締め切れるのは求人を投稿した投稿者のみです。": "Only the job poster can close this listing.",
-  "職種・スキルなど": "Job title, skills, etc.",
+  "種類": "Type of work",
   "自分が投稿した求人には応募できません。": "You cannot apply to your own job posting.",
   "自分のアカウントだけ削除できます。": "You can only delete your own account.",
   "自己紹介 / 会社紹介": "Bio / company description",
@@ -1044,7 +1044,6 @@
   "匿名ゲストの名前は変更できません。名前を付けて使いたい場合は、右上から新規登録してください(自己紹介とスキルは匿名のままでも書けます)。": "The anonymous guest's name can't be changed. To use a display name, sign up from the top right (you can still write a bio and skills while staying anonymous).",
   "＋ 新規登録(名前を付けて使う)": "+ Sign up (use a display name)",
   "キーワード": "Keyword",
-  "例: 東京、フルリモート": "e.g. Tokyo, fully remote",
   "例: 草刈り、翻訳": "e.g. mowing, translation",
   "募集状況": "Status",
   "条件をクリア": "Clear filters",
@@ -1251,7 +1250,7 @@
   function fmtDate(ts) {
     return new Date(ts).toLocaleString(LANG === "en" ? "en-US" : "ja-JP", { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
   }
-  // 求人の「勤務日時」(datetime-local の入力値、例: "2026-10-04T09:00") を表示用に整形する。
+  // 求人の「日時」(datetime-local の入力値、例: "2026-10-04T09:00") を表示用に整形する。
   function fmtWorkDatetime(v) {
     if (!v) return "";
     const d = new Date(v);
@@ -1280,6 +1279,44 @@
     ["佐賀", "佐賀県"], ["長崎", "長崎県"], ["熊本", "熊本県"], ["大分", "大分県"], ["宮崎", "宮崎県"],
     ["鹿児島", "鹿児島県"], ["沖縄", "沖縄県"],
   ];
+
+  // 場所を選ばない働き方。都道府県より先に出す(件数が多く、探されやすいため)。
+  const REMOTE_OPTIONS = ["フルリモート", "一部リモート"];
+
+  // 場所の候補(都道府県)を出すピッカー。検索ページと一覧の絞り込みで共用する。
+  // 自由入力も残してあるので、「〇〇市」のような細かい指定も書ける。
+  function attachLocPicker(input, dropdown, onPick) {
+    if (!input || !dropdown) return;
+    const PREF_OPTIONS = PREFECTURES.map(([value]) => value);
+    const optionButton = (opt) =>
+      `<button type="button" data-value="${escapeHtml(opt)}">${escapeHtml(opt)}</button>`;
+    function render() {
+      const v = input.value.trim().toLowerCase();
+      const hit = (opt) => opt.toLowerCase().includes(v);
+      const remote = v ? REMOTE_OPTIONS.filter(hit) : REMOTE_OPTIONS;
+      const prefs  = v ? PREF_OPTIONS.filter(hit)   : PREF_OPTIONS;
+      if (!remote.length && !prefs.length) { dropdown.hidden = true; return; }
+      // リモート → 区切り線 → 都道府県。どちらかが空なら線は引かない。
+      dropdown.innerHTML =
+        remote.map(optionButton).join("")
+        + (remote.length && prefs.length ? `<div class="loc-dropdown-sep"></div>` : "")
+        + prefs.map(optionButton).join("");
+      dropdown.hidden = false;
+      dropdown.querySelectorAll("button").forEach((btn) => {
+        // mousedown(blurより先に発火)で選択することで、inputのblurによって
+        // ドロップダウンが閉じる前にクリックを確定させる。
+        btn.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          input.value = btn.dataset.value;
+          dropdown.hidden = true;
+          if (onPick) onPick();
+        });
+      });
+    }
+    input.addEventListener("focus", render);
+    input.addEventListener("input", render);
+    input.addEventListener("blur", () => { dropdown.hidden = true; });
+  }
 
   // 報酬は日本円のみ。このサイトは掲載だけを行い、支払いには一切関与しない
   // (受け渡しの方法・タイミングは当事者同士がチャットで決める)。
@@ -1751,8 +1788,8 @@
 
   /* ---------------------------------------------------------------- */
   /* Firestoreからの読み込み(全員で共有される本物のデータベース)。       */
-  /* どのアカウントを選んでいるかの記憶と、オンチェーン送金の記録だけは  */
-  /* このブラウザだけのローカルな情報として別に保存する。                */
+  /* どのアカウントを選んでいるかの記憶だけは、このブラウザだけの       */
+  /* ローカルな情報として別に保存する。                                  */
   /* ---------------------------------------------------------------- */
 
   const CURRENT_ACCOUNT_KEY = "jobchain-current-account-v1";
@@ -2199,8 +2236,8 @@
             ${job.isOpen
               ? `<span class="pill open">${tr("募集中")}</span>`
               : job.hiredId ? `<span class="pill hired">${tr("採用済み")}</span>` : `<span class="pill">${tr("募集終了")}</span>`}
-            <span class="meta-item"><span class="meta-label">${tr("勤務地")}</span>${escapeHtml(job.location) || "-"}</span>
-            ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("勤務日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
+            <span class="meta-item"><span class="meta-label">${tr("場所")}</span>${escapeHtml(job.location) || "-"}</span>
+            ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
             <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward)}</span></span>
             <span class="meta-item"><span class="meta-label">${tr("投稿元")}</span>${escapeHtml(employer.name)}${ratingBadgeHtml(employer.id)}</span>
           </div>
@@ -2215,8 +2252,6 @@
     const initialLoc = (query && query.get("loc")) || "";
     const initialDate = (query && query.get("date")) || "";
     const initialRewardTier = (query && query.get("tier")) || "";
-    const REMOTE_OPTIONS = [];
-    const PREF_OPTIONS = PREFECTURES.map(([value]) => value);
     root.innerHTML = `
       <div class="page-head search-page-head">
         <h1>${tr("求人を検索")}</h1>
@@ -2225,7 +2260,7 @@
         <div id="search-wrapper" style="max-width:720px; width:100%; position:relative;">
           <div style="position:relative;">
             <form id="search-form" class="toolbar toolbar-lg">
-              <input type="search" id="search-q" placeholder="${tr("職種・スキルなど")}" value="${escapeHtml(initialQ)}" />
+              <input type="search" id="search-q" placeholder="${tr("種類")}" value="${escapeHtml(initialQ)}" />
               <input type="text" id="search-loc" class="loc-input" placeholder="${tr("場所を選択・入力")}" value="${escapeHtml(initialLoc)}" autocomplete="off" />
               <button type="submit" class="toolbar-search-btn" aria-label="${tr("検索")}">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -2235,7 +2270,7 @@
           </div>
           <div class="search-filters">
             <div class="field date-field">
-              <label id="search-date-label" for="search-date-btn">${tr("勤務日(以降)")}</label>
+              <label id="search-date-label" for="search-date-btn">${tr("日付(以降)")}</label>
               <button type="button" id="search-date-btn" class="date-btn">
                 <span id="search-date-display" class="${initialDate ? "" : "is-placeholder"}">${initialDate ? escapeHtml(fmtDateDisplay(initialDate)) : tr("指定なし")}</span>
                 <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
@@ -2262,7 +2297,7 @@
     const locInput = document.getElementById("search-loc");
     const dropdown = document.getElementById("loc-dropdown");
 
-    /* ---- 独自カレンダー(勤務日) ---- */
+    /* ---- 独自カレンダー(日付) ---- */
     let selectedDate = initialDate || "";
     const today = new Date();
     const todayIso = toIsoDate(today.getFullYear(), today.getMonth(), today.getDate());
@@ -2400,30 +2435,7 @@
       }
     });
 
-    function renderDropdown() {
-      const v = locInput.value.trim().toLowerCase();
-      const remoteMatches = v ? REMOTE_OPTIONS.filter((opt) => opt.toLowerCase().includes(v)) : REMOTE_OPTIONS;
-      const prefMatches = v ? PREF_OPTIONS.filter((opt) => opt.toLowerCase().includes(v)) : PREF_OPTIONS;
-      if (!remoteMatches.length && !prefMatches.length) { dropdown.hidden = true; return; }
-      const optBtn = (opt) => `<button type="button" data-value="${escapeHtml(opt)}">${escapeHtml(opt)}</button>`;
-      dropdown.innerHTML =
-        remoteMatches.map(optBtn).join("") +
-        (remoteMatches.length && prefMatches.length ? `<div class="loc-dropdown-sep"></div>` : "") +
-        prefMatches.map(optBtn).join("");
-      dropdown.hidden = false;
-      dropdown.querySelectorAll("button").forEach((btn) => {
-        // mousedown(blurより先に発火)で選択することで、inputのblurによって
-        // ドロップダウンが閉じる前にクリックを確定させる。
-        btn.addEventListener("mousedown", (e) => {
-          e.preventDefault();
-          locInput.value = btn.dataset.value;
-          dropdown.hidden = true;
-        });
-      });
-    }
-    locInput.addEventListener("focus", renderDropdown);
-    locInput.addEventListener("input", renderDropdown);
-    locInput.addEventListener("blur", () => { dropdown.hidden = true; });
+    attachLocPicker(locInput, dropdown);
 
     document.getElementById("search-form").addEventListener("submit", (e) => {
       e.preventDefault();
@@ -2473,11 +2485,14 @@
               <input id="filter-q" type="search" value="${escapeHtml(init.q)}" placeholder="${tr("例: 草刈り、翻訳")}" />
             </div>
             <div class="field">
-              <label for="filter-loc">${tr("勤務地")}</label>
-              <input id="filter-loc" type="search" value="${escapeHtml(init.loc)}" placeholder="${tr("例: 東京、フルリモート")}" />
+              <label for="filter-loc">${tr("場所")}</label>
+              <div style="position:relative;">
+                <input id="filter-loc" type="search" value="${escapeHtml(init.loc)}" placeholder="${tr("場所を選択・入力")}" autocomplete="off" />
+                <div class="loc-dropdown" id="filter-loc-dropdown" hidden></div>
+              </div>
             </div>
             <div class="field">
-              <label for="filter-date">${tr("勤務日(以降)")}</label>
+              <label for="filter-date">${tr("日付(以降)")}</label>
               <input id="filter-date" type="date" value="${escapeHtml(init.date)}" />
             </div>
             <div class="field">
@@ -2515,6 +2530,7 @@
     const dateEl = document.getElementById("filter-date");
     const tierEl = document.getElementById("filter-tier");
     const statusEl = document.getElementById("filter-status");
+    attachLocPicker(locEl, document.getElementById("filter-loc-dropdown"), () => renderList());
 
     toggleBtn.addEventListener("click", () => {
       const open = bodyEl.hidden;
@@ -2598,18 +2614,18 @@
       <form id="post-form" class="card stack">
         <div class="field">
           <label for="f-title">${tr("求人タイトル")}</label>
-          <input id="f-title" required placeholder="${tr("例: Solidityスマートコントラクトエンジニア")}" />
+          <input id="f-title" required placeholder="${tr("例: 引っ越しの手伝い(2時間)")}" />
         </div>
         <div class="field">
           <label for="f-desc">${tr("求人詳細")}</label>
           <textarea id="f-desc" placeholder="${tr("業務内容、必要スキル、稼働形態など")}"></textarea>
         </div>
         <div class="field">
-          <label for="f-loc">${tr("勤務地")}</label>
+          <label for="f-loc">${tr("場所")}</label>
           <input id="f-loc" placeholder="${tr("例: フルリモート / 東京")}" />
         </div>
         <div class="field">
-          <label for="f-workdate">${tr("勤務日時(任意・単発の仕事などで指定)")}</label>
+          <label for="f-workdate">${tr("日時(任意・単発の仕事などで指定)")}</label>
           <input id="f-workdate" type="datetime-local" />
         </div>
         <div class="field">
@@ -2760,8 +2776,8 @@
         <h1 style="font-size:24px; margin-bottom:10px;">${escapeHtml(job.title)}</h1>
         ${job.image ? `<img class="job-detail-image" src="${job.image}" alt="" />` : ""}
         <div class="meta-row" style="margin-bottom:14px;">
-          <span class="meta-item"><span class="meta-label">${tr("勤務地")}</span>${escapeHtml(job.location) || "-"}</span>
-          ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("勤務日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
+          <span class="meta-item"><span class="meta-label">${tr("場所")}</span>${escapeHtml(job.location) || "-"}</span>
+          ${job.workDate ? `<span class="meta-item"><span class="meta-label">${tr("日時")}</span>${fmtWorkDatetime(job.workDate)}</span>` : ""}
           <span class="meta-item"><span class="meta-label">${tr("報酬")}</span><span class="mono">${fmtAmount(job.reward)}</span></span>
           <span class="meta-item"><span class="meta-label">${tr("投稿日")}</span>${fmtDate(job.createdAt)}</span>
         </div>
@@ -3019,7 +3035,7 @@
         </div>
         <div class="field">
           <label for="p-skills">${tr("スキル / タグ (カンマ区切り)")}</label>
-          <input id="p-skills" value="${escapeHtml(acct.skills)}" placeholder="${tr("例: Solidity, React, Node.js")}" />
+          <input id="p-skills" value="${escapeHtml(acct.skills)}" placeholder="${tr("例: 草刈り, 翻訳, 配送")}" />
         </div>
         <div><button type="submit" class="btn-accent">${tr("保存する")}</button></div>
       </form>
