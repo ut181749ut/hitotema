@@ -1,15 +1,21 @@
 rules_version = '2';
 
-// jobchain 用 Firestore セキュリティルール
+// ヒトテマ(Firebaseプロジェクト名は旧称の jobchain のまま)用
+// Firestore セキュリティルール
 //
-// これまでSupabaseのRow Level Security(RLS)が担っていた「自分の作った
-// アカウント・求人・応募・メッセージだけを書き換えられる」という制限を、
-// Firestore側の仕組みでそのまま再現したものです。
+// このサイトは「求人の掲載と連絡」だけを行う掲示板です。報酬の受け渡しには
+// 一切関与しないため、決済に関するフィールド・ルールは存在しません。
 //
-// このアプリのユーザーは全員「匿名認証」でサインインしています(名前や
-// パスワードは不要)。そのため request.auth は必ずFirebaseの匿名ユーザー
-// のUIDを指し、1つのブラウザ(1つのauth_uid)が複数のaccountsドキュメント
-// (サブアカウント)を持てる設計になっています。
+// 利用者は全員「匿名認証」でサインインしています(メールアドレスも
+// パスワードも使いません)。そのため request.auth は必ずFirebaseの匿名
+// ユーザーのUIDを指します。
+//
+// アカウントは1人につき2つまで ——「匿名ゲスト」と、名前を付けて登録した
+// 1つだけ。ドキュメントIDを UID と UID_1 に固定することで、3つ目を
+// 作れないことをルール側で構造的に保証しています。
+//
+// 匿名で誰でも投稿できる掲示板なので、通報(reports)とブロック(blocks)を
+// 用意しています。通報は運営だけが読め、ブロックは本人だけが読めます。
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -18,8 +24,7 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    // accountId のドキュメントが「今リクエストしている本人が持っている
-    // アカウント」かどうかを調べる。
+    // accountId のドキュメントが「今リクエストしている本人のアカウント」か。
     function ownsAccount(accountId) {
       return signedIn()
         && accountId != null
@@ -33,15 +38,20 @@ service cloud.firestore {
     }
 
     // ---------------- accounts ----------------
-    // 名前・自己紹介・見本残高などのプロフィール情報。
+    // 名前・自己紹介などのプロフィール情報。
     // 誰でも読めるが(求人一覧に投稿者名を出すため)、書き込みは本人のみ。
     match /accounts/{accountId} {
       allow read: if signedIn();
 
+      // 作れるのは自分の枠2つだけ。
+      //   UID    = 匿名ゲスト
+      //   UID_1  = 名前を付けて登録したアカウント
+      // これ以外のIDでは作成できないため、1人が3つ以上持つことはできない。
+      // (過去に作られたランダムIDのアカウントは、下の update 側で
+      //  これまでどおり本人だけが編集できる。)
       allow create: if signedIn()
+        && (accountId == request.auth.uid || accountId == request.auth.uid + '_1')
         && request.resource.data.auth_uid == request.auth.uid
-        && request.resource.data.balance == 0
-        && request.resource.data.pending == 0
         && request.resource.data.is_deleted == false;
 
       // 自分のアカウントのフィールドは自由に更新できるが、
@@ -51,6 +61,7 @@ service cloud.firestore {
         && request.resource.data.auth_uid == request.auth.uid;
 
       // アカウントは完全には削除しない(ソフトデリートのみ)。
+      // 完全に消すと、他人の求人の「採用者」欄から参照できなくなるため。
       allow delete: if false;
     }
 
@@ -61,25 +72,11 @@ service cloud.firestore {
       allow create: if signedIn()
         && ownsAccount(request.resource.data.employer_id)
         && request.resource.data.is_open == true
-        && request.resource.data.hired_id == null
-        && request.resource.data.settled == false
-        && request.resource.data.pending_claimed == false;
+        && request.resource.data.hired_id == null;
 
-      allow update: if signedIn() && (
-        // (1) 投稿者本人による更新(締切・採用・支払い済みにする、など)。
-        ownsAccount(resource.data.employer_id)
-        // (2) 採用されたETH案件の本人が、自分への報酬反映が済んだことを
-        //     示すpending_claimedフラグだけを立てる特別枠。
-        //     (accounts側の自分の残高更新はこれと同じバッチで行われる)
-        || (
-          resource.data.pay_method == 'eth'
-          && resource.data.hired_id != null
-          && resource.data.pending_claimed != true
-          && ownsAccount(resource.data.hired_id)
-          && request.resource.data.pending_claimed == true
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['pending_claimed'])
-        )
-      );
+      // 更新できるのは投稿者本人のみ(採用の確定・募集の締め切り)。
+      allow update: if signedIn()
+        && ownsAccount(resource.data.employer_id);
 
       // 投稿者本人だけが、自分の求人を削除できる
       // (応募・チャットの連動削除はクライアント側で個別に行う)。
@@ -128,11 +125,48 @@ service cloud.firestore {
       allow update: if false;
     }
 
+    // ---------------- blocks ----------------
+    // 「自分が誰をブロックしたか」の記録。自分のものしか読めない。
+    // ドキュメントIDを {自分のUID}_{相手のアカウントID} に固定することで、
+    // 他人のブロック記録を作ることも消すこともできない。
+    match /blocks/{blockId} {
+      allow read: if signedIn() && resource.data.blocker_uid == request.auth.uid;
+
+      allow create: if signedIn()
+        && blockId == request.auth.uid + '_' + request.resource.data.blocked_id
+        && request.resource.data.blocker_uid == request.auth.uid;
+
+      allow delete: if signedIn() && resource.data.blocker_uid == request.auth.uid;
+
+      allow update: if false;
+    }
+
+    // ---------------- reports ----------------
+    // 通報。運営がFirebaseコンソールで確認するためのもので、
+    // 利用者からは一切読めない(誰が誰を通報したかが漏れないようにする)。
+    // 送ったあとに取り消し・書き換えもできない。
+    match /reports/{reportId} {
+      allow read: if false;
+
+      allow create: if signedIn()
+        && ownsAccount(request.resource.data.reporter_id)
+        && request.resource.data.reporter_uid == request.auth.uid
+        && request.resource.data.target_type in ['job', 'account', 'message']
+        && request.resource.data.target_id is string
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() <= 100
+        && request.resource.data.detail is string
+        && request.resource.data.detail.size() <= 1000;
+
+      allow update, delete: if false;
+    }
+
     // ---------------- reviews ----------------
-    // 支払い済みになった求人について、その求人の投稿者⇔採用者という
+    // 採用が決まった求人について、その求人の投稿者⇔採用者という
     // 当事者同士だけが、お互いを星1〜5で評価できる。匿名のままでも
     // 過去の取引実績が見えるようにし、使い捨てアカウントによる
     // 詐欺的な行為を多少なりとも抑止するための仕組み。
+    //
     // ドキュメントIDは「{jobId}_{from_id}」という決まった形にしており、
     // これにより「同じ求人について同じ人が2回評価する」ことは
     // (updateを禁止しているため)自然に防げる。
@@ -148,7 +182,6 @@ service cloud.firestore {
         && request.resource.data.rating <= 5
         && ownsAccount(request.resource.data.from_id)
         && request.resource.data.from_id != request.resource.data.to_id
-        && get(/databases/$(database)/documents/jobs/$(request.resource.data.job_id)).data.settled == true
         && get(/databases/$(database)/documents/jobs/$(request.resource.data.job_id)).data.hired_id != null
         && (
           (

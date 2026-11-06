@@ -206,6 +206,10 @@ async function main() {
   const sitemapEntries = [
     { loc: `${SITE_BASE_URL}/`, lastmod: now.toISOString() },
     { loc: `${SITE_BASE_URL}/jobs/`, lastmod: now.toISOString() },
+    // 規約とプライバシーポリシーもクロールさせる(ストアの審査でURLを
+    // 求められるページなので、検索から辿れないと不自然)。
+    { loc: `${SITE_BASE_URL}/terms.html`, lastmod: now.toISOString() },
+    { loc: `${SITE_BASE_URL}/privacy.html`, lastmod: now.toISOString() },
   ];
   const indexEntries = [];
 

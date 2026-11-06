@@ -679,6 +679,13 @@
     line-height: 1.7;
   }
   .site-footer a { color: var(--text-dim); text-decoration: underline; }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    margin-top: 12px;
+  }
 
   .meta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
   .meta-item { font-size: 13px; color: var(--text); }
@@ -838,6 +845,68 @@
     padding: 11px 13px;
   }
   .pw-warn strong { display: block; margin-bottom: 2px; }
+
+  /* ---------- 安全対策(通報・ブロック) ---------- */
+  .safety-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .link-danger {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .link-danger:hover { color: var(--danger, #c0392b); }
+  .report-label {
+    display: block;
+    margin: 12px 0 4px;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .modal-box select,
+  .modal-box textarea { width: 100%; display: block; }
+  .report-note {
+    margin-top: 10px;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .blocked-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+  .blocked-row:last-child { border-bottom: none; }
+
+  /* ---------- 規約・ポリシーなどの文章ページ ---------- */
+  .doc-page { line-height: 1.85; font-size: 14px; }
+  .doc-page h1 { font-size: 22px; margin-bottom: 6px; }
+  .doc-page .doc-updated { font-size: 12px; color: var(--text-dim); margin-bottom: 22px; }
+  .doc-page h2 {
+    font-size: 15px;
+    margin: 26px 0 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-page h2:first-of-type { border-top: none; padding-top: 0; margin-top: 18px; }
+  .doc-page p { margin-bottom: 10px; }
+  .doc-page ul { margin: 0 0 10px 1.3em; }
+  .doc-page li { margin-bottom: 5px; }
+  .doc-page .contact-missing { color: var(--danger, #c0392b); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -862,8 +931,13 @@
 <main id="view-root"></main>
 
 <div class="site-footer">
-  このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。
-  <br><a href="jobs/">求人一覧(検索エンジン向けページ)</a>
+  <span id="footer-note">このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。</span>
+  <div class="footer-links">
+    <a href="#terms" data-footer="利用規約">利用規約</a>
+    <a href="#privacy" data-footer="プライバシーポリシー">プライバシーポリシー</a>
+    <a href="#safety" data-footer="安全にご利用いただくために">安全にご利用いただくために</a>
+    <a href="jobs/" data-footer="求人一覧(検索エンジン向けページ)">求人一覧(検索エンジン向けページ)</a>
+  </div>
 </div>
 
 <a href="#post" class="fab-post" id="fab-post" title="求人を投稿する" aria-label="求人を投稿する">
@@ -892,6 +966,36 @@
   })();
 
   const STRINGS_EN = {
+  // --- 安全対策(通報・ブロック・規約) ---
+  "通報する": "Report",
+  "利用規約": "Terms of Use",
+  "プライバシーポリシー": "Privacy Policy",
+  "安全にご利用いただくために": "Staying safe",
+  "最終更新": "Last updated",
+  "ブロック中のユーザーはいません。": "You have not blocked anyone.",
+  "連絡先メールアドレスが未設定です。公開前に設定してください。": "No contact email is set. Set one before launch.",
+  "求人一覧(検索エンジン向けページ)": "Job index (pages for search engines)",
+  "この求人を通報する": "Report this job",
+  "この投稿者をブロックする": "Block this poster",
+  "ブロックしました。": "Blocked.",
+  "ブロックを解除しました。": "Unblocked.",
+  "ブロックを解除する": "Unblock",
+  "ブロック中のユーザーの求人です。": "This job was posted by a user you have blocked.",
+  "ブロック中の相手には送信できません。": "You cannot message a user you have blocked.",
+  "理由": "Reason",
+  "詳しい内容(任意)": "Details (optional)",
+  "内容を確認し、必要に応じて削除などの対応を行います。結果の個別のご連絡はできません。": "We review every report and take action such as removal where needed. We cannot reply to reports individually.",
+  "通報を受け付けました。": "Thanks — your report has been received.",
+  "通報の送信に失敗しました。": "Could not send the report.",
+  "ブロックに失敗しました。": "Could not block this user.",
+  "ブロックの解除に失敗しました。": "Could not unblock this user.",
+  "自分のアカウントはブロックできません。": "You cannot block your own account.",
+  "違法な仕事・犯罪への勧誘": "Illegal work or criminal recruitment",
+  "詐欺・金銭をだまし取ろうとしている": "Fraud or an attempt to take money",
+  "性的・わいせつな内容": "Sexual or obscene content",
+  "暴力的・差別的な内容": "Violent or discriminatory content",
+  "スパム・宣伝": "Spam or advertising",
+  "その他": "Something else",
   "ヒトテマ": "Hitotema",
   "(応募者)": "(applicant)",
   "(投稿者)": "(poster)",
@@ -1569,6 +1673,8 @@
 
   async function postJob({ title, description, location, reward, workDate, image }) {
     const acct = me();
+    // 明らかに違法な募集はここで止める(投稿前のフィルタ)。
+    assertAllowedContent(`${title}\n${description || ""}\n${location || ""}`);
     const { collection, addDoc } = fsMod;
     const payload = {
       employer_id: acct.id,
@@ -1739,6 +1845,149 @@
   // 求人を1件だけ消す。投稿者本人だけが実行できる(セキュリティルール側でも制限)。
   // 応募とチャットも道連れにする。評価だけは後から改ざんできないよう
   // ルールで削除を禁じているので、相手が受け取った星はそのまま残る。
+  /* ---------------------------------------------------------------- */
+  /* 安全対策(通報・ブロック・投稿フィルタ)                              */
+  /*                                                                    */
+  /* 匿名で誰でも投稿できる掲示板なので、各ストアの審査要件であると同時に */
+  /* サイトとして当然必要な仕組み。Appleのガイドライン1.2は              */
+  /* 「不適切な投稿のフィルタ・通報・ブロック・連絡先の公開」の4つを      */
+  /* 明確に要求している。                                                */
+  /* ---------------------------------------------------------------- */
+
+  // 利用者からの問い合わせ・通報についての連絡先。
+  // ストアの審査では「利用者が運営者に連絡できる窓口の公開」が必須なので、
+  // 空にしないこと(空にすると規約ページに警告が出る)。
+  const CONTACT_EMAIL = "hitotemah@gmail.com";
+
+  // 明らかに違法な仕事の募集を投稿させないための検出。
+  // 正当な求人を巻き込まないよう、他の意味で使われにくい語だけを選んである。
+  // (「闇バイト」の隠語は入れ替わりが早いので、通報とブロックで補う前提)
+  const BANNED_PATTERNS = [
+    { re: /闇バイト|裏バイト/, why: "違法な仕事の募集" },
+    { re: /受け子|出し子|かけ子/, why: "特殊詐欺の加担者募集" },
+    { re: /名義貸し/, why: "名義貸しの勧誘" },
+    { re: /口座\s*(売買|買取|譲渡|貸し)/, why: "預貯金口座の売買" },
+    { re: /大麻|覚醒剤|覚せい剤|コカイン|違法薬物|脱法ハーブ/, why: "薬物に関わる募集" },
+    { re: /MDMA/i, why: "薬物に関わる募集" },
+    { re: /拳銃|けん銃/, why: "銃器に関わる募集" },
+    { re: /偽造\s*(免許|パスポート|身分証|在籍|書類)/, why: "文書偽造の依頼" },
+    { re: /児童\s*ポルノ/, why: "児童の保護に反する内容" },
+    { re: /援助交際/, why: "性的なサービスの募集" },
+  ];
+
+  // 引っかかった理由を返す。問題なければ null。
+  function findBannedContent(text) {
+    const t = String(text || "");
+    for (const p of BANNED_PATTERNS) if (p.re.test(t)) return p.why;
+    return null;
+  }
+
+  // 投稿・送信の直前に呼ぶ。見つかったらその場で例外にして止める。
+  function assertAllowedContent(text) {
+    const why = findBannedContent(text);
+    if (!why) return;
+    throw new Error(
+      LANG === "en"
+        ? `This cannot be posted: it appears to involve ${why}.`
+        : `${why}にあたる内容が含まれているため投稿できません。`
+    );
+  }
+
+  // 自分がブロックした相手のアカウントIDの集合。
+  const BLOCKED = new Set();
+  function isBlocked(accountId) { return BLOCKED.has(accountId); }
+  // 自分の求人・自分のアカウントはブロック対象にしない(自分を消さないため)。
+  function isMine(accountId) { const a = getAccount(accountId); return !!(a && a.mine); }
+  // 一覧や検索に出してよい求人か。
+  function isVisibleJob(job) { return !isBlocked(job.employerId); }
+
+  async function blockAccount(accountId) {
+    if (isMine(accountId)) throw new Error(tr("自分のアカウントはブロックできません。"));
+    const { doc, setDoc } = fsMod;
+    const id = MY_AUTH_UID + "_" + accountId;
+    try {
+      await setDoc(doc(db, "blocks", id), {
+        blocker_uid: MY_AUTH_UID,
+        blocked_id: accountId,
+        created_at: new Date().toISOString(),
+      });
+    } catch (e) { throw new Error(tr("ブロックに失敗しました。")); }
+    BLOCKED.add(accountId);
+  }
+
+  async function unblockAccount(accountId) {
+    const { doc } = fsMod;
+    try { await batchDeleteRefs([doc(db, "blocks", MY_AUTH_UID + "_" + accountId)]); }
+    catch (e) { throw new Error(tr("ブロックの解除に失敗しました。")); }
+    BLOCKED.delete(accountId);
+  }
+
+  const REPORT_REASONS = [
+    "違法な仕事・犯罪への勧誘",
+    "詐欺・金銭をだまし取ろうとしている",
+    "性的・わいせつな内容",
+    "暴力的・差別的な内容",
+    "スパム・宣伝",
+    "その他",
+  ];
+
+  // 通報は運営だけが読める(ルール上 read 不可)。乱用を防ぐため本文は1000字まで。
+  async function submitReport(targetType, targetId, reason, detail) {
+    const { collection, addDoc } = fsMod;
+    try {
+      await addDoc(collection(db, "reports"), {
+        target_type: targetType,
+        target_id: String(targetId),
+        reporter_id: me().id,
+        reporter_uid: MY_AUTH_UID,
+        reason: String(reason || "").slice(0, 100),
+        detail: String(detail || "").slice(0, 1000),
+        created_at: new Date().toISOString(),
+      });
+    } catch (e) { throw new Error(tr("通報の送信に失敗しました。")); }
+  }
+
+  // 通報フォーム。askConfirm と同じ modal-root を使う。
+  function openReportModal(targetType, targetId, targetLabel) {
+    const root = document.getElementById("modal-root");
+    root.innerHTML = `
+      <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+          <p><strong>${tr("通報する")}</strong><br>${escapeHtml(targetLabel)}</p>
+          <label class="report-label" for="report-reason">${tr("理由")}</label>
+          <select id="report-reason">
+            ${REPORT_REASONS.map((r) => `<option value="${escapeHtml(r)}">${escapeHtml(tr(r))}</option>`).join("")}
+          </select>
+          <label class="report-label" for="report-detail">${tr("詳しい内容(任意)")}</label>
+          <textarea id="report-detail" rows="3" maxlength="1000"></textarea>
+          <p class="report-note">${tr("内容を確認し、必要に応じて削除などの対応を行います。結果の個別のご連絡はできません。")}</p>
+          <div class="modal-actions">
+            <button class="btn-ghost" id="modal-cancel">${tr("キャンセル")}</button>
+            <button class="btn-accent" id="report-send">${tr("通報する")}</button>
+          </div>
+        </div>
+      </div>
+    `;
+    const close = () => { root.innerHTML = ""; };
+    document.getElementById("modal-overlay").addEventListener("click", (e) => {
+      if (e.target.id === "modal-overlay") close();
+    });
+    document.getElementById("modal-cancel").addEventListener("click", close);
+    document.getElementById("report-send").addEventListener("click", async (e) => {
+      e.target.disabled = true;
+      const reason = document.getElementById("report-reason").value;
+      const detail = document.getElementById("report-detail").value.trim();
+      try {
+        await submitReport(targetType, targetId, reason, detail);
+        close();
+        toast(tr("通報を受け付けました。"), "success");
+      } catch (err) {
+        toast((err && err.message) || tr("通報の送信に失敗しました。"), "error");
+        e.target.disabled = false;
+      }
+    });
+  }
+
   async function deleteJob(jobId) {
     const job = getJob(jobId);
     if (!job) throw new Error(tr("求人が見つかりませんでした。"));
@@ -1774,6 +2023,8 @@
   }
 
   async function sendMessage(jobId, toId, text) {
+    assertAllowedContent(text);
+    if (isBlocked(toId)) throw new Error(tr("ブロック中の相手には送信できません。"));
     const { collection, addDoc } = fsMod;
     const at = new Date().toISOString();
     try {
@@ -1941,6 +2192,19 @@
       MESSAGES[key].push({ fromId: row.from_id, text: row.text, at: row.created_at });
     });
 
+    // 自分がブロックした相手。自分のUIDで絞ったクエリしか投げない
+    // (ルール側も、自分がブロックしたものしか読めないようにしてある)。
+    BLOCKED.clear();
+    try {
+      const blockSnap = await getDocs(
+        query(collection(db, "blocks"), where("blocker_uid", "==", MY_AUTH_UID))
+      );
+      blockSnap.docs.forEach((d) => BLOCKED.add(d.data().blocked_id));
+    } catch (e) {
+      // ブロック一覧が読めなくても、サイト自体は動き続けるべき。
+      console.warn("ブロック一覧を読み込めませんでした", e);
+    }
+
     // まだ1つも無ければ(初回訪問、または以前すべて削除した場合)
     // 「匿名ゲスト」を自動的に作る。
     let mine = myAccounts();
@@ -1964,7 +2228,7 @@
     const raw = (location.hash || "#list").slice(1);
     const [hash, queryStr] = raw.split("?");
     if (hash.startsWith("job-")) return { name: "job", id: hash.slice(4), query: new URLSearchParams(queryStr || "") };
-    if (["search", "list", "post", "dashboard", "profile"].includes(hash)) {
+    if (["search", "list", "post", "dashboard", "profile", "terms", "privacy", "safety"].includes(hash)) {
       return { name: hash, query: new URLSearchParams(queryStr || "") };
     }
     return { name: "list", query: new URLSearchParams() };
@@ -2562,6 +2826,7 @@
       const dateFromTime = dateFrom ? new Date(dateFrom).getTime() : null;
       const tierById = tier ? computeRewardTiers() : null;
       const filtered = JOBS.filter((j) => {
+        if (!isVisibleJob(j)) return false;
         if (status === "open" && !j.isOpen) return false;
         if (q && !(j.title + " " + j.description + " " + j.location).toLowerCase().includes(q)) return false;
         if (loc && !j.location.toLowerCase().includes(loc)) return false;
@@ -2574,9 +2839,12 @@
         return true;
       }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+      // 母数はブロック済みを除いた件数。ブロックした相手の求人は
+      // 「N件中」のNにも数えない(存在を匂わせないため)。
+      const visibleTotal = JOBS.filter(isVisibleJob).length;
       resultEl.textContent = LANG === "en"
-        ? `${filtered.length} of ${JOBS.length} jobs`
-        : `${JOBS.length}件中 ${filtered.length}件を表示`;
+        ? `${filtered.length} of ${visibleTotal} jobs`
+        : `${visibleTotal}件中 ${filtered.length}件を表示`;
 
       const listEl = document.getElementById("job-list");
       // 求人5件おきに広告バナーを1枠差し込む(ただし一覧の最後には付けない)。
@@ -2586,7 +2854,7 @@
             const showAd = (i + 1) % AD_INTERVAL === 0 && i !== filtered.length - 1;
             return jobCardHtml(j) + (showAd ? adBannerHtml() : "");
           }).join("")
-        : JOBS.length
+        : visibleTotal
           ? `<div class="empty">${tr("該当する求人が見つかりません。条件を変えてみてください。")}</div>`
           : `<div class="empty">${tr("まだ求人がありません。最初の求人を投稿してみましょう。")}</div>`;
     }
@@ -2767,6 +3035,25 @@
     const acct = me();
     const iAmEmployer = acct.id === job.employerId;
 
+    // ブロックした相手の求人は、直接URLを開いても中身を見せない。
+    if (isBlocked(job.employerId)) {
+      root.innerHTML = `
+        <a class="back-link" href="#list">${tr("← 求人一覧に戻る")}</a>
+        <div class="card">
+          <p>${tr("ブロック中のユーザーの求人です。")}</p>
+          <button type="button" class="btn-ghost btn-small" id="unblock-btn">${tr("ブロックを解除する")}</button>
+        </div>
+      `;
+      document.getElementById("unblock-btn").addEventListener("click", async () => {
+        try {
+          await unblockAccount(job.employerId);
+          toast(tr("ブロックを解除しました。"), "success");
+          viewJob(jobId);
+        } catch (err) { toast(err.message, "error"); }
+      });
+      return;
+    }
+
     root.innerHTML = `
       <a class="back-link" href="#list">${tr("← 求人一覧に戻る")}</a>
       <div class="card" style="margin-bottom:18px;">
@@ -2790,7 +3077,35 @@
       <div id="actions" style="margin-bottom:18px;"></div>
       <div id="chat-container"></div>
       <div id="review-section"></div>
+      ${iAmEmployer ? "" : `
+        <div class="safety-row">
+          <button type="button" class="link-danger" id="report-job-btn">${tr("この求人を通報する")}</button>
+          <button type="button" class="link-danger" id="block-user-btn">${tr("この投稿者をブロックする")}</button>
+        </div>
+      `}
     `;
+
+    const reportJobBtn = document.getElementById("report-job-btn");
+    if (reportJobBtn) {
+      reportJobBtn.addEventListener("click", () => openReportModal("job", job.id, job.title));
+    }
+    const blockUserBtn = document.getElementById("block-user-btn");
+    if (blockUserBtn) {
+      blockUserBtn.addEventListener("click", () => {
+        askConfirm(
+          LANG === "en"
+            ? `Block ${employer.name}? Their jobs and messages will be hidden from you.`
+            : `${employer.name} をブロックしますか?この人の求人とメッセージが表示されなくなります。`,
+          async () => {
+            try {
+              await blockAccount(job.employerId);
+              toast(tr("ブロックしました。"), "success");
+              location.hash = "#list";
+            } catch (err) { toast(err.message, "error"); }
+          }
+        );
+      });
+    }
 
     const actionsEl = document.getElementById("actions");
     const chatContainer = document.getElementById("chat-container");
@@ -3093,6 +3408,167 @@
     }
   }
 
+  /* ---------------------------------------------------------------- */
+  /* 規約・ポリシー・安全ガイド                                          */
+  /* アプリ内から必ず開ける場所に置く(ストアの審査要件であり、           */
+  /* 利用者が運営者に連絡できる窓口でもある)。                          */
+  /* ---------------------------------------------------------------- */
+
+  const DOC_UPDATED = "2026-11-01";
+
+  function contactLineHtml() {
+    if (!CONTACT_EMAIL) {
+      return `<p class="contact-missing">${tr("連絡先メールアドレスが未設定です。公開前に設定してください。")}</p>`;
+    }
+    return `<p><a href="mailto:${escapeHtml(CONTACT_EMAIL)}">${escapeHtml(CONTACT_EMAIL)}</a></p>`;
+  }
+
+  function docPageHtml(title, bodyHtml) {
+    return `
+      <a class="back-link" href="#list">${tr("← 求人一覧に戻る")}</a>
+      <div class="card doc-page">
+        <h1>${escapeHtml(title)}</h1>
+        <div class="doc-updated">${tr("最終更新")}: ${DOC_UPDATED}</div>
+        ${bodyHtml}
+      </div>
+    `;
+  }
+
+  function viewTerms() {
+    const b = LANG === "en" ? `
+      <h2>1. What this service is</h2>
+      <p>ヒトテマ (Hitotema) is a bulletin board for posting and finding short jobs. We only host listings and the messages between users. We are not a party to any agreement you make, and we never handle payment.</p>
+      <h2>2. Accounts</h2>
+      <p>You may use the site anonymously. One person may hold at most one anonymous guest account and one named account. Do not impersonate another person or organisation.</p>
+      <h2>3. What you must not post</h2>
+      <ul>
+        <li>Work that is illegal, or recruitment for crime</li>
+        <li>Fraud, or attempts to take money or personal data</li>
+        <li>Sexual services, or content that sexualises minors</li>
+        <li>Violent, threatening or discriminatory content</li>
+        <li>Spam, or repeated identical postings</li>
+        <li>Anything that infringes someone else's rights</li>
+      </ul>
+      <h2>4. Reporting and removal</h2>
+      <p>Every listing and user can be reported from inside the app, and you can block any user. We review reports and may remove content or accounts without notice.</p>
+      <h2>5. Payment is between users</h2>
+      <p>Rewards are paid directly between the poster and the person hired. We do not hold, guarantee, mediate or refund any money, and we are not a licensed money transmitter or employment agency.</p>
+      <h2>6. No warranty</h2>
+      <p>The service is provided as is. We are not liable for loss arising from use of the service, to the extent permitted by law.</p>
+      <h2>7. Changes</h2>
+      <p>We may change these terms. Continued use after a change means you accept it.</p>
+      <h2>8. Contact</h2>
+      ${contactLineHtml()}
+    ` : `
+      <h2>1. このサービスについて</h2>
+      <p>ヒトテマは、単発の仕事を募集・応募するための掲示板です。当方が提供するのは掲載の場と当事者間の連絡手段のみで、成立した約束の当事者にはなりません。報酬のやり取りにも一切関与しません。</p>
+      <h2>2. アカウント</h2>
+      <p>匿名のままご利用いただけます。1人が持てるのは「匿名ゲスト」1つと、名前を付けたアカウント1つまでです。他人や他の団体になりすます行為は禁止します。</p>
+      <h2>3. 投稿してはいけないもの</h2>
+      <ul>
+        <li>違法な仕事、犯罪への勧誘(いわゆる闇バイトを含む)</li>
+        <li>詐欺、金銭や個人情報をだまし取ろうとする行為</li>
+        <li>性的なサービスの募集、未成年者を性的に扱う内容</li>
+        <li>暴力的・脅迫的・差別的な内容</li>
+        <li>スパム、同じ内容の繰り返し投稿</li>
+        <li>他人の権利を侵害する内容</li>
+      </ul>
+      <h2>4. 通報と削除</h2>
+      <p>すべての求人とユーザーは、アプリ内から通報できます。またユーザーのブロックもできます。通報の内容は確認のうえ、必要と判断した場合は予告なく投稿やアカウントを削除することがあります。</p>
+      <h2>5. 報酬は当事者間のやり取りです</h2>
+      <p>報酬は、投稿者と採用された方との間で直接受け渡されます。当方が金銭を預かる・保証する・仲介する・返金することはありません。資金移動業者でも職業紹介事業者でもありません。</p>
+      <h2>6. 免責</h2>
+      <p>本サービスは現状有姿で提供されます。ご利用により生じた損害について、法令で許される範囲で責任を負いません。</p>
+      <h2>7. 規約の変更</h2>
+      <p>本規約は変更することがあります。変更後にご利用を続けられた場合、変更に同意されたものとみなします。</p>
+      <h2>8. お問い合わせ</h2>
+      ${contactLineHtml()}
+    `;
+    document.getElementById("view-root").innerHTML = docPageHtml(tr("利用規約"), b);
+  }
+
+  function viewPrivacy() {
+    const b = LANG === "en" ? `
+      <h2>1. What we collect</h2>
+      <p>We ask for no email address, phone number or real name. What is stored is what you choose to type: your display name, profile text, job listings, applications, messages and ratings.</p>
+      <p>Signing in creates an anonymous ID issued by Firebase Authentication. If you set a password, we store a one-way hash of your name as an internal login identifier — we cannot recover your name from it, and no mail is ever sent anywhere.</p>
+      <h2>2. What we do not collect</h2>
+      <p>No advertising identifier, no location data, no contact list, no photos other than an image you deliberately attach to a listing.</p>
+      <h2>3. Where it is stored</h2>
+      <p>Google Cloud Firestore (Firebase), operated by Google. Your browser also stores which account you last used, on your own device.</p>
+      <h2>4. Who can see it</h2>
+      <p>Listings, display names and ratings are public. Messages are visible only to the two people in the conversation. Reports are visible only to us.</p>
+      <h2>5. Deletion</h2>
+      <p>You can delete your own listings and your account from inside the app. Deleting an account removes its listings, applications and messages. Ratings already given cannot be edited or deleted, so that past conduct cannot be erased.</p>
+      <h2>6. Children</h2>
+      <p>This service is not intended for people under 18.</p>
+      <h2>7. Contact</h2>
+      ${contactLineHtml()}
+    ` : `
+      <h2>1. 取得する情報</h2>
+      <p>メールアドレス・電話番号・本名はお聞きしません。保存されるのは、ご自身で入力された内容だけです。具体的には、表示名、プロフィール文、投稿した求人、応募、メッセージ、評価です。</p>
+      <p>ご利用開始時に、Firebase Authentication の匿名IDが発行されます。パスワードを設定した場合は、お名前を一方向に変換した文字列をログイン用の内部IDとして保存します。この文字列からお名前を復元することはできず、メールが送信されることもありません。</p>
+      <h2>2. 取得しない情報</h2>
+      <p>広告ID、位置情報、連絡先、端末内の写真(求人に自分で添付した画像を除く)は取得しません。</p>
+      <h2>3. 保存場所</h2>
+      <p>Google が運営する Cloud Firestore(Firebase)に保存されます。また、最後に使ったアカウントの記録のみ、お使いの端末内に保存されます。</p>
+      <h2>4. 公開範囲</h2>
+      <p>求人・表示名・評価は公開情報です。メッセージは、その会話の当事者2人だけが読めます。通報の内容は運営のみが確認します。</p>
+      <h2>5. 削除</h2>
+      <p>投稿した求人とアカウントは、アプリ内からご自身で削除できます。アカウントを削除すると、その求人・応募・メッセージも削除されます。すでに付けられた評価は、過去のふるまいを消せないようにするため、編集・削除できません。</p>
+      <h2>6. 18歳未満の方の利用</h2>
+      <p>本サービスは18歳未満の方の利用を想定していません。</p>
+      <h2>7. お問い合わせ</h2>
+      ${contactLineHtml()}
+    `;
+    document.getElementById("view-root").innerHTML = docPageHtml(tr("プライバシーポリシー"), b);
+  }
+
+  function viewSafety() {
+    const blocked = [...BLOCKED].map((id) => getAccount(id)).filter(Boolean);
+    const b = (LANG === "en" ? `
+      <h2>Before you take a job</h2>
+      <ul>
+        <li>Be wary of very high pay for very little work. That is the most common shape of an illegal job offer.</li>
+        <li>Never hand over your bank account, cash card, phone or ID to someone you met here.</li>
+        <li>Be careful about being moved to another messaging app straight away.</li>
+        <li>Agree how and when you will be paid before you start. This site is not involved in payment.</li>
+      </ul>
+      <h2>If something is wrong</h2>
+      <p>Open the listing and use <strong>Report this job</strong> or <strong>Block this poster</strong> at the bottom of the page. If you think a crime is involved, contact the police.</p>
+      <h2>Users you have blocked</h2>
+    ` : `
+      <h2>仕事を受ける前に</h2>
+      <ul>
+        <li>「短時間で高額」はいちばん警戒すべき形です。違法な仕事の募集によくある誘い方です。</li>
+        <li>ここで知り合った相手に、銀行口座・キャッシュカード・携帯電話・身分証を渡さないでください。</li>
+        <li>すぐに別のメッセージアプリへ移そうとする相手にはご注意ください。</li>
+        <li>報酬の受け渡し方法とタイミングは、始める前に必ず決めてください。当サイトは関与しません。</li>
+      </ul>
+      <h2>おかしいと思ったら</h2>
+      <p>その求人のページを開き、いちばん下の<strong>「この求人を通報する」</strong>または<strong>「この投稿者をブロックする」</strong>をお使いください。犯罪に関わると思われる場合は警察にご相談ください。</p>
+      <h2>ブロック中のユーザー</h2>
+    `) + (blocked.length
+      ? blocked.map((a) => `
+          <div class="blocked-row">
+            <span>${escapeHtml(a.name)}</span>
+            <button type="button" class="btn-ghost btn-small" data-unblock="${escapeHtml(a.id)}">${tr("ブロックを解除する")}</button>
+          </div>
+        `).join("")
+      : `<p>${tr("ブロック中のユーザーはいません。")}</p>`);
+
+    document.getElementById("view-root").innerHTML = docPageHtml(tr("安全にご利用いただくために"), b);
+    document.querySelectorAll("[data-unblock]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        try {
+          await unblockAccount(btn.dataset.unblock);
+          toast(tr("ブロックを解除しました。"), "success");
+          viewSafety();
+        } catch (err) { toast(err.message, "error"); }
+      });
+    });
+  }
+
   function route() {
     document.getElementById("account-panel").hidden = true;
     renderShell();
@@ -3103,6 +3579,9 @@
     else if (r.name === "dashboard") viewDashboard();
     else if (r.name === "profile") viewProfile();
     else if (r.name === "job") viewJob(r.id);
+    else if (r.name === "terms") viewTerms();
+    else if (r.name === "privacy") viewPrivacy();
+    else if (r.name === "safety") viewSafety();
     window.scrollTo(0, 0);
   }
 
@@ -3130,10 +3609,15 @@
     });
     const loginLabel = document.querySelector("#account-btn .login-label");
     if (loginLabel) loginLabel.textContent = tr("ログイン");
-    const footer = document.querySelector(".site-footer");
-    if (footer) {
-      footer.textContent = tr("このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。");
+    const footerNote = document.getElementById("footer-note");
+    if (footerNote) {
+      footerNote.textContent = tr("このサイトは求人の掲載と連絡の場です。運営者はお金のやり取りを仲介・保証する登録業者ではなく、報酬の受け渡しには一切関与しません。採用後の支払いは投稿者と応募者の間で直接行われるものです。ご利用は自己責任でお願いします。実際のお金がからむ求人の掲載・応募については、お住まいの地域のルール・法律に沿っているか、ご自身でご確認ください。");
     }
+    // フッターのリンクは文章とは別に訳す(以前はフッターごと textContent で
+    // 差し替えていたため、英語表示のときだけリンクが消えていた)。
+    document.querySelectorAll(".footer-links a[data-footer]").forEach((a) => {
+      a.textContent = tr(a.dataset.footer);
+    });
     const fab = document.getElementById("fab-post");
     if (fab) {
       const label = tr("求人を投稿する");

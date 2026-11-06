@@ -1,0 +1,8 @@
+{
+  "appId": "jp.hitotema.app",
+  "appName": "ヒトテマ",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
